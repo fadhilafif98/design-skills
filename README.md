@@ -33,16 +33,14 @@ These skills replace defaults with decisions, and check each one with tools inst
 ## Install
 
 ```bash
-npx skills@latest add <your-github-username>/design-skills
+npx skills@latest add fadhilafif98/design-skills
 ```
-
-Replace `<your-github-username>` with the account this repo is published under.
 
 Install one skill, or install globally for Claude Code:
 
 ```bash
-npx skills@latest add <your-github-username>/design-skills --skill awwwards-web-design
-npx skills@latest add <your-github-username>/design-skills -a claude-code -g
+npx skills@latest add fadhilafif98/design-skills --skill awwwards-web-design
+npx skills@latest add fadhilafif98/design-skills -a claude-code -g
 ```
 
 Install both for the full experience. `design-consulting` works on its own, but borrows the inspector, linter and references from `awwwards-web-design` when it's present.
