@@ -1,0 +1,106 @@
+{
+  "skill_name": "awwwards-web-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "buatkan website kedai kopi saya di Bandung. terserah kamu",
+      "expected_output": "Autopilot run: inventory, rut, deal, three rendered concepts, locked DESIGN.md/BRAND.md, copy deck, built index.html that passes both gates, fresh-context critique, honest report in Indonesian.",
+      "files": [],
+      "expectations": [
+        "design/inventory.md lists at least 8 items spanning at least 3 families, with inferred items marked ASSUMPTION",
+        "design/decisions.md has a ledger line for every phase 0-9 (or N/A with a reason)",
+        "scripts/deal.mjs was run and its seed is recorded in DESIGN.md §0",
+        "DESIGN.md §0 contains an idea sentence of the form 'On this page, X becomes Y' and a competitor test result",
+        "The page ground is not warm cream (inspect.sh reports no cream-ground warning) unless DESIGN.md gives a subject-derived reason",
+        "No font from the reflex list in tells.md §4 is used without a written reason",
+        "The h1 is 2 lines or fewer at 1440, 768 and 390 (inspect.sh headline-lines has no FAIL)",
+        "The final inspect.sh run reports 0 FAIL and brand-check.mjs reports 0 errors",
+        "No invented testimonials, ratings, customer counts or press logos appear; unconfirmed facts use [FILL: ...]",
+        "The page has a live thing (an interaction using real content) with a no-JS fallback",
+        "The critique was produced by a fresh subagent, or is explicitly marked DEGRADED",
+        "The final report is in Indonesian and lists every FILL/REPLACE/SAMPLE slot"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Landing page for Ledgerline, an API that reconciles Stripe payouts with bank statements for small accounting firms. Primary action: book a demo. We have real product screenshots in assets/ui/.",
+      "expected_output": "A Precision/Structured style page whose hero shows the real product UI, avoiding the near-black + neon and purple-gradient ruts.",
+      "files": [],
+      "expectations": [
+        "The rut section names both the category default (dark + purple/neon gradient, 3 feature cards) and a predictable opposite",
+        "deal.mjs was run with --have product-ui",
+        "The hero uses the real product UI from assets/ui/ rather than an illustration or a fake grey-bar dashboard",
+        "There is no row of three identical icon feature cards",
+        "There are no gradient text, glow, or backdrop-filter glass panels (inspect.sh WARN list has none of gradient-text, glass)",
+        "The primary button says what happens (e.g. 'Book a 20-minute demo'), not 'Get started' or 'Learn more'",
+        "Light or dark ground is justified by a written use-scene sentence"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Make a site for our dental clinic. Here is our brand guide: our colour is #0B5D3B, we always use the font Inter, and we address patients as 'Anda'.",
+      "expected_output": "Import mode: brand values LOCKED; Inter in fonts.locked so it is not flagged; address form Anda enforced; concepts vary in composition only.",
+      "files": [],
+      "expectations": [
+        "Import mode ran first and design/BRAND.md lists the colour, Inter and the address form as LOCKED",
+        "brand.json lists Inter in fonts.locked and fonts.allowed, and voice.addressForm is 'Anda'",
+        "No copy on the page uses 'kamu'",
+        "The three concepts keep the brand colour and Inter and differ in composition/idea",
+        "deal.mjs was run with --keep palette,type",
+        "Prices or a booking path are visible on the first screen or in the nav (trust convention kept)"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Portfolio website for me, I'm a ceramicist in Yogyakarta. I have about 30 photos of my work. Make it award level.",
+      "expected_output": "Full mode, picture-led direction using the real photos, critique up to 3 rounds, honest scores.",
+      "files": [],
+      "expectations": [
+        "Mode is Full and up to 3 critique rounds are logged in the critique format with a Disposition line",
+        "At least 6 of the real photos appear on the page with consistent crops",
+        "The site does not use the Ma grammar as an empty, thin page (no blank-stretch WARN left unexplained)",
+        "Final scores are reported with any caps applied and are not all 9-10",
+        "The report does not promise an award"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "kurang premium, dan kayaknya kelihatan kayak buatan AI",
+      "expected_output": "Feedback loop on an existing build: translate words into levers, run tells.md against screenshots, change only FLEXIBLE items, show before/after.",
+      "files": [],
+      "expectations": [
+        "The agent ran inspect.sh before changing anything and listed which tells were visible",
+        "No LOCKED brand element was changed without an AskUserQuestion approval",
+        "Removed ornaments were replaced with scale, content or pictures, not another ornament",
+        "Before and after screenshot paths are shown and the change is logged in decisions.md"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Make me a website for my bakery",
+      "expected_output": "Guided mode: exactly one AskUserQuestion batch of at most 4 plain-language questions; no questions about fonts, colours or layout.",
+      "files": [],
+      "expectations": [
+        "Exactly one question batch is asked before Phase 2, with at most 4 questions",
+        "Each question has a (Recommended) option",
+        "No question mentions fonts, colours, layout or animation",
+        "One question asks what someone should remember after the first screen"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "buatkan website untuk villa mewah saya di Canggu, Bali. 4 kamar, sangat tenang, booking lewat WhatsApp. belum ada foto.",
+      "expected_output": "A photographable subject with no own photos: stock placeholders decided at intake, deal run with --have stock, three concepts on three different hero compositions with pictures at real scale, no card beside the headline, picker passing timid-hero / hero-card / same-skeleton.",
+      "files": [],
+      "expectations": [
+        "design/brief.md names the picture source as stock placeholders (or asks for photos) before Phase 2",
+        "deal.mjs was run with --have stock and design/deal.json lists three different composition ids",
+        "At least two of the three picker concepts show real photos covering ≥ 50% of the desktop fold (inspect fold line: pictures ≥ 50%)",
+        "No picker concept has a card or widget beside the headline (inspect.sh reports no hero-card)",
+        "inspect.sh on each concept reports no timid-hero FAIL and no same-skeleton FAIL",
+        "Each picker section opens with a deal-check comment naming its composition, colour strategy and display face",
+        "Every stock picture is in design/credits.md and marked REPLACE; the report says they must be replaced with the villa's own photos"
+      ]
+    }
+  ]
+}

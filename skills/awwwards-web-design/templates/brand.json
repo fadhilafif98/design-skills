@@ -1,0 +1,42 @@
+{
+  "$comment": "Machine-readable brand lock for scripts/brand-check.mjs and scripts/inspect.sh. Keep in sync with design/BRAND.md. Example values: replace all of them.",
+  "brandName": "Kopi Catat",
+  "brandNameBannedVariants": ["KopiCatat", "Kopi catat", "kopi Catat"],
+
+  "tokenFiles": ["css/tokens.css"],
+  "tokenSelectors": [":root", "[data-theme"],
+
+  "fonts": {
+    "$comment": "allowed = every face the site may render. locked = faces the brand already owns (imported); they are exempt from the overused-font warning.",
+    "allowed": ["Schibsted Grotesk", "Literata"],
+    "locked": [],
+    "allowGenericFallbacks": true
+  },
+
+  "voice": {
+    "language": "id",
+    "addressForm": "kamu",
+    "bannedAddressForms": ["Anda", "anda", "lo", "lu", "elo"],
+    "bannedWords": ["unlock", "seamless", "revolusioner", "terbaik se-Indonesia"],
+    "maxExclamationsPerPage": 1,
+    "allowEmoji": false,
+    "canonicalCtas": ["Mampir ke kedai", "Lihat menu"],
+    "bannedCtas": ["Order sekarang", "Klik di sini", "Learn more"]
+  },
+
+  "logo": {
+    "files": ["assets/logo.svg", "assets/logo-mark.svg", "assets/logo-light.svg"],
+    "minWidthPx": 96
+  },
+
+  "motion": {
+    "bannedEasings": ["ease-in", "bounce", "elastic", "back.out"],
+    "allowTransitionAll": false
+  },
+
+  "$allow": "Rules the brand deliberately keeps (see DESIGN.md §7 for the reason). Applies to brand-check.mjs; inspect.allow applies to inspect.sh.",
+  "allow": [],
+  "inspect": { "allow": [] },
+
+  "ignore": ["node_modules", ".git", "design", "dist", "build", ".next", "direction-picker.html"]
+}

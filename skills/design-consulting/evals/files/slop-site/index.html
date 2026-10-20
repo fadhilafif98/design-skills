@@ -1,0 +1,45 @@
+<!doctype html>
+<!-- Seeded-defect fixture for design-consulting evals. Planted defects are listed in ../../evals.json (eval 1). Do not fix. -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Kopi Senja</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; font-family: Poppins, sans-serif; background: #F4F1EA; color: #2a2a2a; }
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 999px; background: #ece6ff; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+  header { padding: 16px 24px; }
+  .hero { text-align: center; padding: 80px 24px; }
+  .hero h1 { font-size: 64px; margin: 16px auto; max-width: 1100px; background: linear-gradient(90deg, #7c3aed, #2563eb); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { color: #b5b5b5; font-size: 15px; }
+  .btn { display: inline-block; padding: 10px 18px; border-radius: 12px; background: #7c3aed; color: #fff; text-decoration: none; transition: all .3s ease-in; }
+  .btn:hover { transform: scale(1.05); box-shadow: 0 10px 15px rgba(0,0,0,.1); }
+  .cards { display: grid; grid-template-columns: repeat(3, 340px); gap: 24px; justify-content: center; padding: 40px 24px; }
+  .card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 10px 15px rgba(0,0,0,.1); text-align: center; }
+  .icon { width: 48px; height: 48px; border-radius: 12px; background: #ece6ff; margin: 0 auto 12px; display: grid; place-items: center; }
+  .reveal { opacity: 0; transform: translateY(40px); }
+  .reveal.in { opacity: 1; transform: none; transition: all 1.2s ease-in; }
+  footer { padding: 24px; font-size: 12px; color: #c8c8c8; text-align: center; }
+</style>
+</head>
+<body>
+<header><img src="logo.png" width="40"></header>
+<section class="hero">
+  <span class="badge">✨ Baru di Bandung</span>
+  <h1>Unlock Pengalaman Ngopi Terbaik yang Akan Mengubah Hari-Harimu Selamanya</h1>
+  <p>Solusi terbaik untuk kamu yang ingin menikmati kopi berkualitas tinggi dengan harga terjangkau dan pelayanan terbaik.</p>
+  <a class="btn" href="#">Get started</a> <a class="btn" href="#">Learn more</a>
+</section>
+<section class="cards">
+  <div class="card"><div class="icon">☕</div><h3>Kopi Premium</h3><p>Biji kopi pilihan terbaik.</p></div>
+  <div class="card"><div class="icon">🚀</div><h3>Pelayanan Cepat</h3><p>Pesanan siap dalam sekejap.</p></div>
+  <div class="card"><div class="icon">💜</div><h3>Tempat Nyaman</h3><p>Suasana yang bikin betah.</p></div>
+</section>
+<section class="reveal"><h2>Apa Kata Mereka</h2><p>"Kopi terbaik yang pernah saya coba!" — Budi S., Jakarta</p><p>Dipercaya 10.000+ pelanggan</p></section>
+<footer>© 2026 Kopi Senja · Bandung · Indonesia</footer>
+<script>
+  addEventListener('scroll', () => document.querySelectorAll('.reveal').forEach((el) => { if (el.getBoundingClientRect().top < innerHeight * 0.5) el.classList.add('in'); }));
+</script>
+</body>
+</html>

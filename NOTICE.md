@@ -1,0 +1,15 @@
+# Notices
+
+This project is MIT-licensed (see `LICENSE`). It adapts ideas, rules, values and short passages from the projects below. Each one was studied as reference material; no code from them is bundled. Where a file adapts a source, it says so in a closing credit line.
+
+| Source | License | What was adapted | Where |
+|---|---|---|---|
+| [emilkowalski/skills](https://github.com/emilkowalski/skills), © 2026 Emil Kowalski | MIT | Motion decision gate, easing curves and durations, component recipes, never-ship list, performance tiers, reduced-motion approach, mobile-native fixes, gesture physics (from apple-design), break-ui stress-test method, prototype picker conventions, motion vocabulary | `motion-playbook.md`, `interaction-details.md`, `stress-test.md`, `templates/direction-picker.html`, `design-vocabulary.md` |
+| [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | Apache-2.0 | The three generated looks, font-reflex list, colour strategies (Restrained / Committed / Full / Drenched), "the rut" (default and predictable opposite), material-family spread, isolated reviewer rule and DEGRADED label, cream-ground and copy-cadence heuristics, truth-binds-claims rule, working-form action, memory test, craft-floor details | `tells.md`, `creative-direction.md`, `critique.md`, `copy.md`, `visual-craft.md`, `layout-composition.md`, `scripts/inspect.mjs`, `scripts/brand-check.mjs` |
+| [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill), © 2026 Leonxlnx | MIT | Dated tells registry, subject inventory, idea sentence and competitor test, the live thing, argument-first copy and two-line headline arithmetic, imagery ladder and floor, fullness and frame rules, critique passes, caps and calibration, dealing directions by die, measuring in a real browser | `tells.md`, `creative-direction.md`, `copy.md`, `critique.md`, `visual-craft.md`, `layout-composition.md`, `scripts/deal.mjs`, `scripts/inspect.mjs` |
+| [garrytan/gstack](https://github.com/garrytan/gstack), © 2026 Garry Tan | MIT (parts adapted from impeccable, Apache-2.0) | Safe choices vs risks, the insight template, outside voice without the draft, hard rejects and litmus checks, overused-display list, swap test, anti-skip and evidence rules, seeded-defect and contract-style evals | `creative-direction.md`, `critique.md`, `tells.md`, `SKILL.md` files, `evals/` |
+| [anthropics/skills](https://github.com/anthropics/skills) frontend-design | See its LICENSE.txt | Calibration list of generated-design clusters (cream + terracotta, mono labels, middle-dot meta strings, arrows on links, numbered markers), "visual structure is information", writing-in-design rules | `tells.md`, `copy.md` |
+
+Apache-2.0 notice for material adapted from pbakaus/impeccable: Copyright the impeccable authors. Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0). Adapted text has been rewritten and condensed; changes are ours.
+
+Font candidates listed in `scripts/deal.mjs` are names only. Each face has its own licence (SIL OFL for Google Fonts; the Fontshare licence for Fontshare faces). Verify before production use.

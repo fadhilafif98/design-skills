@@ -1,0 +1,103 @@
+<!doctype html>
+<!--
+  Direction picker: render 3 concept heroes side by side as switchable variants.
+  Usage (for Claude):
+  1. Copy to design/direction-picker.html.
+  2. Fill each <section data-variant> with that concept's FIRST SCREEN, built as its DEALT COMPOSITION
+     (references/awwwards-patterns.md §3): real h1 (≤ 2 lines), supporting line, the primary button,
+     its real pictures (own or stock placeholders from design/assets/) at their real size, its own tokens
+     (scoped via [data-variant="n"]), its fonts loaded in <head>. Name each variant after its idea, never "Option A".
+     - One thing dominates: a picture or the display type covers ≥ 35% of the desktop fold.
+     - Type and picture touch: overlap, interleave, mask, or a word crossing a picture's edge.
+     - NO card or widget beside the headline. The live thing goes in the .next screen under the hero.
+  3. Open each section with the deal check:
+       <!-- deal: composition=type-over-image · colour=committed (field covers ~45%) · display=<dealt face> -->
+     A concept that doesn't match its deal is rebuilt. If two variants share a skeleton, or differ only
+     in colour or copy, they are one variant: inspect fails it as same-skeleton.
+  4. Inspect each: inspect.sh "design/direction-picker.html?v=1" --name concept1 --widths 1440,390 --no-extra
+  5. User switches with keys 1/2/3 or ←/→, or the bottom bar. Selection persists in the URL.
+  The example tokens below are placeholders: replace every value. Dev-only artifact. Never ship it.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Direction Picker</title>
+<!-- FONTS: add <link> tags for every concept's fonts here -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  section[data-variant] { display: none; min-height: 100svh; }
+  section[data-variant].is-active { display: block; }
+  section[data-variant] > .hero { position: relative; min-height: 100svh; overflow: clip; }
+  section[data-variant] img { display: block; max-width: 100%; }
+
+  /* ===== Concept 1 tokens ===== */
+  [data-variant="1"] { --bg: oklch(0.97 0.01 85); --ink: oklch(0.2 0.01 60); --accent: oklch(0.6 0.15 40);
+                       background: var(--bg); color: var(--ink); }
+  /* ===== Concept 2 tokens ===== */
+  [data-variant="2"] { --bg: oklch(0.15 0.01 260); --ink: oklch(0.93 0.01 260); --accent: oklch(0.85 0.18 150);
+                       background: var(--bg); color: var(--ink); }
+  /* ===== Concept 3 tokens ===== */
+  [data-variant="3"] { --bg: oklch(0.96 0.005 90); --ink: oklch(0.15 0 0); --accent: oklch(0.62 0.22 30);
+                       background: var(--bg); color: var(--ink); }
+
+  /* Picker bar (not part of any design) */
+  .picker { position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+            display: flex; gap: 4px; padding: 4px; border-radius: 999px; z-index: 9999;
+            background: rgb(20 20 20 / 0.85); backdrop-filter: blur(8px);
+            font: 500 13px/1 ui-sans-serif, system-ui, sans-serif; }
+  .picker button { appearance: none; border: 0; cursor: pointer; padding: 10px 14px; border-radius: 999px;
+                   white-space: nowrap; font: inherit; -webkit-tap-highlight-color: transparent;
+                   background: transparent; color: rgb(255 255 255 / 0.7);
+                   transition: background-color 160ms ease, color 160ms ease, transform 120ms ease; }
+  .picker button:active { transform: scale(0.97); }
+  .picker button[aria-pressed="true"] { background: #fff; color: #111; }
+  .picker button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<section data-variant="1" aria-label="Concept 1: [name]">
+  <!-- deal: composition=… · colour=… · display=… -->
+  <div class="hero"><!-- FIRST SCREEN for concept 1, as its composition --></div>
+  <div class="next"><!-- LIVE THING for concept 1, working stub with real content --></div>
+</section>
+
+<section data-variant="2" aria-label="Concept 2: [name]">
+  <!-- deal: composition=… · colour=… · display=… -->
+  <div class="hero"><!-- FIRST SCREEN for concept 2 --></div>
+  <div class="next"><!-- LIVE THING for concept 2 --></div>
+</section>
+
+<section data-variant="3" aria-label="Concept 3: [name]">
+  <!-- deal: composition=… · colour=… · display=… -->
+  <div class="hero"><!-- FIRST SCREEN for concept 3 --></div>
+  <div class="next"><!-- LIVE THING for concept 3 --></div>
+</section>
+
+<nav class="picker" data-picker aria-label="Choose direction">
+  <button data-pick="1">1 · [name]</button>
+  <button data-pick="2">2 · [name]</button>
+  <button data-pick="3">3 · [name]</button>
+</nav>
+
+<script>
+  const show = (v) => {
+    document.querySelectorAll('[data-variant]').forEach((s) => s.classList.toggle('is-active', s.dataset.variant === v));
+    document.querySelectorAll('[data-pick]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pick === v)));
+    const url = new URL(location.href); url.searchParams.set('v', v); history.replaceState(null, '', url);
+  };
+  document.querySelectorAll('[data-pick]').forEach((b) => b.addEventListener('click', () => show(b.dataset.pick)));
+  const ids = [...document.querySelectorAll('[data-variant]')].map((s) => s.dataset.variant);
+  addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest('input, textarea, select, [contenteditable]')) return;
+    const cur = ids.indexOf(new URL(location.href).searchParams.get('v') || ids[0]);
+    if (ids.includes(e.key)) show(e.key);
+    else if (e.key === 'ArrowRight') show(ids[(cur + 1) % ids.length]);
+    else if (e.key === 'ArrowLeft') show(ids[(cur - 1 + ids.length) % ids.length]);
+  });
+  show(new URL(location.href).searchParams.get('v') || '1');
+</script>
+</body>
+</html>
