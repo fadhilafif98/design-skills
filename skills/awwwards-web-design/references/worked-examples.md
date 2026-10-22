@@ -4,7 +4,7 @@ Three briefs from three different categories, taken from prompt to a locked dire
 
 Rules:
 - Don't reuse an idea, grammar, colour, face, section order or headline from these examples. They exist to show the *procedure*.
-- If your concept looks like one of these, it came from this page, not from your subject. Redeal.
+- If your concept looks like one of these, it came from this page, not from your subject. Pick a fresh mechanism from `awwwards-references.md`.
 - Note what each example rejects. The rejected default and predictable opposite are the lesson.
 
 ---
@@ -27,13 +27,13 @@ Rules:
 - Default: cream/brown, latte-art photo, "freshly roasted with love", menu as an image.
 - Predictable opposite: editorial roast log with mono labels, hairlines, terracotta. **Both rejected.**
 
-**Deal (seed 1):** Ritual × Hand and Material × Committed · Poster Fields × Place × Full · Artefact × Raw × Drenched.
+**Reference Blueprint (`awwwards-references.md`):** *Mejuma Tuscany* (`craft` / `poster`, `type-over-image` + `inline-images`).
 
 **Chosen idea:** *On this page, **the stamped date on the roast bag** becomes **the hero and the clock of the whole site**.*
 - The page counts down to the next roast day and shows what's left from the last one.
 - Competitor test: another café has no roast days. ✓
 
-**Live thing:** "Roasting berikutnya: Jumat, 2 hari lagi. Sisa dari Selasa: 6 kantong Kerinci." A real number, updated by the owner. No-JS fallback: the static date.
+**Live thing:** "Roasting berikutnya: Jumat, 2 hari lagi. Sisa dari Selasa: 6 kantong Kerinci." Interactive batch & grind-size selector built as a tactile stamped bag-label stage. No-JS fallback: the static date and batch table.
 
 **Colour (Committed):** the green of the shopfront grilles carries ~40% of the surface. Ink is a deep roast brown; ground is a cool off-white from the morning fog. Use scene: phone in the morning, outdoors → light ground.
 
@@ -47,13 +47,14 @@ Button: Lihat menu & harga
 ```
 
 **Sections:**
-1. Stamp hero (live).
-2. The two roast days as two big fields.
-3. Menu with prices as a real table.
-4. The grilles, drawn, as the motif for the map and hours section.
-5. Closing field in the green with the address.
+1. Stamp hero (`type-over-image` + inline detail crops).
+2. Interactive roast-bag label & batch countdown stage (the live thing).
+3. The two roast days as two drenched poster fields with parallax macro photography.
+4. Menu with prices as an architectural index table.
+5. The grilles, drawn in SVG, as the motif for the map and hours section.
+6. Closing field in the green with the full-bleed wordmark and address.
 
-**Pictures:** 2 found (a 1930s Dago street postcard, CC0; a botanical coffee plate, public domain) + `REPLACE:` slots for the roaster's photos. The floor is met once those arrive. The report says so.
+**Pictures:** 6 bespoke AI-generated images (`image-generator`: macro roasted Kerinci beans on kraft paper, 1930s green Dutch ventilation grilles in 6am Dago fog, cupping spoon steam, enamel cup on teak counter) marked `REPLACE:` for the roaster's own photos.
 
 ---
 
@@ -121,7 +122,7 @@ Sub:    Klinik gigi satu dokter di Tebet. Semua tindakan dan harganya ada di baw
 Button: Pilih jadwal
 ```
 
-**Pictures:** no stock smiles. `REPLACE:` slots for the real room and the dentist, plus drawn diagrams of each treatment in the palette.
+**Pictures:** no generic stock smiles. Bespoke AI-generated architectural interior and equipment photography (`image-generator`, marked `REPLACE:` for the real room and dentist), plus drawn SVG diagrams of each treatment in the palette.
 
 ---
 

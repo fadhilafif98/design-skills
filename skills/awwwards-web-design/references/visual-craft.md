@@ -40,19 +40,16 @@
 **One dominant image beats six small ones.** Pages with real pictures beat pages of drawings or type only in blind comparisons. Order of preference:
 
 1. **The project's own:** photos, footage, real product UI.
-2. **AI-Generated Imagery (Preferred):** If AI image/media generation capability is available (e.g. `image-generator` subagent or local generative tooling), generate all imagery directly to fit the exact lighting, framing, and mood of the concept. Do not fetch or scrape stock photos/videos from the internet when AI generation is capable.
-   - Tailor the prompt with exact focal length, lighting, subject materials, and color temperature.
-   - Save directly into `design/assets/generated/`.
-3. **Stock placeholders (Fallback ONLY when AI generation is completely unavailable):**
-   - **Sources:** Unsplash and Pexels (free licences that allow commercial use; credit anyway).
+2. **AI-Generated Imagery (Default when no own photos):** When AI image/media generation capability is available (`image-generator` subagent or generative tooling), generate **6–8 bespoke high-craft images** directly to fit the exact lighting, framing, and mood of the chosen reference in `awwwards-references.md`. Never fetch or scrape stock photos/videos from the internet when AI generation is capable.
+   - Tailor every prompt with exact focal length (`24mm architectural`, `85mm macro`), lighting (`chiaroscuro`, `diffused morning mist`), subject materials, and color temperature.
+   - Save directly into `assets/` (or `design/assets/generated/`), mark `<!-- REPLACE: client photo of … -->` in markup, and document in `design/credits.md`.
+3. **Drawn in code from the subject** (`<svg>` diagrams, `<canvas>` interactive instruments, architectural floor plans), paired with AI photography.
+4. **Type and colour alone**, only when the concept is strictly type-led and declared in `DESIGN.md` §0.
+5. **Open-licence archive / stock fallback (ONLY when `image-generator` is unavailable in the environment):**
+   - **Sources:** Wikimedia Commons / museum open-access (CC0, CC BY, public domain) or Unsplash/Pexels.
    - Marked `<!-- REPLACE: own photo of …, 4:5 -->` in the source and listed in `design/credits.md`.
-4. **Real pictures of the subject's world from open collections**, when an honest one exists:
-   - **Sources:** Openverse (openverse.org), Wikimedia Commons, museum open-access collections (Met, Rijksmuseum, Art Institute of Chicago).
-   - Licence: only CC0, CC BY, public domain.
-5. **Drawn in code from the subject**, for things no honest picture exists of.
-6. **Type and colour alone**, when the concept is strictly type-led.
 
-**The floor:** at least **4 real pictures** on a marketing page (photos, stock placeholders, archival images, footage, real UI crops), usually 6–12. Drawings don't count. Below that, `critique.md` caps Design at 6.5, unless the concept is deliberately type-led and DESIGN.md says so.
+**The floor:** at least **4 real/generated pictures** on a marketing page (usually 6–8 bespoke AI-generated or client photos). Drawings alone don't count. Below that, `critique.md` caps Design at 6.5, unless the concept is deliberately type-led and DESIGN.md says so.
 
 Treatment:
 - Fixed aspect ratios from tokens. Same crop family, same grade.

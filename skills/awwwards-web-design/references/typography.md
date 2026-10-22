@@ -7,9 +7,9 @@ Award sites are typography-led. Type is the cheapest way to look expensive and t
 1. **Brand first.** If the brand owns typefaces, use them (`brand.json` → `fonts.locked`). Stop here.
 2. **Write three words** for the voice from the brief (e.g. *precise, unhurried, local*). Not "modern", not "elegant".
 3. **Pick the class** the grammar calls for (`art-directions.md`): grotesk, neutral, humanist, geometric, condensed, wide, text serif, display serif, slab, soft.
-4. **Take candidates** from `scripts/deal.mjs` (or the same classes yourself). Reject any face on the reflex list (`tells.md` §4) unless you can write a reason no other face could satisfy. "It feels like coffee" is not a reason.
+4. **Take candidates** from the curated non-reflex classes (`scripts/deal.mjs` `FONTS` table or the same classes yourself). Reject any face on the reflex list (`tells.md` §4) unless you can write a reason no other face could satisfy. "It feels like coffee" is not a reason.
 5. **Verify, don't recall.** Open the official listing (fonts.google.com / fontshare.com). Confirm the face exists, has the weights and italics you need, covers the language, has tabular figures if numbers matter, and has a licence that allows the use. If you can't verify, mark it `pending verification` in DESIGN.md and say so in the report. Never invent a face.
-6. **Set the hero headline in it** at real size, in the picker, and look at the screenshot before committing.
+6. **Set the hero headline in it** at real size and inspect the rendered fold screenshot before committing.
 
 Pairing:
 - **One family is normal** (a third of studied award sites use one). Two is the limit. Add mono only for real code or data tables.

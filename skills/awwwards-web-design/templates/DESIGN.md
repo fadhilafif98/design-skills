@@ -1,21 +1,26 @@
 # Design System: [Brand]
 
 ## 0. Decisions (don't change without a reason in decisions.md)
+- **Reference blueprint:** `[Site Name + URL from references/awwwards-references.md]`
+- **70% Reference foundation (kept close to reference):** [hero mechanism, grid proportions, section rhythm, and motion stack inherited from the reference]
+- **30% Subject evolution (developed from reference):** [how the layout, bespoke interactive live thing, and visual motifs are evolved from `inventory.md` so it is not a 100% clone]
 - **Purpose:** [audience] visitors must [1 action]
 - **Worry resolved:** [their doubt] → resolved by [section/proof]
 - **The one thing to remember** after the first screen: [...]
 - **Idea:** On this page, **[inventory item]** becomes **[device]**
 - **Competitor test:** with [nearest competitor]'s name, the idea [fails ✓ / still works ✗]
 - **Rut avoided:** default = [...]; predictable opposite = [...]
-- **Live thing:** [what the visitor can do / what differs each visit] · no-JS fallback: [...]
-- **Signature moment:** [once-per-visit motion, from the idea]
-- **Grammar:** [id from art-directions.md] · deal seed [n] · redeals: [none / reason]
+- **Hero composition:** `[id from awwwards-patterns.md §3]` · layered depth mechanism: [overlap / clip-path aperture / inline-images / edge-crossing]
+- **Section rhythm:** `hero=[...] → s2=[...] → s3=[...] → s4=[...] → s5=[...]` (no two adjacent alike; zero plain HTML accordions/form cards)
+- **Live thing:** [bespoke interactive visual instrument + what differs/responds] · no-JS fallback: [...]
+- **Signature moment & motion stack:** [Lenis + GSAP ScrollTrigger / SplitText / clip-path / parallax mechanism from reference]
+- **Grammar:** `[id from art-directions.md]`
 - **Colour strategy:** [Restrained / Committed / Full palette / Drenched], hues from [subject source]
 - **Use scene:** [who, where, under what light] → [light / dark] ground
 - **Brand axes (1–5):** Temperature _ · Volume _ · Order _ · Era _ · Pace _
 - **Safe choices:** [2–3 conventions kept + why]
 - **Risks:** [each: what · why it works · gain · cost]
-- **Imagery plan:** [own photos / generated / found (credited) / drawn / type-led because …] · real pictures planned: [n ≥ 4]
+- **Imagery plan:** [own photos / AI-generated via `image-generator` (6–8 bespoke assets) / drawn / type-led because …] · real/generated pictures planned: [n ≥ 6]
 
 ## 1. Colour
 ```css

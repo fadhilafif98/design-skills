@@ -147,6 +147,11 @@ function measure() {
   const media = [...document.querySelectorAll('img,video,picture,canvas')].filter((e) => { const r = e.getBoundingClientRect(); return r.width >= 160 && r.height >= 120; });
   out.mediaCount = media.length;
   out.brokenImages = [...document.images].filter((i) => i.complete && i.naturalWidth === 0 && i.getAttribute('src')).map((i) => i.getAttribute('src'));
+  out.hasChoreography = Boolean(
+    window.gsap || window.ScrollTrigger || window.Lenis ||
+    document.querySelector('[data-reveal],[data-reveal-lines],[data-clip],[data-part],[data-magnetic],[data-parallax],canvas') ||
+    all.some((e) => { const cp = getComputedStyle(e).clipPath; return cp && cp !== 'none'; })
+  );
 
   if (vw <= 480) out.smallTargets = [...document.querySelectorAll('a,button,input,select,textarea,[role=button],summary')].filter((e) => {
     if (!visible(e) || e.closest('p,li p,figcaption')) return false; const r = e.getBoundingClientRect(); return Math.min(r.width, r.height) < 44 && !(e.tagName === 'A' && getComputedStyle(e).display === 'inline');
@@ -300,6 +305,7 @@ function judge(m, w) {
   if (m.shadows > 6) add('WARN', 'shadows', at, `${m.shadows} elements with box-shadow. Shadows only on what floats`);
   for (const [a, b] of m.blank) add('WARN', 'blank-stretch', at, `Nothing from y=${a} to y=${b} (${Math.round((b - a) / m.vh * 100)}% of a screen)`);
   if (m.invisible.length >= 3) add('FAIL', 'hidden-after-scroll', at, `${m.invisible.length} text elements still invisible after scrolling through: ${m.invisible.slice(0, 4).join(', ')}`);
+  if (w >= 1024 && !m.hasChoreography) add('WARN', 'static-page', at, 'No scroll/reveal choreography detected (GSAP/ScrollTrigger, Lenis, clip-path masks, data-reveal, or interactive canvas). Implement the reference Motion Stack (motion-playbook.md §7–9)');
   if (m.smallTargets?.length) add('WARN', 'tap-target', at, `Tap targets < 44px: ${m.smallTargets.join(', ')}`);
   if (m.smallBody?.length) add('WARN', 'small-body', at, `Paragraph text < 16px on phone: ${m.smallBody.slice(0, 3).join(', ')}`);
 }

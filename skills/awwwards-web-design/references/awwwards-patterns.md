@@ -26,7 +26,7 @@ The live thing belongs in the section where it proves the claim, usually the sec
 
 ## 3. Hero compositions
 
-Every concept picks **one** composition id. `deal.mjs` deals one per concept; the three must differ. Each entry: the mechanism, what it needs, how it recomposes on a phone, and its rut.
+Every direction picks **one** primary hero composition id (or a deliberate hybrid from `awwwards-references.md` §1). Each entry: the mechanism, what it needs, how it recomposes on a phone, and its rut.
 
 ### `type-over-image`
 - **Mechanism:** one full-bleed picture; the display type set at 12–20vw, crossing the picture, often bleeding off one edge. Small facts (place, action) sit in the corners.

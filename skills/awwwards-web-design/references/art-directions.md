@@ -125,15 +125,15 @@ Use **one** grammar per project. The idea sentence decides what the grammar show
 ## Quick filter
 
 ```
-Have photos/video, or stock placeholders? quiet-luxury, cinematic, poster, archive
-No pictures of their own?               structured, kinetic, archive, craft (drawn), clear
+Have own or AI-generated photos/video?  quiet-luxury, cinematic, poster, archive
+Strictly type-led / code-drawn?         structured, kinetic, craft (drawn), clear
 Physical / local / food?                craft, archive, poster, playful
 Software / product?                     precision, structured, kinetic
 Creative / portfolio?                   structured, raw, kinetic, ma
 Premium?                                quiet-luxury, ma, poster
 ```
 
-`scripts/deal.mjs` applies this filter (via `--have`) before it rolls.
+Match the grammar directly to the chosen reference in `references/awwwards-references.md` §1.
 
 ## Existing brand
 

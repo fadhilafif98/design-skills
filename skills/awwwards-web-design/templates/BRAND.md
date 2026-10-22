@@ -58,10 +58,10 @@ Reference lines (new copy must sound like these):
 - Error/empty state: "[...]"
 
 ## 6. Imagery (LOCKED rules)
-- Subjects: [real products, real place, real team; no stock people]
-- Grade: [warm, medium contrast, light grain]
+- Subjects: [real products, real place, or bespoke AI-generated photography (`image-generator`) matched to the subject's materials and lighting; no generic web stock]
+- Grade: [warm, medium contrast, consistent focal length and colour temperature]
 - Crop: [tight details, 4:5 and 16:9 only]
-- Banned: [3D blobs, AI-generated people, generic laptop shots]
+- Banned: [3D blobs, scraped stock-photo smiles, generic laptop mockups, uncredited web images]
 
 ## 7. Shape & motion
 - Radius: [__] (LOCKED) · Icon stroke: [1.5px]

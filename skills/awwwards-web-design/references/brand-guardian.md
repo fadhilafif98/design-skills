@@ -40,7 +40,7 @@ If an art direction archetype conflicts with a higher source, **the brand wins**
 3. Mark everything extracted as **LOCKED** unless the guide itself says it's flexible. Imported typefaces go in `brand.json` → `fonts.locked` (and `fonts.allowed`), so the linter doesn't flag a brand-owned face as a reflex default.
    If a locked element is itself a tell (a violet gradient logo, cream ground), keep it, note it in DESIGN.md §7, and add the rule to `brand.json` → `allow`. The brand wins over the tells registry.
 4. Fill gaps (things the guide doesn't specify) as FLEXIBLE with bounds, and list them for the user to confirm.
-5. Phase 2 then generates concepts **inside** the brand: concepts vary in structure, signature moment, and composition, never in locked identity.
+5. Phase 2 then formulates the reference direction **inside** the brand: structure, signature moment, and composition come from `awwwards-references.md`, while locked identity stays untouched.
 6. Report: "Imported from: [sources]. Locked: [list]. Assumed (please confirm): [list]."
 
 Never "improve" a client's logo, colors, or typeface. If something in the guide hurts accessibility (e.g. brand color fails contrast as text), keep it locked for its allowed uses and propose a compliant pairing. Never silently replace it.
@@ -83,7 +83,7 @@ Run at: end of Phase 3, after the hero, after the full page, after the critique 
 1. **Automated:**
    - `node <this-skill-dir>/scripts/brand-check.mjs <site-dir> --config design/brand.json`: errors must be zero. Warnings: fix, or justify in a code comment.
    - `bash <this-skill-dir>/scripts/inspect.sh <page> --name <step>`: zero FAIL. It also checks that rendered fonts are in `fonts.allowed` and that contrast holds.
-2. **Visual** (when screenshots exist from the picker or critique): Is the logo rendered at ≥ min size, with clear space, on an allowed background? Do photos follow the imagery rules?
+2. **Visual** (when screenshots exist from the critique): Is the logo rendered at ≥ min size, with clear space, on an allowed background? Do photos follow the imagery rules?
 3. **Voice:** re-read all new copy against the three reference lines and the IS/IS NOT list.
 4. **Drift check:** in the critique screenshots, does every section feel like the same brand as the hero? Name any section that drifts and fix it. In the source, every colour, font and radius traces to `tokens.css` (`brand-check.mjs` catches raw values).
 
@@ -107,4 +107,4 @@ When the user reacts ("kurang premium", "terlalu ramai", "kurang wow"):
 | CTA wording changes per section ("Pesan", "Order", "Beli sekarang") | No canonical CTA | Define canonical CTA labels in BRAND.md |
 | Logo shrinks on mobile below legibility | Responsive pass | min logo width + visual gate |
 | Motion gets bouncy in a calm brand | Feedback "more wow" | motion character is LOCKED |
-| Stock photo slips in | Missing assets | imagery rules + REPLACE slots |
+| Generic stock photo slips in | Web scraping instead of `image-generator` | AI imagery generation rules + REPLACE slots |

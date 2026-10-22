@@ -11,16 +11,16 @@ The agent that built the page is the worst judge of it, because it inherits its 
 Give it only:
 - the screenshot paths from `inspect.sh --shots page --widths 1440,390` (≤ 15 images);
 - `design/brief.md` (purpose, audience, worry);
-- the idea sentence and the live thing from DESIGN.md §0;
+- the chosen reference site & blueprint (`references/awwwards-references.md`), the idea sentence, and the live thing from DESIGN.md §0;
 - the path to this file.
 
-Never give it your notes, the concept scoring, your reasoning, or what you think is good. Prompt:
+Never give it your notes, your reasoning, or what you think is good. Prompt:
 
 ```
-You are an Awwwards juror who did not build this page. Read <this file> and the brief at <path>.
+You are an Awwwards juror who did not build this page. Read <this file>, the reference blueprint in references/awwwards-references.md, and the brief at <path>.
 Open each screenshot listed below once with the Read tool, desktop first, then phone,
 then reduced-motion, no-JS and 320. Do check 0 first. One pass; don't re-open images. Then make the 14 passes, score with the caps,
-and answer in the exact format of §5. Name problems like a designer to a colleague, with the
+and answer in the exact format of §6. Name problems like a designer to a colleague, with the
 screenshot file where each is visible. Don't praise. Don't suggest code.
 Screenshots: <list>
 ```
@@ -56,7 +56,7 @@ Make each pass on its own. Don't blend them.
 11. **Fullness.** Is each desktop screen a composed poster, or a thin column of small grey text with dead ground on both sides? An austere page is not a restrained one.
 12. **Substance.** Does every section the brief needs deliver its information completely (the whole menu with prices, every room, the price and what it includes)? Is the primary action a real button on the first screen?
 13. **Collisions.** Is anything on top of a headline or button at any scroll position? Does anything run off the phone edge? Is there a blank band where a reveal didn't fire?
-14. **Competitor and live thing.** Put the nearest competitor's name into the idea sentence: does it still work? Name the live thing. If either answer is weak, that is problem #1 for the round.
+14. **Competitor, live thing, and 70/30 reference balance.** Put the nearest competitor's name into the idea sentence: does it still work? Name the live thing. Check the **70% Reference / 30% Evolution** balance against `DESIGN.md` §0 and `awwwards-references.md`: does the build preserve 70% of the reference's architectural caliber (layered hero depth, section rhythm, choreography) while developing 30% bespoke evolution for this subject (neither a lazy 100% clone of the reference nor a downgrade into flat static cards/accordions)? If any answer is weak, that is problem #1 for the round.
 
 ## 4. Score
 
@@ -81,8 +81,9 @@ Four criteria, 1–10 each, weighted like Awwwards: **Design 40% · Usability 30
 | Any **ban** from `tells.md` visible in a screenshot without a recorded reason | overall ≤ 6.5 |
 | Pass 3 fails (the page could belong to anyone) | creativity ≤ 6 |
 | Idea sentence still works with a competitor's name (pass 14) | creativity ≤ 7 |
-| No live thing | creativity ≤ 7.5 |
-| One identical fade on every block, or a page that barely moves | design ≤ 7 |
+| No live thing, or the live thing is a plain unstyled HTML slider/form instead of a bespoke visual instrument | creativity ≤ 6.5 |
+| One identical fade on every block, or a static page without scroll/reveal choreography (no Lenis/GSAP/clip-path/parallax) | design ≤ 6.5 |
+| Lower sections collapse into plain stacked accordion boxes or generic 2-column form cards instead of the reference's section rhythm | design ≤ 6.5 |
 | Fewer than 4 real pictures, unless the concept is type-led **and** DESIGN.md says so | design ≤ 6.5 |
 | Nothing dominates the first screen, or a card or widget sits beside the hero headline | design ≤ 6 |
 | Two or more desktop screens that are mostly empty, or running text small and grey | design ≤ 6.5 |
