@@ -18,7 +18,7 @@ A model asked to invent a look returns the average of every page it has seen, or
 - **Curated reference catalog with 70/30 evolution.** Reference architecture is matched directly against the approved Awwwards catalog (`references/awwwards-references.md`). The final build inherits **70% from the reference** (spatial ambition, layout skeleton, hero mechanism, motion/scroll stack) and develops **30% creative evolution** from the subject's own inventory—never a 100% clone, and never drifting away from the reference's concept.
 - **Decisive direction.** The agent evaluates and commits to the single best direction directly with full technical justification; no user decision paralysis or multi-screen polling.
 - **AI-generated visuals first.** All images and media are generated directly via AI (`image-generator`) to match the reference's lighting and color grade, strictly eliminating web stock scraping.
-- **Full Awwwards choreography, never static blocks.** Built with layered depth, custom interactive stages, and real scroll/reveal choreography (Lenis + GSAP ScrollTrigger/SplitText) while keeping a rock-solid static/no-JS/reduced-motion floor.
+- **Full Awwwards choreography, never static blocks.** Built with layered depth, custom interactive stages, and the reference's real motion/WebGL/scroll stack (**GSAP ScrollTrigger/SplitText**, **Anime.js**, **Three.js / WebGL shaders**, **Lenis**, **View Transitions API**, or **2D Canvas physics**) while keeping a rock-solid static/no-JS/reduced-motion floor.
 - **Measure, don't hope.** `inspect.sh` measures headline lines, contrast, overflow, fonts, hidden content, voids, tells, first-screen ambition, and choreography signals at 1440/768/390/320, plus reduced-motion and no-JS. Measuring needs no screenshots: it takes pictures only when asked (`--shots`), for the critique, into a temp dir outside the project. `brand-check.mjs` lints the source.
 - **Judge with fresh eyes.** A subagent that never saw your reasoning scores the screenshots against the chosen Awwwards reference bar, with caps that block grade inflation.
 - **The brand never drifts.** LOCKED identity, FLEXIBLE taste, checked at every gate.
@@ -133,7 +133,7 @@ Append one line per phase to `design/decisions.md`: `YYYY-MM-DD · Phase N · <a
 
 ## Phase 5: Build the reference architecture
 Build the layout with the spatial ambition, depth, and tactile density of the chosen Awwwards reference (`awwwards-references.md` §2):
-1. **Stack:** existing codebase → follow it. None → semantic `index.html` + modular CSS (`css/tokens.css`, `css/styles.css`) + ES6 JS (`js/main.js`) + GSAP (`gsap`, `ScrollTrigger`, `SplitText`) + `Lenis`.
+1. **Stack:** existing codebase → follow it. None → semantic `index.html` + modular CSS (`css/tokens.css`, `css/styles.css`) + ES6 JS (`js/main.js`) + the motion engine(s) matched to the chosen reference in `awwwards-references.md` §2 (`GSAP + ScrollTrigger + SplitText + Lenis`, `Anime.js`, `Three.js / custom GLSL shaders`, or `Canvas 2D physics`).
 2. **Tokens** first. Everything downstream references tokens only.
 3. **The hero**, at desktop and phone width, built as the reference's exact composition (`awwwards-patterns.md` §3):
    - One thing dominates (`≥ 35%` of the desktop fold).
@@ -157,8 +157,8 @@ The gate reads numbers, not pictures. Take screenshots only where eyes are neede
 - **If the scripts can't run** (no Node, no network for the first Playwright install), say so. Use any browser screenshot tool or ask the user for screenshots, and mark every unmeasured check "not measured".
 
 ## Phase 6: Choreography and interaction (Mandatory)
-An Awwwards site is not a static document with `:hover` transitions. Execute the reference's **Motion Stack** (`awwwards-references.md` §2 & `motion-playbook.md`):
-1. **Choreography engine**: wire up **Lenis** smooth scrolling + **GSAP ScrollTrigger** (and **SplitText** where line masks apply), gated cleanly behind `matchMedia('(prefers-reduced-motion: no-preference)')`.
+An Awwwards site is not a static document with `:hover` transitions. Execute the reference's **Motion Stack** (`awwwards-references.md` §2 & `motion-playbook.md` §1e, §9, §9b):
+1. **Choreography engine (multi-engine support)**: wire up the motion engine(s) that best execute the chosen reference's signature stagecraft—**Lenis + GSAP (`ScrollTrigger`, `SplitText`, `Flip`, `Draggable`)**, **Anime.js** (staggered 2D grid matrices, SVG morphing/line-drawing, spring physics), **Three.js / WebGL custom GLSL shaders** (interactive 3D vessels, depth/displacement planes, volumetric particle stages), or **2D Canvas physics**—gated cleanly behind `matchMedia('(prefers-reduced-motion: no-preference)')`.
 2. **The motion budget** (all four required):
    - **The signature moment** from the reference blueprint: e.g., scroll-scrubbed `clip-path` aperture expansion, pinned horizontal filmstrip/showcase, multi-plane parallax collage, or live pointer-reactive canvas/preview (`gsap.quickTo`).
    - **Choreographed section entrances by parts**: masked headline lines (`yPercent: 110 → 0`, `expo.out`), image clip/scale reveals (`clip-path: inset(...)` + `scale: 1.12 → 1`), and staggered supporting elements (`60–90ms`). Never use one identical fade-up on every block.

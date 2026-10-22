@@ -238,10 +238,23 @@ function measure() {
   out.mediaCount = media.length;
   out.brokenImages = [...document.images].filter((i) => i.complete && i.naturalWidth === 0 && i.getAttribute('src')).map((i) => i.getAttribute('src'));
   const stCount = window.ScrollTrigger?.getAll ? window.ScrollTrigger.getAll().length : 0;
+  const hasAnime = typeof window.anime === 'function' || typeof window.anime === 'object';
+  const hasThree = Boolean(window.THREE || document.querySelector('canvas[data-webgl-stage], canvas[data-engine*="three"]'));
+  const hasMotionLib = Boolean(window.Motion || window.Matter);
   out.stCount = stCount;
+  out.motionEngines = [
+    stCount > 0 ? `GSAP ScrollTrigger (${stCount})` : (window.gsap ? 'GSAP' : ''),
+    window.Lenis ? 'Lenis' : '',
+    hasAnime ? 'Anime.js' : '',
+    hasThree ? 'Three.js/WebGL' : '',
+    hasMotionLib ? 'Motion/Physics' : '',
+  ].filter(Boolean);
   out.hasChoreography = Boolean(
     stCount >= 2 ||
-    document.querySelectorAll('[data-reveal-lines],[data-clip],[data-part],[data-parallax]').length >= 3
+    hasAnime ||
+    hasThree ||
+    hasMotionLib ||
+    document.querySelectorAll('[data-reveal-lines],[data-clip],[data-part],[data-parallax],[data-grid-tick],[data-anime-draw],[data-webgl-stage]').length >= 3
   );
 
   // 6. Distinct section background color chapters (to detect monotonous single-color/dark-grey pages)
@@ -432,7 +445,7 @@ function judge(m, w) {
   if (m.shadows > 6) add('WARN', 'shadows', at, `${m.shadows} elements with box-shadow. Shadows only on what floats`);
   for (const [a, b] of m.blank) add('WARN', 'blank-stretch', at, `Nothing from y=${a} to y=${b} (${Math.round((b - a) / m.vh * 100)}% of a screen)`);
   if (m.invisible.length >= 3) add('FAIL', 'hidden-after-scroll', at, `${m.invisible.length} text elements still invisible after scrolling through: ${m.invisible.slice(0, 4).join(', ')}`);
-  if (w >= 1024 && !m.hasChoreography) add('FAIL', 'static-page', at, `Insufficient scroll choreography (ScrollTrigger count=${m.stCount}). Implement at least 2 distinct GSAP ScrollTrigger mechanisms (hero scrub/clip + section reveals/pinning) per motion-playbook.md §9`);
+  if (w >= 1024 && !m.hasChoreography) add('FAIL', 'static-page', at, `Insufficient motion choreography (detected engines: ${m.motionEngines?.join(', ') || 'none'}). Implement the reference's motion stack (GSAP ScrollTrigger/SplitText, Anime.js, Three.js/WebGL shaders, or interactive Canvas physics) per motion-playbook.md §1e & §9`);
   if (w >= 1024 && referenceId && REF_PROFILES[referenceId]) {
     const prof = REF_PROFILES[referenceId];
     if (prof.minBgChapters && m.bgChapterCount < prof.minBgChapters) {

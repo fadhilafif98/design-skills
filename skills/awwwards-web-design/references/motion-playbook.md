@@ -76,14 +76,19 @@ A new curve comes from easings.dev or easings.co and is named as a token. Never 
 
 **Interface motion stays under 300ms** unless a reason is written next to it. Faster *feels* higher quality.
 
-### 1e. Which tool? (cheapest that works, stop at the first that fits)
-1. CSS `transition` (hover, press, toggles: retargets mid-flight)
-2. `@starting-style` (enter animation without JS)
-3. CSS `@keyframes` (motion that must survive a busy main thread: spinners, indicators)
-4. WAAPI `element.animate()` (predetermined, JS-triggered, still off-main-thread for transform/opacity)
-5. GSAP / Motion (scroll-linked choreography, timelines, springs, SplitText)
+### 1e. Which tool / engine? (Match the chosen Awwwards reference's Motion Stack)
 
-GSAP and requestAnimationFrame always run on the **main thread**. Anything that plays during navigation, fetching or hydration (page transitions, loading indicators, tab indicators) must be CSS, WAAPI or View Transitions, never GSAP.
+Do NOT treat `Lenis + GSAP` as the only animation stack. Choose the engine(s) that match the chosen reference in `awwwards-references.md` §2:
+
+| Engine / Stack | Best For | Reference Archetypes |
+|---|---|---|
+| **1. CSS `transition` / `@starting-style` / View Transitions API / Scroll-Driven CSS (`animation-timeline: view()`)** | Micro-interactions, hover/press states, off-main-thread reveals, MPA/SPA page transitions | All 15 references (baseline UI layer) |
+| **2. GSAP (`ScrollTrigger`, `SplitText`, `Flip`, `Draggable`, `Observer`) + Lenis** | Scroll-scrubbed `clip-path` portals, pinned horizontal filmstrips, masked line reveals, layout morphs (`Flip`) | `era-residence`, `emotion-agency`, `lxl-creative`, `onlines`, `squared-media`, `ray-corral`, `mejuma-tuscany` |
+| **3. Anime.js v4 (`animate`, `stagger`, `createTimeline`, `createDraggable`, `onScroll`, SVG morph/line-drawing)** | High-density grid/tick matrices, SVG path morphing & `strokeDashoffset` engineering diagrams, spring physics, parameter playgrounds | `animejs`, `dontboardme`, `structure-eng`, `shopify-editions` |
+| **4. Three.js / WebGL / Custom GLSL Shaders (`THREE.WebGLRenderer`, `ShaderMaterial`, post-processing, interactive particles/cloth/fluid)** | 3D object-field heroes, atmospheric depth planes, shader displacement on scroll/pointer, volumetric lighting, interactive 3D vessels/artifacts | `oryzo`, `santioni`, `emotion-agency`, `adobe-bowie`, `mont-fort` |
+| **5. Motion (Framer Motion / `motion` vanilla) + Matter.js / 2D Canvas Physics** | Spring-driven UI, throwable/draggable sticker decks, 2D rigid-body collisions, real-time audio/acoustic waveform canvases | `dontboardme`, `shopify-editions`, `oryzo`, `animejs` |
+
+GSAP, Anime.js, Three.js, and `requestAnimationFrame` run on the **main thread** (or WebGL context). Anything that plays during navigation, fetching or hydration (page transitions, loading indicators, tab indicators) must be CSS, WAAPI or View Transitions. Always pause off-screen WebGL/Canvas `requestAnimationFrame` loops via `IntersectionObserver` and disable heavy motion when `prefers-reduced-motion: reduce` matches.
 
 ---
 
@@ -356,7 +361,118 @@ document.querySelectorAll('[data-draw] path').forEach((p) => {
 ```
 
 ### Cursor-following preview (hover list)
-`position: fixed` element + `gsap.quickTo` on `pointermove`; swap `src` on row hover; scale in from 0.9 + opacity. Fine pointer only. Preload the images. Mouse-driven decoration is always smoothed (quickTo/spring, 0.15–0.4s). Raw 1:1 feels mechanical; heavy lag feels broken.
+`position: fixed` element + `gsap.quickTo` (or `anime. createAnimatable`) on `pointermove`; swap `src` on row hover; scale in from 0.9 + opacity. Fine pointer only. Preload the images. Mouse-driven decoration is always smoothed (quickTo/spring, 0.15–0.4s). Raw 1:1 feels mechanical; heavy lag feels broken.
+
+---
+
+## 9b. Multi-Engine Choreography Recipes (Anime.js, Three.js / WebGL, Interactive Canvas)
+
+When the reference calls for **Anime.js**, **Three.js / WebGL shaders**, or **2D Physics / Canvas**, use these production-ready patterns (always gated by `prefers-reduced-motion` and `IntersectionObserver` so off-screen canvases pause):
+
+### A. Anime.js — Staggered Grid / Tick Matrix & SVG Line Drawing (`animejs`, `structure-eng`, `dontboardme`)
+```html
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+```
+```js
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// 1. Staggered 2D grid / tick ripple from pointer or center
+if (!reduce && typeof anime !== 'undefined') {
+  anime({
+    targets: '[data-grid-tick]',
+    scale: [
+      { value: 1.35, easing: 'easeOutSine', duration: 260 },
+      { value: 1, easing: 'easeInOutQuad', duration: 500 }
+    ],
+    rotate: () => anime.random(-12, 12),
+    delay: anime.stagger(45, { grid: [14, 6], from: 'center' }),
+    autoplay: true
+  });
+
+  // 2. Precision SVG structural / topographic path drawing
+  anime({
+    targets: '[data-anime-draw] path',
+    strokeDashoffset: [anime.setDashoffset, 0],
+    easing: 'easeInOutCubic',
+    duration: 1400,
+    delay: anime.stagger(180)
+  });
+}
+```
+
+### B. Three.js / WebGL — Interactive Shader / 3D Atmospheric Stage (`oryzo`, `santioni`, `emotion-agency`, `adobe-bowie`)
+Always mount the `<canvas data-webgl-stage>` behind or inside the hero composition so semantic HTML text (`<h1>`, `<p>`, `<button>`) remains crisp, accessible, and readable even if WebGL is disabled:
+```html
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+```
+```js
+const canvas = document.querySelector('[data-webgl-stage]');
+if (canvas && typeof THREE !== 'undefined' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+  camera.position.z = 3.2;
+
+  // Custom shader plane or sculpted 3D geometry reacting to pointer & scroll
+  const uniforms = {
+    uTime: { value: 0 },
+    uPointer: { value: new THREE.Vector2(0.5, 0.5) },
+    uScroll: { value: 0 }
+  };
+  const geo = new THREE.PlaneGeometry(4, 2.5, 64, 64);
+  const mat = new THREE.ShaderMaterial({
+    uniforms,
+    wireframe: true,
+    transparent: true,
+    vertexShader: `
+      uniform float uTime;
+      uniform vec2 uPointer;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        vec3 pos = position;
+        float dist = distance(uv, uPointer);
+        pos.z += sin(pos.x * 3.0 + uTime) * 0.12 + smoothstep(0.45, 0.0, dist) * 0.22;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec2 vUv;
+      void main() {
+        gl_FragColor = vec4(0.95, 0.88, 0.78, 0.28);
+      }
+    `
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  scene.add(mesh);
+
+  let isVisible = true;
+  new IntersectionObserver(([entry]) => { isVisible = entry.isIntersecting; }).observe(canvas);
+  window.addEventListener('pointermove', (e) => {
+    uniforms.uPointer.value.set(e.clientX / innerWidth, 1.0 - e.clientY / innerHeight);
+  }, { passive: true });
+
+  const resize = () => {
+    const { clientWidth: w, clientHeight: h } = canvas.parentElement;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  };
+  resize();
+  window.addEventListener('resize', resize);
+
+  const tick = (t) => {
+    if (isVisible && !document.hidden) {
+      uniforms.uTime.value = t * 0.0012;
+      uniforms.uScroll.value = window.scrollY / innerHeight;
+      renderer.render(scene, camera);
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+```
 
 ---
 
