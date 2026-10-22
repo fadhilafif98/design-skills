@@ -9,7 +9,7 @@ Passing `inspect.sh` and `brand-check.mjs` means nothing banned or broken was me
 The agent that built the page is the worst judge of it, because it inherits its own framing and optimism. Run the critique in a **fresh-context subagent** (Agent tool, a new general-purpose agent, not a fork).
 
 Give it only:
-- the screenshot paths from the last `inspect.sh` run (all of them);
+- the screenshot paths from `inspect.sh --shots page --widths 1440,390` (≤ 15 images);
 - `design/brief.md` (purpose, audience, worry);
 - the idea sentence and the live thing from DESIGN.md §0;
 - the path to this file.
@@ -18,8 +18,8 @@ Never give it your notes, the concept scoring, your reasoning, or what you think
 
 ```
 You are an Awwwards juror who did not build this page. Read <this file> and the brief at <path>.
-Open every screenshot listed below with the Read tool, desktop first, then 768, then phone,
-then reduced-motion and no-JS. Do check 0 first. Then make the 14 passes, score with the caps,
+Open each screenshot listed below once with the Read tool, desktop first, then phone,
+then reduced-motion, no-JS and 320. Do check 0 first. One pass; don't re-open images. Then make the 14 passes, score with the caps,
 and answer in the exact format of §5. Name problems like a designer to a colleague, with the
 screenshot file where each is visible. Don't praise. Don't suggest code.
 Screenshots: <list>
@@ -37,7 +37,7 @@ Before judging anything, open every screenshot and confirm it shows what its nam
 - fonts are loaded (no fallback serif where a grotesk was planned);
 - reveal animations have settled.
 
-An element hidden by animation timing reads as missing. If a capture is invalid, fix the capture (or the reveal) and rerun `inspect.sh`. Don't judge a broken photograph.
+An element hidden by animation timing reads as missing. If a capture is invalid, fix the capture (or the reveal) and rerun `inspect.sh --shots page`. Don't judge a broken photograph.
 
 ## 3. Fourteen passes
 
@@ -171,7 +171,7 @@ Record every fix:
 
 ## 8. When to stop
 
-At most **three rounds**: critique → fix the top three → `inspect.sh` → fresh critique. Stop early when a round finds nothing a stranger would notice, or when a round resolves nothing (you are looping).
+**Standard mode: one round.** Critique → fix the top three → measure-only `inspect.sh`, then report. **Full mode:** at most three rounds: critique → fix → `inspect.sh --shots page` → fresh critique. Stop early when a round finds nothing a stranger would notice, or when a round resolves nothing (you are looping).
 
 The target is overall ≥ 7.5 with no category under 7 and no caps applied. If round three is still below, say so plainly in the report with the remaining problems. Don't round up.
 

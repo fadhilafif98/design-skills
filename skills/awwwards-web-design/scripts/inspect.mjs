@@ -1,7 +1,7 @@
-// Called by inspect.sh. Renders a page in a real browser, measures it, and photographs it in
-// viewport-sized slices that stay legible when read back as images.
+// Called by inspect.sh. Renders a page in a real browser and measures it. Screenshots only on request
+// (--shots fold|page), written to a temp dir outside the project so they never ship with the site.
 //
-//   inspect.sh <file-or-url> [--out design/inspect] [--name page] [--widths 1440,768,390]
+//   inspect.sh <file-or-url> [--shots none|fold|page] [--out DIR] [--name page] [--widths 1440,768,390]
 //              [--config design/brand.json] [--allow rule,rule] [--no-extra] [--json]
 //
 // Exit code 0 = no FAIL. Exit code 1 = at least one FAIL (the page is not done). 2 = usage error.
@@ -9,6 +9,8 @@ import { createRequire } from 'node:module';
 import { createServer } from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
+import crypto from 'node:crypto';
 
 const require = createRequire(path.join(process.env.NODE_PATH || process.cwd(), 'noop.js'));
 const { chromium } = require('playwright');
@@ -16,17 +18,21 @@ const { chromium } = require('playwright');
 const args = process.argv.slice(2);
 const flag = (name, def) => { const i = args.indexOf('--' + name); if (i < 0) return def; const v = args[i + 1]; args.splice(i, 2); return v; };
 const has = (name) => { const i = args.indexOf('--' + name); if (i < 0) return false; args.splice(i, 1); return true; };
-const outDir = path.resolve(flag('out', 'design/inspect'));
+// Default out dir: per-project temp dir. Holds picker skeleton signatures and any screenshots.
+const tmpOut = path.join(os.tmpdir(), 'awwwards-inspect', `${path.basename(process.cwd())}-${crypto.createHash('sha1').update(process.cwd()).digest('hex').slice(0, 8)}`);
+const outDir = path.resolve(flag('out', tmpOut));
+const shotMode = flag('shots', 'none');
 const name = flag('name', 'page');
 const widths = flag('widths', '1440,768,390').split(',').map(Number).filter(Boolean);
 const configPath = flag('config', fs.existsSync('design/brand.json') ? 'design/brand.json' : '');
 const asJson = has('json');
 const noExtra = has('no-extra');
-const MAX_SLICES = 14;
+const MAX_SLICES = 6;
 const SETTLE = 1800;
 
 let target = args[0];
-if (!target) { console.error('usage: inspect.sh <file-or-url> [--out DIR] [--name NAME] [--widths 1440,768,390] [--config brand.json] [--allow rule,rule] [--json]'); process.exit(2); }
+if (!['none', 'fold', 'page'].includes(shotMode)) { console.error('inspect: --shots must be none, fold or page'); process.exit(2); }
+if (!target) { console.error('usage: inspect.sh <file-or-url> [--shots none|fold|page] [--out DIR] [--name NAME] [--widths 1440,768,390] [--config brand.json] [--allow rule,rule] [--json]'); process.exit(2); }
 
 const cfg = configPath && fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, 'utf8')) : {};
 const allow = new Set([...(flag('allow', '') || '').split(',').filter(Boolean), ...(cfg.inspect?.allow || [])]);
@@ -322,16 +328,16 @@ function compareSkeletons(sig) {
   }
 }
 
+// Screen 1 is the fold shot, so slices start at screen 2.
 async function slices(page, prefix) {
   const { docH, vh } = await page.evaluate(() => ({ docH: document.documentElement.scrollHeight, vh: innerHeight }));
   const n = Math.min(MAX_SLICES, Math.ceil(docH / vh));
-  for (let i = 0; i < n; i++) {
+  for (let i = 1; i < n; i++) {
     await page.evaluate((y) => scrollTo(0, y), i * vh);
     await page.waitForTimeout(250);
     const p = `${prefix}-${String(i + 1).padStart(2, '0')}.png`;
     await page.screenshot({ path: p }); shots.push(p);
   }
-  if (Math.ceil(docH / vh) > MAX_SLICES) add('WARN', 'long-page', 'all', `Page is ${Math.ceil(docH / vh)} screens; only the first ${MAX_SLICES} were photographed`);
 }
 
 const browser = await chromium.launch();
@@ -344,15 +350,14 @@ try {
     await page.goto(target, { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(SETTLE);
-    const fold = path.join(outDir, `${name}-${w}-fold.png`);
-    await page.screenshot({ path: fold }); shots.push(fold);
+    if (shotMode !== 'none') { const fold = path.join(outDir, `${name}-${w}-fold.png`); await page.screenshot({ path: fold }); shots.push(fold); }
     await scrollThrough(page);
     judge(await page.evaluate(measure), w);
     await page.evaluate(() => scrollTo(0, 0)); await page.waitForTimeout(400);
     const fm = await page.evaluate(foldMeasure);
     judgeFold(fm, w);
     if (!foldSig && w >= 1024) foldSig = fm.sig;
-    await slices(page, path.join(outDir, `${name}-${w}`));
+    if (shotMode === 'page') await slices(page, path.join(outDir, `${name}-${w}`));
     await ctx.close();
   }
 
@@ -363,7 +368,7 @@ try {
     await p1.goto(target, { waitUntil: 'networkidle' }); await p1.waitForTimeout(SETTLE); await scrollThrough(p1);
     const m1 = await p1.evaluate(measure);
     if (m1.invisible.length >= 3) add('FAIL', 'reduced-motion', '1440px', `${m1.invisible.length} text elements invisible with reduced motion: ${m1.invisible.slice(0, 3).join(', ')}`);
-    const rmShot = path.join(outDir, `${name}-reduced-motion.png`); await p1.screenshot({ path: rmShot, fullPage: false }); shots.push(rmShot);
+    if (shotMode === 'page') { const rmShot = path.join(outDir, `${name}-reduced-motion.png`); await p1.screenshot({ path: rmShot }); shots.push(rmShot); }
     await rm.close();
 
     // No JavaScript: the content must still be there.
@@ -373,7 +378,7 @@ try {
     const m2 = await p2.evaluate(measure);
     if (m2.h1.length && !m2.h1.some((h) => h.visible)) add('FAIL', 'no-js', '1440px', 'The <h1> is invisible without JavaScript. Hide reveal targets only from JS (html.js class)');
     if (m2.invisible.length >= 3) add('FAIL', 'no-js', '1440px', `${m2.invisible.length} text elements invisible without JavaScript`);
-    const njShot = path.join(outDir, `${name}-no-js.png`); await p2.screenshot({ path: njShot }); shots.push(njShot);
+    if (shotMode === 'page') { const njShot = path.join(outDir, `${name}-no-js.png`); await p2.screenshot({ path: njShot }); shots.push(njShot); }
     await nj.close();
 
     // Narrowest phone: catches overflow the 390 pass hides.
@@ -383,7 +388,7 @@ try {
     const m3 = await p3.evaluate(measure);
     if (m3.scrollW > 321) add('FAIL', 'overflow', '320px', `Page scrolls sideways at 320px: ${m3.overflow.join(', ')}`);
     for (const h of m3.h1) if (h.lines > 3) add('WARN', 'headline-lines', '320px', `${h.label} runs ${h.lines} lines at 320px`);
-    const ncShot = path.join(outDir, `${name}-320-fold.png`); await p3.screenshot({ path: ncShot }); shots.push(ncShot);
+    if (shotMode === 'page') { const ncShot = path.join(outDir, `${name}-320-fold.png`); await p3.screenshot({ path: ncShot }); shots.push(ncShot); }
     await nc.close();
   }
 } finally {
@@ -399,7 +404,7 @@ if (asJson) console.log(JSON.stringify({ target, fails, warns, findings, fold: f
 else {
   for (const n of foldNotes) console.log(n);
   for (const f of findings) console.log(`${f.level.padEnd(4)} [${f.rule}] ${f.where}: ${f.msg}`);
-  console.log(`\nScreenshots (Read every one after the last change):\n${shots.map((s) => '  ' + path.relative(process.cwd(), s)).join('\n')}`);
+  if (shots.length) console.log(`\nScreenshots (temp, not part of the site):\n${shots.map((s) => '  ' + s).join('\n')}`);
   console.log(`\ninspect: ${fails} FAIL · ${warns} WARN${allow.size ? ` · allowed: ${[...allow].join(', ')}` : ''}`);
 }
 process.exit(fails ? 1 : 0);

@@ -38,7 +38,7 @@ Build one fixture where rows 1–3 each fail differently (long name in row 1, mi
 | One | Exactly one item ("1 items"?) |
 | Huge | 1,000+ items, and exactly page size and page size + 1 |
 
-Add a **dev-only toggle** (fixed bottom-centre, instant switch, `?data=worst|empty|one|huge`) so every state can be screenshotted with `inspect.sh "index.html?data=worst"`. Remove it before shipping or strip it in production.
+Add a **dev-only toggle** (fixed bottom-centre, instant switch, `?data=worst|empty|one|huge`) so every state can be measured with `inspect.sh "index.html?data=worst"` (add `--shots fold` to see it). Remove it before shipping or strip it in production.
 
 ## Content catalog
 

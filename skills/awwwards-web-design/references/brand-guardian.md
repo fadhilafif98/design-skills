@@ -78,14 +78,14 @@ Self-check every new piece of copy: *"Could this line appear on a competitor's s
 
 ## 7. Brand gate (run at every checkpoint)
 
-Run at: end of Phase 3, after the hero, after every section, after the motion pass, after every feedback change, and before the final report.
+Run at: end of Phase 3, after the hero, after the full page, after the critique fixes, and after every feedback change.
 
 1. **Automated:**
    - `node <this-skill-dir>/scripts/brand-check.mjs <site-dir> --config design/brand.json`: errors must be zero. Warnings: fix, or justify in a code comment.
    - `bash <this-skill-dir>/scripts/inspect.sh <page> --name <step>`: zero FAIL. It also checks that rendered fonts are in `fonts.allowed` and that contrast holds.
-2. **Visual:** look at the latest screenshots. Is the logo rendered at ≥ min size, with clear space, on an allowed background? Do photos follow the imagery rules?
+2. **Visual** (when screenshots exist from the picker or critique): Is the logo rendered at ≥ min size, with clear space, on an allowed background? Do photos follow the imagery rules?
 3. **Voice:** re-read all new copy against the three reference lines and the IS/IS NOT list.
-4. **Drift check:** compare the latest `inspect` slices to `design/inspect/brand-reference-*.png` (the approved hero). Does every section feel like the same brand? Name any section that drifts and fix it.
+4. **Drift check:** in the critique screenshots, does every section feel like the same brand as the hero? Name any section that drifts and fix it. In the source, every colour, font and radius traces to `tokens.css` (`brand-check.mjs` catches raw values).
 
 Record each gate result in decisions.md: `YYYY-MM-DD · gate after <phase> · brand-check 0 err / 2 warn (justified) · inspect 0 FAIL / 3 WARN · drift: none`.
 
@@ -95,7 +95,7 @@ When the user reacts ("kurang premium", "terlalu ramai", "kurang wow"):
 1. Translate the feedback into levers.
 2. Classify each lever: FLEXIBLE (apply within bounds) / LOCKED (needs protocol).
 3. Apply FLEXIBLE changes; propose LOCKED ones with AskUserQuestion, recommending the option that keeps identity intact.
-4. Run the brand gate. Show before/after screenshots.
+4. Run the brand gate. For a visual change, compare `--shots fold` before and after.
 
 ## 9. Common drift patterns (watch for these)
 

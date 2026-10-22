@@ -39,7 +39,7 @@ This skill works alone. If `../awwwards-web-design/` is present, use its tools a
 
 | If present | Use |
 |---|---|
-| `../awwwards-web-design/scripts/inspect.sh` | Measured pass: `bash ../awwwards-web-design/scripts/inspect.sh <file-or-url> --out design/inspect --name audit`. Real browser at 1440/768/390 + 320, reduced motion, no-JS; contrast, headline lines, overflow, fonts loaded, hidden content, tap targets; legible viewport-slice screenshots |
+| `../awwwards-web-design/scripts/inspect.sh` | Measured pass: `bash ../awwwards-web-design/scripts/inspect.sh <file-or-url> --name audit --widths 1440,390 --shots page`. Real browser at 1440/390 + 320, reduced motion, no-JS; contrast, headline lines, overflow, fonts loaded, hidden content, tap targets; legible viewport-slice screenshots in a temp dir (paths printed) |
 | `../awwwards-web-design/scripts/brand-check.mjs` | Source lint: `node ../awwwards-web-design/scripts/brand-check.mjs <site> --json` (add `--config design/brand.json` only when a brand lock exists; without one it runs tells-only) (brand drift + copy/CSS tells + overused fonts) |
 | `../awwwards-web-design/references/` | `critique.md` (passes, caps, calibration), `tells.md`, `copy.md`, `brand-guardian.md`, `typography.md`, `layout-composition.md`, `visual-craft.md`, `motion-playbook.md`, `interaction-details.md`, `stress-test.md`, `art-directions.md`; templates `BRAND.md` + `brand.json` |
 

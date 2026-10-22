@@ -25,7 +25,7 @@ These skills replace defaults with decisions, and check each one with tools inst
   - content that never appears, empty stretches, tap targets and zoom blocking;
   - generated-page tells.
 
-  Then it saves screenshots small enough to actually read.
+  Gates read the numbers only. Screenshots are taken on request (for the concept picker and the critique) into a temp dir, so the project never fills with images.
 - **Judged by fresh eyes.** The critique runs in a separate agent that sees only the screenshots and the brief. It scores like an Awwwards juror, with caps that stop grade inflation.
 - **The brand never drifts.** Identity is LOCKED, taste moves within FLEXIBLE bounds, and `brand-check.mjs` lints every checkpoint. Already have a brand book? It's imported and locked first.
 - **No invented proof.** No fake testimonials, customer counts or logos. Unknown facts become `[FILL: …]` slots you fill in.
@@ -127,7 +127,7 @@ Every recommendation carries the principle behind it, so you build taste over ti
 node --test skills/awwwards-web-design/scripts/tests/brand-check.test.mjs
 
 # inspector against a site with planted defects
-bash skills/awwwards-web-design/scripts/inspect.sh skills/design-consulting/evals/files/slop-site/index.html --out .tmp/fixture --name fixture
+bash skills/awwwards-web-design/scripts/inspect.sh skills/design-consulting/evals/files/slop-site/index.html --name fixture --shots page
 ```
 
 Behaviour evals live in `skills/*/evals/evals.json`. See [evals/README.md](./evals/README.md) for running them against a no-skill baseline.

@@ -72,7 +72,7 @@
         "The agent ran inspect.sh before changing anything and listed which tells were visible",
         "No LOCKED brand element was changed without an AskUserQuestion approval",
         "Removed ornaments were replaced with scale, content or pictures, not another ornament",
-        "Before and after screenshot paths are shown and the change is logged in decisions.md"
+        "The change is gated with inspect.sh and logged in decisions.md"
       ]
     },
     {

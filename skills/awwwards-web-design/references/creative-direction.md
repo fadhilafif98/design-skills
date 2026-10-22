@@ -164,7 +164,7 @@ Non-designers can't judge concepts from text. Build the direction picker (`templ
 - a hint of the signature moment;
 - its live thing as a working stub on a **second screen** under the hero, never as a card beside the headline.
 
-Run `inspect.sh` on each variant (`--widths 1440,390 --no-extra`) and look at every shot before showing the user. `same-skeleton` fails when two concepts share one first-screen shape: that is one concept. The user chooses by looking. Autopilot takes the top score, but still saves the picker so they can switch.
+Run `inspect.sh` on each variant (`--widths 1440 --no-extra --shots fold`) and look at each fold shot before showing the user. `same-skeleton` fails when two concepts share one first-screen shape: that is one concept. The user chooses by looking. Autopilot takes the top score, but still saves the picker so they can switch.
 
 ## Anti-patterns
 

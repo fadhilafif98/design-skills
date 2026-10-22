@@ -40,21 +40,17 @@
 **One dominant image beats six small ones.** Pages with real pictures beat pages of drawings or type only in blind comparisons. Order of preference:
 
 1. **The project's own:** photos, footage, real product UI.
-2. **Stock placeholders**, when the subject can be photographed (a place, a room, food, a product, people) and the client has no pictures yet. They let the concepts and the build be judged at the scale the real photos will have. Rules:
+2. **AI-Generated Imagery (Preferred):** If AI image/media generation capability is available (e.g. `image-generator` subagent or local generative tooling), generate all imagery directly to fit the exact lighting, framing, and mood of the concept. Do not fetch or scrape stock photos/videos from the internet when AI generation is capable.
+   - Tailor the prompt with exact focal length, lighting, subject materials, and color temperature.
+   - Save directly into `design/assets/generated/`.
+3. **Stock placeholders (Fallback ONLY when AI generation is completely unavailable):**
    - **Sources:** Unsplash and Pexels (free licences that allow commercial use; credit anyway).
-   - **Finding:** search the inventory, not the category ("board-formed concrete wall tropical shade", not "luxury villa"). Use WebSearch or WebFetch on the site's search page to get real photo page URLs. Never guess an image ID.
-   - **Downloading:** Unsplash `curl -L -o design/assets/stock/<name>.jpg "https://unsplash.com/photos/<id>/download?w=2400"`; Pexels `curl -L -o … "https://images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg?auto=compress&w=2400"`, where `<id>` comes from the photo page URL. Check the file is an image (`file`), then **open it with Read** and judge it: right light, right material, no logos, no faces you can't use, one consistent grade with the others.
-   - **Honesty:** every stock picture is a stand-in, marked `<!-- REPLACE: own photo of …, 4:5 -->` in the source and listed in `design/credits.md` and the report. A stock villa is never presented as this villa; the client replaces it before launch.
-   - Pick a set that could come from one shoot. Mixed light and grade reads as stock even when each photo is good.
-3. **Generated**, if an image tool is available. Never presented as the client's real product, room, dish or team.
+   - Marked `<!-- REPLACE: own photo of …, 4:5 -->` in the source and listed in `design/credits.md`.
 4. **Real pictures of the subject's world from open collections**, when an honest one exists:
    - **Sources:** Openverse (openverse.org), Wikimedia Commons, museum open-access collections (Met, Rijksmuseum, Art Institute of Chicago).
-   - **What to search for:** the inventory, not the category. The street in old postcards, an old map of the neighbourhood, the material up close, the trade in engravings, a botanical plate of the crop.
-   - **Licence:** only licences that allow commercial use (CC0, CC BY, public domain). Download into `assets/found/`, record title, creator, licence and source URL in `design/credits.md`, and put a credit line in the footer.
-   - **Use them large and with intent.** One archival photograph can be the hero; an enlarged engraving can become the page's motif; the real map can be the contact section.
-   - **Honesty:** a found picture shows the world around the client. It is never presented as the client's own. A caption says what it is.
-5. **Drawn in code from the subject**, for things no honest picture exists of (its objects, its tiles, its product's interface). Use one consistent flat graphic language in the palette's real colours, with `fill="currentColor"` or `var(--token)`.
-6. **Type and colour alone**, when the concept is type-led. Say so in DESIGN.md. Never as the fallback for a photographable subject: use rung 2.
+   - Licence: only CC0, CC BY, public domain.
+5. **Drawn in code from the subject**, for things no honest picture exists of.
+6. **Type and colour alone**, when the concept is strictly type-led.
 
 **The floor:** at least **4 real pictures** on a marketing page (photos, stock placeholders, archival images, footage, real UI crops), usually 6–12. Drawings don't count. Below that, `critique.md` caps Design at 6.5, unless the concept is deliberately type-led and DESIGN.md says so.
 
