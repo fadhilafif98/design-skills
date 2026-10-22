@@ -82,6 +82,8 @@ Four criteria, 1–10 each, weighted like Awwwards: **Design 40% · Usability 30
 | Pass 3 fails (the page could belong to anyone) | creativity ≤ 6 |
 | Idea sentence still works with a competitor's name (pass 14) | creativity ≤ 7 |
 | No live thing, or the live thing is a plain unstyled HTML slider/form instead of a bespoke visual instrument | creativity ≤ 6.5 |
+| Build fails to replicate the chosen reference's Design System (e.g., ships a monotonous dark-grey/gold page instead of `era-residence`'s multi-chapter Alabaster/Powder-Sky/Velvet-Plum color fields, misses the 3-tier Condensed Didone + Overlapping Script typography, or uses a generic top navbar instead of the 4-corner viewport HUD) | design ≤ 6.0 · overall ≤ 6.5 |
+| Imagery is murky, low-contrast dark AI renders instead of crisp daylight architectural photography with azure sky, water reflections, and botanical contrast | design ≤ 6.5 |
 | One identical fade on every block, or a static page without scroll/reveal choreography (no Lenis/GSAP/clip-path/parallax) | design ≤ 6.5 |
 | Lower sections collapse into plain stacked accordion boxes or generic 2-column form cards instead of the reference's section rhythm | design ≤ 6.5 |
 | Fewer than 4 real pictures, unless the concept is type-led **and** DESIGN.md says so | design ≤ 6.5 |

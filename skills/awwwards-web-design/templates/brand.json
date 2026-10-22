@@ -2,6 +2,7 @@
   "$comment": "Machine-readable brand lock for scripts/brand-check.mjs and scripts/inspect.sh. Keep in sync with design/BRAND.md. Example values: replace all of them.",
   "brandName": "Kopi Catat",
   "brandNameBannedVariants": ["KopiCatat", "Kopi catat", "kopi Catat"],
+  "referenceId": "era-residence",
 
   "tokenFiles": ["css/tokens.css"],
   "tokenSelectors": [":root", "[data-theme"],

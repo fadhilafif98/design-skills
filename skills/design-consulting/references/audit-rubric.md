@@ -47,13 +47,14 @@ Weights (Persuade; adjust and state for other surfaces): Clarity 15, Hierarchy 1
 - Mobile is its own composition, not a squeeze.
 
 ### 5. Color (Taste + Rule)
-- A named strategy: Restrained (tinted neutrals + one accent), Committed (one saturated color carries 30–60%), Full (3–4 named roles), or Drenched (the surface is the color). No strategy = drift.
+- **Reference Design System & Multi-Chapter Strategy**: When auditing against a reference in `../awwwards-web-design/references/awwwards-references.md`, check whether the site replicates the reference's multi-chapter color system (e.g. `era-residence` shifting across `#F3F3EC` Warm Alabaster, `#B5CEDB` Powder Sky, and `#340C24` Velvet Plum with `#17233B` Deep Navy ink) vs collapsing into a monotonous single-surface dark-grey/gold AI default (`FAIL [flat-surface-monotony]`).
 - Accent on the action and at most one other thing.
 - Contrast: body ≥ 4.5:1, large text (≥ 24px or ≥ 18.7px bold) ≥ 3:1, UI boundaries ≥ 3:1 **(measured)**. Secondary text on a colored surface is tinted from that hue, never gray.
-- Light vs dark follows the physical use scene, never a default.
+- Light vs dark follows the physical use scene and reference chapters, never a flat dark-mode default.
 
 ### 6. Imagery & iconography (Taste)
-- Real pictures of this subject beat drawings, which beat stock. Count real pictures: fewer than 4 on a Persuade/Experience page reads unfinished.
+- Real pictures or bespoke daylight/twilight AI architectural photography (`image-generator`) beat drawings, which beat stock. Count real pictures: fewer than 4 on a Persuade/Experience page reads unfinished.
+- **No murky low-contrast AI renders**: For hospitality, real estate, and editorial sites, at least 60% of photography must have crisp natural daylight, clear azure/coastal sky contrast, water reflections, and botanical accents rather than dark, underexposed AI gloom.
 - Shared crop ratios and one grade; no stretched images, grey boxes, or fake dashboards of grey bars.
 - One icon set, one stroke; icons support labels.
 

@@ -37,6 +37,15 @@ if (!target) { console.error('usage: inspect.sh <file-or-url> [--shots none|fold
 const cfg = configPath && fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, 'utf8')) : {};
 const allow = new Set([...(flag('allow', '') || '').split(',').filter(Boolean), ...(cfg.inspect?.allow || [])]);
 const allowedFonts = (cfg.fonts?.allowed || []).map((f) => f.toLowerCase());
+const referenceId = (cfg.referenceId || '').toLowerCase();
+const REF_PROFILES = {
+  'era-residence': { minBgChapters: 3, minFontFamilies: 3, minH1VwRatio: 0.085, requireHud: true },
+  'emotion-agency': { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.075, requireHud: false },
+  'lxl-creative': { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.085, requireHud: false },
+  'dontboardme': { minBgChapters: 3, minFontFamilies: 2, minH1VwRatio: 0.08, requireHud: false },
+  'shopify-editions': { minBgChapters: 3, minFontFamilies: 2, minH1VwRatio: 0.06, requireHud: false },
+  'squared-media': { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.065, requireHud: false },
+};
 
 // Local files are served over http so module scripts, fetch() and relative assets behave as when hosted.
 let server = null;
@@ -226,6 +235,27 @@ function measure() {
     document.querySelectorAll('[data-reveal-lines],[data-clip],[data-part],[data-parallax]').length >= 3
   );
 
+  // 6. Distinct section background color chapters (to detect monotonous single-color/dark-grey pages)
+  const chapterBgs = [];
+  for (const sec of document.querySelectorAll('section, main > div, footer')) {
+    if (!visible(sec)) continue;
+    const r = sec.getBoundingClientRect();
+    if (r.height < 180 || r.width < vw * 0.6) continue;
+    const c = rgba(getComputedStyle(sec).backgroundColor);
+    if (c[3] > 0.5) {
+      if (!chapterBgs.some((prev) => Math.hypot(prev[0] - c[0], prev[1] - c[1], prev[2] - c[2]) < 28)) {
+        chapterBgs.push(c);
+      }
+    }
+  }
+  out.bgChapterCount = Math.max(1, chapterBgs.length);
+
+  // 7. Fixed HUD / Corner navigation detection
+  out.hasCornerHud = Boolean(
+    document.querySelector('[data-hud], .hud-frame, .viewport-hud') ||
+    [...document.querySelectorAll('body > *')].filter((e) => !/^(HEADER|ASIDE|DIALOG)$/i.test(e.tagName) && getComputedStyle(e).position === 'fixed' && visible(e)).length >= 2
+  );
+
   if (vw <= 480) out.smallTargets = [...document.querySelectorAll('a,button,input,select,textarea,[role=button],summary')].filter((e) => {
     if (!visible(e) || e.closest('p,li p,figcaption')) return false; const r = e.getBoundingClientRect(); return Math.min(r.width, r.height) < 44 && !(e.tagName === 'A' && getComputedStyle(e).display === 'inline');
   }).slice(0, 6).map(label);
@@ -394,6 +424,22 @@ function judge(m, w) {
   for (const [a, b] of m.blank) add('WARN', 'blank-stretch', at, `Nothing from y=${a} to y=${b} (${Math.round((b - a) / m.vh * 100)}% of a screen)`);
   if (m.invisible.length >= 3) add('FAIL', 'hidden-after-scroll', at, `${m.invisible.length} text elements still invisible after scrolling through: ${m.invisible.slice(0, 4).join(', ')}`);
   if (w >= 1024 && !m.hasChoreography) add('FAIL', 'static-page', at, `Insufficient scroll choreography (ScrollTrigger count=${m.stCount}). Implement at least 2 distinct GSAP ScrollTrigger mechanisms (hero scrub/clip + section reveals/pinning) per motion-playbook.md §9`);
+  if (w >= 1024 && referenceId && REF_PROFILES[referenceId]) {
+    const prof = REF_PROFILES[referenceId];
+    if (prof.minBgChapters && m.bgChapterCount < prof.minBgChapters) {
+      add('FAIL', 'flat-surface-monotony', at, `Reference "${referenceId}" requires at least ${prof.minBgChapters} distinct full-bleed color chapters across sections (found ${m.bgChapterCount}). Do not ship a monotonous single-color page (awwwards-references.md §2)`);
+    }
+    if (prof.minFontFamilies && m.families.length < prof.minFontFamilies) {
+      add('FAIL', 'reference-typography', at, `Reference "${referenceId}" requires its multi-tier typography system (found only ${m.families.length} font family). Check awwwards-references.md §2`);
+    }
+    const maxH1 = Math.max(0, ...m.h1.map((h) => h.size || 0));
+    if (prof.minH1VwRatio && maxH1 / w < prof.minH1VwRatio) {
+      add('FAIL', 'reference-scale', at, `Reference "${referenceId}" requires monumental display scale >= ${Math.round(prof.minH1VwRatio * 100)}vw (${Math.round(w * prof.minH1VwRatio)}px at ${w}px), but h1 is only ${Math.round(maxH1)}px`);
+    }
+    if (prof.requireHud && !m.hasCornerHud) {
+      add('FAIL', 'reference-hud', at, `Reference "${referenceId}" uses a fixed 4-corner architectural viewport HUD, not a generic top navbar`);
+    }
+  }
   if (m.smallTargets?.length) add('WARN', 'tap-target', at, `Tap targets < 44px: ${m.smallTargets.join(', ')}`);
   if (m.smallBody?.length) add('WARN', 'small-body', at, `Paragraph text < 16px on phone: ${m.smallBody.slice(0, 3).join(', ')}`);
 }

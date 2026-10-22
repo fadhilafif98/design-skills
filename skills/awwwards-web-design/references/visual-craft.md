@@ -2,9 +2,11 @@
 
 ## 1. Colour
 
-- **Strategy first, values second.** Choose Restrained / Committed / Full palette / Drenched (`creative-direction.md` §6), then pick hues **from the subject**: its material, its packaging, its street, the landscape outside. Check the result against the third-wave look (`tells.md` §3: cream + serif + terracotta; near-black + neon).
-- **Light or dark from the use scene**, never by default. Write the scene sentence in DESIGN.md §0.
+- **Replicate the Reference's Multi-Chapter Color System first (`awwwards-references.md` §1–2).** Never invent a monotonous dark-grey (`#141414`) + yellow-gold page when the reference uses multi-chapter surface shifts (e.g. `era-residence` shifting across `#F3F3EC` Warm Alabaster, `#B5CEDB` Powder Sky, and `#340C24` Velvet Plum with `#17233B` Deep Navy ink).
+- **Strategy first, values second.** Choose Restrained / Committed / Full palette / Drenched (`creative-direction.md` §6), then pick hues **from the reference's surface system + the subject's physical world**: its material, its sky, its street, its botanicals. Check the result against the third-wave look (`tells.md` §3: cream + serif + terracotta; near-black + neon; murky charcoal + brass).
+- **Light or dark from the reference & use scene**, never a flat dark-mode default. Write the scene sentence in DESIGN.md §0.
 - **Define in OKLCH** for perceptually even steps: `oklch(L C H)`. Build tints by changing L.
+- **Multi-chapter color events (Mandatory for `era-residence`, `emotion-agency`, `lxl-creative`, `dontboardme`, `shopify-editions`, `squared-media`):** A single-surface page feels flat and generated. Shift the full viewport ground cleanly across 2–3 curated chapter tokens (`--bg-chapter-1`, `--bg-chapter-2`, `--bg-chapter-3`). `inspect.sh` enforces this with `FAIL [flat-surface-monotony]`.
 - **Tinted neutrals:** chroma 0.005–0.02 toward the brand hue. Pure `#000` / `#fff` / flat grey feel digital. But a tinted near-black on every project is a tell too: derive the ink from the palette.
   ```css
   --ground: oklch(0.97 0.008 250);  /* example only: hue comes from the subject */
@@ -40,8 +42,10 @@
 **One dominant image beats six small ones.** Pages with real pictures beat pages of drawings or type only in blind comparisons. Order of preference:
 
 1. **The project's own:** photos, footage, real product UI.
-2. **AI-Generated Imagery (Default when no own photos):** When AI image/media generation capability is available (`image-generator` subagent or generative tooling), generate **6–8 bespoke high-craft images** directly to fit the exact lighting, framing, and mood of the chosen reference in `awwwards-references.md`. Never fetch or scrape stock photos/videos from the internet when AI generation is capable.
-   - Tailor every prompt with exact focal length (`24mm architectural`, `85mm macro`), lighting (`chiaroscuro`, `diffused morning mist`), subject materials, and color temperature.
+2. **AI-Generated Imagery (Default when no own photos):** When AI image/media generation capability is available (`image-generator` subagent or generative tooling), generate **6–8 bespoke high-craft images** directly to fit the exact lighting, sky-to-architecture ratio, and color grade of the chosen reference in `awwwards-references.md` §3. Never fetch or scrape stock photos/videos from the internet when AI generation is capable.
+   - **Ban murky, low-contrast dark AI renders:** At least 60% of generated images (especially for `era-residence`, `mont-fort`, `mejuma-tuscany`, `ray-corral`, `onlines`) MUST be shot in **crisp natural daylight** with clear azure/coastal sky, bright architectural surfaces, crystal water reflections, and vibrant botanical accents (bougainvillea, palms, olive trees).
+   - When the reference features a **Day / Night atmospheric toggle** (`era-residence`), generate a matched pair of hero images (`hero-day.jpg` in bright coastal sunlight + `hero-night.jpg` in blue-hour twilight with warm 2700K architectural cove lighting).
+   - Tailor every prompt with exact camera/lens (`Hasselblad H6D 24mm tilt-shift`, `85mm f/1.4 macro`), lighting, subject materials, and color temperature.
    - Save directly into `assets/` (or `design/assets/generated/`), mark `<!-- REPLACE: client photo of … -->` in markup, and document in `design/credits.md`.
 3. **Drawn in code from the subject** (`<svg>` diagrams, `<canvas>` interactive instruments, architectural floor plans), paired with AI photography.
 4. **Type and colour alone**, only when the concept is strictly type-led and declared in `DESIGN.md` §0.

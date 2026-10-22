@@ -106,9 +106,10 @@ Append one line per phase to `design/decisions.md`: `YYYY-MM-DD · Phase N · <a
 1. `templates/DESIGN.md` → `design/DESIGN.md`. Fill every field. §0 carries the reference blueprint, idea, live thing, signature moment, colour strategy, use scene, axes, safe/risks and imagery plan. Every later token traces to it.
 2. Fonts: follow `typography.md` §1. **Verify each face on its official listing** and record it. No reflex defaults (`tells.md` §4) without a written reason.
 3. Mandatory tokens:
-   - OKLCH colour from the strategy and the subject;
-   - ≤ 2 families;
-   - five sizes at most, with bold display scale (`≥ 6×` body at desktop);
+   - **`referenceId` locked in `design/brand.json`** (e.g., `"referenceId": "era-residence"`) so `inspect.sh` enforces the reference's structural profile;
+   - **Multi-chapter OKLCH surface colours** replicated from the reference (`--bg-chapter-1`, `--bg-chapter-2`, `--bg-chapter-3`, never a monotonous single dark-grey page);
+   - **Reference typography architecture** (2–3 families matching the reference's exact Display + Script/Accent + Body roles);
+   - five sizes at most, with monumental display scale (`≥ 9–11.5vw` at desktop when required by the reference);
    - a spacing scale;
    - one radius rule;
    - the canonical motion curves;

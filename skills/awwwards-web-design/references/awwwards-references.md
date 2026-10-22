@@ -1,140 +1,117 @@
-# Curated Awwwards Reference Catalog & Technical Blueprints
+# Curated Awwwards Reference Catalog & Exact Design Systems
 
-This catalog replaces random dealing with **70/30 Reference Evolution Architecture**. The agent analyzes the subject, selects the **single best reference** from this approved catalog, and builds the site using the **70% Reference / 30% Subject Evolution Rule**:
-- **70% Reference Foundation (Keep close to the reference):** Adopt the reference's spatial ambition, grid proportions, hero mechanism, scroll/motion choreography stack, and surface/lighting discipline so the visual caliber feels unmistakably close to the reference.
-- **30% Creative Evolution (Develop & elevate from the subject):** Evolve the layout details, custom interactive instrument ("the live thing"), bespoke AI imagery, subject-derived OKLCH color nuance, and section transitions from the business's own inventory (`design/inventory.md`). **Never clone the reference 100% 1:1**, and never drift so far that it loses the reference's soul.
+This catalog replaces random dealing with **70/30 Reference Design-System Replication**. The agent analyzes the subject, selects the **single best reference** from this approved catalog (`referenceId` locked in `design/brand.json`), and builds the site using the **70% Reference Design System / 30% Subject Evolution Rule**:
+- **70% Reference Design System (Exact Structural & Token Replication):** Replicate the reference's **exact viewport HUD chrome**, **chapter-by-chapter color-field transitions** (`Drenched` / multi-surface shifts, never one flat monotonous dark page), **3-tier typography architecture** (Display + Script/Accent + Body), **spatial scale (`10–13vw` headlines, `0.88` line-height)**, and **GSAP/Lenis scroll choreography**.
+- **30% Subject Evolution (Adapted Content, Palette Hue Shift, & Live Thing):** Adapt the content, bespoke interactive instrument ("the live thing"), and AI-generated photography (`image-generator`) to the business's own inventory (`design/inventory.md`). **Never invent a generic dark/gold SaaS or dark-mode box layout when the reference uses multi-chapter color fields, daylight sky photography, or editorial typography.**
 
 > [!IMPORTANT]
-> **Strict Catalog Rule**: Any future addition to this reference list MUST strictly come from the official `https://www.awwwards.com/` catalog (`https://www.awwwards.com/sites/...`). Never add external URLs outside of the Awwwards catalog.
+> **Strict Catalog & Machine-Gate Rule**:
+> 1. Any future addition to this reference list MUST strictly come from the official `https://www.awwwards.com/` catalog (`https://www.awwwards.com/sites/...`).
+> 2. Set `"referenceId"` in `design/brand.json` (e.g. `"referenceId": "era-residence"`). `inspect.sh` and `brand-check.mjs` mechanically verify that your rendered DOM and CSS tokens match the chosen reference's design system!
 
 ---
 
 ## 1. Quick Selector Matrix
 
-| # | Reference Site | Archetype / Vibe | Grammar ID | Hero Composition | Best Fit For |
+| `referenceId` | Reference Site | Live Surface & Color System | 3-Tier Typography System | Viewport HUD & Hero Architecture | Best Fit For |
 |---|---|---|---|---|---|
-| 1 | [Emotion Agency](https://emotion-agency.com/) | Dark Brutalist Luxury | `cinematic` / `raw` | `type-over-image` + `mask-reveal` | Creative agencies, digital products, high-end studios |
-| 2 | [LXL Creative](https://www.lxlcreative.co.uk/) | Bold Editorial Grid | `structured` | `giant-wordmark` + `index-hero` | Design consultancies, fashion, architectural practices |
-| 3 | [Era Residence](https://www.era-residence.com/) | Quiet Luxury & Hospitality | `quiet-luxury` | `framed-picture` + `filmstrip` | Real estate, luxury resorts, boutique villas, fine dining |
-| 4 | [Don't Board Me](https://dontboardme.com/) | Expressive & Playful Neo-Brutalist | `playful` | `collage` + `object-field` | Indie startups, creative services, pet/consumer brands, events |
-| 5 | [Oryzo AI](https://oryzo.ai/) | High-Tech AI & Atmospheric Depth | `precision` | `product-ui` + `scene` | SaaS, AI platforms, fintech, modern developer tools |
-| 6 | [Mont-Fort](https://mont-fort.com/) | Swiss Editorial & Heritage | `structured` / `ma` | `framed-picture` + `giant-wordmark` | Asset management, consulting, legal, prestige services |
-| 7 | [Anime.js](https://animejs.com/) | Kinetic & Interactive Playground | `kinetic` / `precision` | `object-field` + `product-ui` | Dev tools, interactive libraries, documentation, tech products |
-| 8 | [Onlines](https://onlines.com.ar/) | Fluid Dynamic Commerce | `poster` / `kinetic` | `filmstrip` + `color-field` | E-commerce, streetwear, modern retail, digital showcases |
-| 9 | [Squared Media](https://www.squared-media.nl/) | Precision Digital Agency | `structured` / `cinematic` | `type-over-image` | Production houses, marketing agencies, B2B digital services |
-| 10 | [Structure Engineering](https://structureengineering.com.au/) | Industrial Precision | `structured` / `precision` | `giant-wordmark` + `framed-picture` | Engineering, architecture, construction, industrial tech |
-| 11 | [Ray Corral](https://raycorral.com/) | Immersive Visual Portfolio | `cinematic` / `ma` | `scene` + `filmstrip` | Artists, photographers, directors, personal brands |
-| 12 | [Mejuma Tuscany](https://www.awwwards.com/sites/mejuma-tuscany) | Artisanal Organic & Earthy | `craft` / `quiet-luxury` | `type-over-image` + `inline-images` | Agriturismo, cafés, bakeries, wine/olive oil, artisanal goods |
-| 13 | [Santioni Spirits](https://santionispirits.com/) | Cinematic Product Storytelling | `cinematic` / `quiet-luxury` | `object-field` + `mask-reveal` | Premium beverages, fragrance, roasteries, craft luxury goods |
-| 14 | [Shopify Editions (Winter 2026)](https://www.shopify.com/editions/winter2026) | Modular High-Density Showcase | `precision` / `poster` | `index-hero` + `collage` | Feature releases, enterprise showcases, multi-product hubs |
-| 15 | [Adobe x Bowie 75](https://adobexbowie75.com/) | Experimental & Kinetic Collage | `archive` / `kinetic` | `collage` + `mask-reveal` | Culture, music, interactive exhibitions, campaign microsites |
+| `emotion-agency` | [Emotion Agency](https://emotion-agency.com/) | Soft Lavender (`#F5EFFF`) ↔ Deep Plum (`#2A1647`) ↔ Obsidian (`#0E0A14`) | Condensed Serif (`96–160px`, `lh 0.80`) + Grotesk (`PP Neue Montreal`) + Mono (`IBM Plex Mono`) | Corner HUD nav + Expanding `clip-path` portal intersecting giant serif | Creative agencies, digital products, studios |
+| `lxl-creative` | [LXL Creative](https://www.lxlcreative.co.uk/) | Espresso Ground (`#27201D`) ↔ Warm Cream Ink (`#FCF2BD`) ↔ Flame Orange (`#FF5121`) / Cobalt (`#055DFF`) | Ultra-Wide Display (`Owners Wide` / `Syne` / `Unbounded`) + Script Accent (`Scribo`) + Geometric (`Manrope`) | Edge-to-edge giant wordmark (`14–18vw`) + overlapping asymmetric editorial crop | Design consultancies, fashion, architecture |
+| `era-residence` | [Era Residence](https://www.era-residence.com/) | **4-Chapter Color Shift**: Alabaster (`#F3F3EC`) ↔ Powder Sky (`#B5CEDB`) ↔ Velvet Plum (`#340C24`) · Ink Deep Navy (`#17233B`) | **Ultra-Condensed Didone** (`11–12vw`, `lh 0.88`) + **Calligraphic Script** (`6–7.5vw` overlapping) + **Extended Sans** (`13px`) | **4-Corner Fixed HUD** (rotating seal TL, stacked underline CTA TR, scroll counter `00–100` L) + Full-bleed daylight sky hero + Day/Night toggle | Real estate, luxury resorts, boutique villas, hospitality, fine dining |
+| `dontboardme` | [Don't Board Me](https://dontboardme.com/) | Drenched Color-Field Chapters (Warm Butter ↔ Cobalt ↔ Coral ↔ Cream) + Crisp Ink | Oversized Expressive Display (`10–13vw`) + Script/Handwritten callouts + Clean Sans | Layered collage hero + tactile pressable sticker/card physics | Indie startups, consumer brands, pet/lifestyle, events |
+| `oryzo` | [Oryzo AI](https://oryzo.ai/) | Deep Espresso-Obsidian (`#100904`) ↔ Warm Parchment Ink (`#FFEDD7`) + Amber Signal | Variable Grotesk Display (`Halyard` / `Hanken Grotesk` / `Sora`) + Technical Mono | Atmospheric canvas stage + live interactive product/query sandbox | SaaS, AI platforms, fintech, developer tools |
+| `mont-fort` | [Mont-Fort](https://mont-fort.com/) | Alpine White (`#FFFFFF`) ↔ Glacier Blue (`#2D628C`) ↔ Mist (`#81A0BB`) ↔ Deep Slate | Wide Geometric Uppercase (`Century Gothic` / `Josefin Sans`, tracked `+0.04em`) + Clean Sans | Swiss 12-col mathematical frame + full-bleed alpine/architectural photography | Asset management, consulting, legal, prestige B2B |
+| `animejs` | [Anime.js](https://animejs.com/) | Technical Charcoal (`#1F1E1E`) ↔ Raised Slate (`#252423`) + Signal Red (`#FF4B4B`) & Coded Hues | Condensed Industrial (`DIN` / `Barlow Condensed`) + Technical Mono | Live reactive timeline/tick matrix responding to pointer/scroll on screen 1 | Dev tools, interactive libraries, technical products |
+| `onlines` | [Onlines](https://onlines.com.ar/) | Stark Gallery White (`#FFFFFF`) ↔ Warm Snow (`#FCF9F9`) ↔ Carbon Ink (`#1D1D1F`) | Tight Neo-Grotesk (`96–140px`, `ls -0.02em`) + Tabular Mono specs | Kinetic horizontal `filmstrip` hero + live filterable lookbook | E-commerce, streetwear, modern retail, catalogs |
+| `squared-media` | [Squared Media](https://www.squared-media.nl/) | Pitch Carbon (`#0C0C0B`) ↔ Sage Stone (`#B8C0A5` / `#DBE0CD`) ↔ Signal Orange (`#FF4500`) | Geometric Sans (`Figtree`) + Technical Display (`Space Grotesk`) + Mono | High-contrast chapter shifts + clip-path video/image wipes + hover index | Production houses, marketing agencies, B2B digital |
+| `structure-eng` | [Structure Engineering](https://structureengineering.com.au/) | Architectural Concrete (`#F5F5F5`) ↔ Stark Black (`#000000`) ↔ Brass Olive (`#B9B36D`) | Neo-Grotesk Display (`82–130px`, `lh 1.0`) + Technical Mono (`PP Fraktion Mono`) | Exposed structural grid rails + SVG line-drawing diagrams on scroll | Engineering, architecture, construction, industrial |
+| `ray-corral` | [Ray Corral](https://raycorral.com/) | Archival Warm Paper (`#F8F7F2`) ↔ Gallery Charcoal (`#333333` / `#0C0C0C`) | Stark Neo-Grotesk (`98–140px`, `lh 1.0`) + Signature Script (`Bacalisties`) | Camera viewfinder corner HUD + `70%+` viewport visual scenes + horizontal sequence | Artists, photographers, directors, portfolios |
+| `mejuma-tuscany` | [Mejuma Tuscany](https://www.awwwards.com/sites/mejuma-tuscany) | Sun-Baked Linen (`#F4EFE6`) ↔ Olive Grove (`#2C3527`) ↔ Terracotta Earth (`#9E472A`) | High-Contrast Editorial Serif + Inline photography inside headline lines + Humanist Sans | Sensory macro photography hero + inline-images typography + harvest/menu board | Agriturismo, cafés, bakeries, wine/olive oil, F&B |
+| `santioni` | [Santioni Spirits](https://santionispirits.com/) | Chiaroscuro Obsidian (`#121212`) ↔ Deep Amber / Mahogany (`#2A140D`) + Crisp White (`#FFFFFF`) | Bespoke Display Serif (`Charles Rosie` / `Bodoni Moda`) + Classic Serif | Layered z-index depth (giant type behind + in front of lit hero subject) | Spirits, fragrance, roasteries, luxury goods |
+| `shopify-editions` | [Shopify Editions](https://www.shopify.com/editions/winter2026) | Multi-Chapter Color Events: Pitch Black (`#000000`) ↔ Warm Ivory (`#F7F7EE`) ↔ Forest Olive (`#292919`) | Editorial Serif (`HW Cigars` / `Instrument Serif`) + Neo-Grotesk (`Neue Montreal`) | Modular chapter switcher + sticky rail with live interactive micro-demos | Feature releases, multi-product hubs, enterprise |
+| `adobe-bowie` | [Adobe x Bowie 75](https://adobexbowie75.com/) | Drenched Chromatic Chapters (Electric Cobalt ↔ Crimson ↔ Acid Yellow ↔ Archive Black) | Expressive Cut-Up Display + Archival Sans | Multi-plane parallax collage + polygon clip-path masks + interactive layer toggle | Culture, music, exhibitions, campaign microsites |
 
 ---
 
-## 2. Structural & Motion Blueprints (Mandatory Implementation Spec)
+## 2. Deep Design-System Specifications (Mandatory 70% Foundation)
 
-A site that only copies colors and fonts while rendering static stacked HTML blocks **fails** the reference match. You must implement the selected reference's **Hero Mechanism**, **Section Rhythm**, **Motion & Scroll Stack**, and **Interactive Signature**.
+> [!CAUTION]
+> **Why AI builds fail to look like the reference**: AI models read "luxury residence" and invent a generic dark-grey `#141414` + gold `#D4AF37` page with a top navbar, 4-column card grids, and small headings. That is **0% like Era Residence**. When a reference is chosen, you MUST copy its **exact structural and visual DNA** below:
 
-### 1. Emotion Agency (`https://emotion-agency.com/`)
-- **Hero Mechanism**: Full-viewport dark stage (`100svh`), massive bleeding grotesk/condensed display headline (`10–14vw`) intersecting an expanding `clip-path` media portal (`inset(18% 22% 18% 22%)` → `inset(0%)` on scroll).
-- **Section Rhythm**: Hero stage → Asymmetric 5/7 manifesto with sticky label → Full-bleed interactive case index with cursor-following video/image preview (`gsap.quickTo`) → Horizontal pinned showcase track → Full-viewport takeover footer.
-- **Motion Stack**: Lenis smooth scroll + GSAP ScrollTrigger scrub on hero portal + SplitText masked line reveals (`expo.out`, `0.9s`) + custom magnetic cursor on fine pointers.
-- **Color & Surface**: Deep obsidian/charcoal (`L 0.14–0.17`), crisp bone ink (`L 0.94`), one electric/acid or stark monochrome accent (`≤ 8%` coverage), `0px` radius.
+### Reference 3 Deep Spec: `era-residence` (`https://www.era-residence.com/`)
+Built by *The First The Last®* (Awwwards SOTD & Developer Award). Every hospitality, villa, resort, or real-estate build using `era-residence` MUST replicate these **7 exact design-system pillars**:
 
-### 2. LXL Creative (`https://www.lxlcreative.co.uk/`)
-- **Hero Mechanism**: Edge-to-edge `giant-wordmark` (`14–18vw`) anchored at top or bottom of the viewport, paired with an off-center high-fashion editorial crop (`framed-picture`, `55%` width) that overlaps the baseline of the display type.
-- **Section Rhythm**: Giant wordmark hero → 12-column asymmetric split (cols 1–4 sticky thesis, cols 6–12 staggered tall imagery) → Interactive project index row (hover expands row height or reveals inline media) → Statement pull-quote field → Monumental footer.
-- **Motion Stack**: Lenis + GSAP ScrollTrigger parallax between overlapping type and image layers + staggered clip-path image reveals (`inset(0 0 100% 0)` → `inset(0)`).
-- **Color & Surface**: High-contrast editorial monochrome or warm stone (`L 0.96` ground, `L 0.15` ink) with one bold drenched section transition.
+1. **Multi-Chapter Surface Color System (NEVER a monotonous dark/gold page!)**:
+   - Era Residence shifts the **entire viewport background (`100vw`)** across 3 distinct architectural color chapters, with **Deep Navy Ink (`#17233B`)** on light/sky chapters and **Warm Alabaster (`#F3F3EC`)** on plum chapters:
+   ```css
+   :root {
+     /* Exact Era Residence Color System (adaptable 30% hue shift only if subject demands, keeping exact L/C contrast) */
+     --bg-alabaster:  oklch(0.96 0.008 95);   /* #F3F3EC Warm Mediterranean Limestone */
+     --bg-powder-sky: oklch(0.83 0.038 230);  /* #B5CEDB Coastal Sky Chapter */
+     --bg-velvet-plum:oklch(0.20 0.065 345);  /* #340C24 Deep Evening Plum Chapter */
+     --accent-bloom:  oklch(0.84 0.085 350);  /* #F8BBCB Bougainvillea Bloom Accent */
+     --ink-navy:      oklch(0.25 0.045 255);  /* #17233B Primary Editorial Ink */
+     --ink-light:     oklch(0.96 0.008 95);   /* #F3F3EC Ink on Plum / Hero Sky */
+     --line-navy:     oklch(0.25 0.045 255 / 0.14);
+     --line-light:    oklch(0.96 0.008 95 / 0.18);
+   }
+   ```
+   - **Mandatory Rule**: At least **3 distinct full-bleed background chapters** (`theme-plum`, `theme-sky`, `theme-alabaster`) must appear as you scroll down the page. `inspect.sh` will **FAIL** (`FAIL [flat-surface-monotony]`) if every section shares the same dark or light background!
 
-### 3. Era Residence (`https://www.era-residence.com/`)
-- **Hero Mechanism**: Architectural `framed-picture` or `mask-reveal` (`65–75%` viewport coverage) with delicate, high-contrast display type (`8–11vw`) crossing the image frame edge, and an integrated architectural booking/availability bar anchored cleanly along the bottom edge (never a card beside the headline).
-- **Section Rhythm**: Architectural aperture hero → Calm asymmetric story split with macro material close-up → Pinned horizontal `filmstrip` of suites/spaces with live spec switching → Interactive floorplan / acoustic / light explorer (the live thing) → Full-screen sanctuary reservation takeover.
-- **Motion Stack**: Slow, unhurried narrative pacing (`1.2–1.6s`, `--ease-out-expo`), image scale `1.12 → 1.0` inside overflow frames on scroll, horizontal scroll-snap or GSAP pinned gallery on desktop.
-- **Color & Surface**: Derived from physical building materials (limestone, basalt, weathered timber, deep foliage). Tone-step surface separation, zero box-shadows, `0px` radius.
+2. **3-Tier Typography System (Ultra-Condensed Didone + Overlapping Script + Extended Micro-Sans)**:
+   - **Display (`--font-display`)**: Ultra-condensed high-contrast Didone serif (`Six Caps`, `Bodoni Moda` condensed, `Prata`, or `Cormorant Upright`), set **ALL-CAPS**, `font-size: clamp(4.5rem, 11.5vw, 11.5rem)` (`172px–192px` at `1440px`), `line-height: 0.88`, `letter-spacing: -0.024em`.
+   - **Script Accent (`--font-script`)**: Calligraphic script (`Pinyon Script`, `Monsieur La Doulaise`, `Alex Brush`, or `Cormorant Garamond` italic swash), `font-size: clamp(3rem, 7vw, 7.25rem)` (`108px` at `1440px`), `line-height: 1.0`, physically **overlapping** the bottom of the uppercase Display headline (`margin-top: -0.32em`) and tilted slightly (`transform: rotate(-4deg)`).
+   - **Body / UI (`--font-text`)**: Crisp geometric sans (`Plus Jakarta Sans` / `Public Sans` / `Syne`), compact editorial scale (`13px–15px` for architectural specs, `16px` for narrative), plus wide-tracked micro-captions (`letter-spacing: 0.28em` ONLY on single architectural coordinate/horizon lines, never as eyebrows above every `h2`).
 
-### 4. Don't Board Me (`https://dontboardme.com/`)
-- **Hero Mechanism**: Drenched `color-field` or layered `collage` with oversized expressive typography (`10–13vw`), cut-out subject imagery overlapping the headline letters, and tactile pressable controls.
-- **Section Rhythm**: Expressive collage hero → Interactive calculator/configurator ("live thing" front and center in section 2) → Asymmetric comparison table (us vs. the boring alternative) → Draggable/throwable sticker or card proof deck → Full-bleed color-change CTA footer.
-- **Motion Stack**: Spring physics (`bounce: 0.15–0.25`) on interactive cards/stickers, rotation nudges on scroll, instant tactile button depression (`scale(0.96)`).
-- **Color & Surface**: `Drenched` or `Full palette` (3–4 curated saturated hues from the subject), bold borders or sharp tone steps, pill (`999px`) or crisp custom radii.
+3. **Fixed 4-Corner Architectural Viewport HUD (No Top Navbar Bar!)**:
+   - Era Residence has **NO traditional horizontal header bar** (`Home | About | Rooms | Contact`). Instead, it uses a fixed `pointer-events: none` 4-corner architectural HUD (`padding: 32px 48px`):
+     - **Top-Left**: Circular rotating architectural seal (`SVG` text-on-path spinning slowly around a central botanical/geometric emblem, `76×76px`).
+     - **Top-Right**: Stacked right-aligned typographic CTA (`SELECT A PAVILION` / `RESERVE SANCTUARY` in condensed display caps `28px` with `1px` underline, followed below by `BOOK A CALL` and `CONTACT` in `11px` caps).
+     - **Left Rail (Vertical Center-to-Bottom)**: Live vertical progress hairline + numeric scroll percentage (`00` → `100` updated on scroll) + vertical rotated `SCROLL ↓` indicator at bottom-left.
+     - **Bottom-Center of Hero**: Circular outline magnetic button (`140×140px`, `border-radius: 50%`, `1px solid rgba(255,255,255,0.35)`) reading `EXPLORE PAVILIONS`.
 
-### 5. Oryzo AI (`https://oryzo.ai/`)
-- **Hero Mechanism**: Atmospheric dark or high-craft technical canvas (`product-ui` / `scene`) where a real, interactive HTML/Canvas product interface crop bleeds off the viewport edge at photographic scale, paired with razor-sharp neo-grotesk display type.
-- **Section Rhythm**: Live interface hero → Interactive live-query / state-machine sandbox (visitor manipulates inputs and sees real computed output) → Uneven architectural bento (1 dominant 8-col cell + 4-col stack, never 3 equal cards) → Live telemetry / benchmark table (`tabular-nums`) → Terminal-clean conversion close.
-- **Motion Stack**: Fast, surgical transitions (`200–350ms`, `--ease-out`), interactive canvas/SVG data flow driven by scroll or pointer, zero decorative bounce.
-- **Color & Surface**: Precision OKLCH dark (`L 0.15–0.19`) or lab-white (`L 0.97`) with tinted technical surfaces and one high-chroma signal accent used strictly on active states and data highlights.
+4. **Hero Stage + Interactive `BY DAY — BY NIGHT` Atmosphere Switcher**:
+   - The hero is a **full-bleed `100vw × 100svh` architectural scene** (in Day mode: brilliant azure coastal/tropical sky in the upper 55%, sunlit limestone/stone architecture and turquoise water pool in the lower 45%, with lush bougainvillea/palm foliage framing the edges).
+   - Centered in the sky is the monumental 2-line condensed serif title (`ERA / RESIDENCE` or `KALA / RESIDENCE`) overlapped by the calligraphic script location (`Estepona` or `Canggu Bali`).
+   - Directly below the script sits the horizontal Horizon Split:
+     `A PLACE` &nbsp;&nbsp;&nbsp; **[ `BY DAY` ─── `BY NIGHT` ]** &nbsp;&nbsp;&nbsp; `TO RETURN TO`
+   - Clicking `BY DAY` / `BY NIGHT` smoothly crossfades the hero architectural photography and page lighting theme between sunlit daytime and warm architectural dusk/night!
+   - On the architecture below, 2–3 subtle circular pulsing architectural hotspot rings (`36×36px`) reveal material/room callouts on hover.
 
-### 6. Mont-Fort (`https://mont-fort.com/`)
-- **Hero Mechanism**: Swiss precision `framed-picture` + `giant-wordmark`: strict 12-column mathematical alignment, monumental serif/grotesk headline (`8–10vw`) locked to column 1, paired with a calm architectural or alpine/subject photograph anchored in columns 6–12.
-- **Section Rhythm**: Swiss grid hero → Key figures / live interactive ledger or portfolio allocation tool (`tabular-nums`) → Sticky left-rail thesis with scrolling evidence chapters → Structured specification matrix → Understated institutional footer.
-- **Motion Stack**: Restrained, dignified line reveals (`700ms`, `expo.out`), subtle parallax on imagery, crisp `150ms` link underlines.
-- **Color & Surface**: `Restrained` palette (cool mineral off-white or deep slate ground, full-contrast ink, single heritage accent `≤ 5%`).
-
-### 7. Anime.js (`https://animejs.com/`)
-- **Hero Mechanism**: Live reactive `object-field` / `product-ui` canvas where geometric ticks, timeline tracks, or subject parameters respond in real time to pointer coordinates or scrub controls right on the first screen.
-- **Section Rhythm**: Interactive kinetic hero → Live parameter playground (sliders/toggles mutating live DOM/SVG targets) → Staggered choreography breakdown (side-by-side code/spec and live visual result) → High-density specification index → Kinetic footer.
-- **Motion Stack**: Choreographed timelines, staggered grid/tick animations, scrubbable progress bars, `requestAnimationFrame` / GSAP ticker synchronization.
-- **Color & Surface**: Deep technical charcoal ground with coded color roles (3–4 high-legibility signal hues) for parameters and states.
-
-### 8. Onlines (`https://onlines.com.ar/`)
-- **Hero Mechanism**: Kinetic `filmstrip` + `color-field`: oversized display type (`11–15vw`) crossing a horizontal strip of tall editorial product crops (`4:5`) that shift on scroll or drag.
-- **Section Rhythm**: Kinetic filmstrip hero → Live filterable/interactive catalog lookbook (instant state swap + image preview) → Full-bleed editorial campaign spread → Marquee of real inventory/drop data → Drenched color-takeover checkout/action footer.
-- **Motion Stack**: Lenis + scroll-velocity skew/shift on filmstrips + cursor-following quick-view badge + fast `200ms` filter transitions.
-- **Color & Surface**: `Committed` or `Drenched` bold fields, stark contrast ink, zero soft card shadows.
-
-### 9. Squared Media (`https://www.squared-media.nl/`)
-- **Hero Mechanism**: High-contrast `type-over-image` / video stage with bold grotesk typography anchored to shared vertical grid rails and an interactive reel/showcase trigger integrated into the composition.
-- **Section Rhythm**: Full-bleed stage hero → Asymmetric split value argument with real metrics → Interactive service/case matrix with hover image reveals → Process timeline driven by scroll progress → Bold agency conversion footer.
-- **Motion Stack**: Clip-path wipes on media, SplitText line-by-line entrances, magnetic primary CTA, smooth scroll-linked progress indicator.
-- **Color & Surface**: Stark contrast (deep ink vs crisp light ground, Alternating dark/light chapters), punchy single accent on CTAs.
-
-### 10. Structure Engineering (`https://structureengineering.com.au/`)
-- **Hero Mechanism**: Industrial `giant-wordmark` + `framed-picture`: structural span typography (`9–13vw`) with exposed architectural alignment (2–3 strict vertical x-axes) and dramatic structural photography.
-- **Section Rhythm**: Structural span hero → Interactive load / span / specification calculator or project filter (the live thing) → Sticky-title project dossier (large photography + tabular engineering specs) → Capability index table → Monumental blueprint footer.
-- **Motion Stack**: Linear/expo structural reveals, SVG diagram line-drawing on scroll (`strokeDashoffset` scrubbed), crisp `150ms` tabular state switches.
-- **Color & Surface**: Raw steel/concrete neutrals (`Restrained` or `Committed`) + one high-visibility industrial safety/signal accent (`≤ 10%`), `0px` radius.
-
-### 11. Ray Corral (`https://raycorral.com/`)
-- **Hero Mechanism**: Visceral `scene` / `filmstrip` where imagery occupies `70%+` of the viewport and minimal, razor-sharp typography sits anchored in the corners like a camera viewfinder or gallery plate.
-- **Section Rhythm**: Full-bleed visual scene hero → Pinned horizontal sequence or asymmetrical staggered gallery (1 huge image + 2 tight detail crops) → Interactive work index (pointer-following floating preview) → Sparse biography/manifesto statement → Full-screen contact close.
-- **Motion Stack**: Lenis + GSAP ScrollTrigger scrub, smooth image scale (`1.15 → 1.0`), crossfade/clip transitions between works.
-- **Color & Surface**: Gallery-dark or archival-paper ground sampled from the photography's dominant shadow/highlight tone.
-
-### 12. Mejuma Tuscany (`https://www.awwwards.com/sites/mejuma-tuscany`)
-- **Hero Mechanism**: Warm editorial `type-over-image` + `inline-images`: tactile macro photography of the place/harvest/craft filling the fold, with expressive display typography that interleaves small detail crops inside the text lines.
-- **Section Rhythm**: Sensory full-bleed hero → Live harvest / batch / daily menu / tasting notes interactive board (the live thing) → Asymmetric story sequence (origin → process → table) with overlapping photography → Full menu/product table with real prices → Warm invitation footer with map & hours.
-- **Motion Stack**: Gentle organic ease-out (`--ease-out-expo`, `1.1–1.4s`), inline image expansion on scroll/hover, subtle parallax drift between foreground and background photos.
-- **Color & Surface**: Hues sampled directly from the subject's terroir (olive leaf, volcanic soil, unbleached linen, espresso roast—never generic AI `#F4F1EA` + terracotta unless justified by subject material).
-
-### 13. Santioni Spirits (`https://santionispirits.com/`)
-- **Hero Mechanism**: Chiaroscuro `object-field` + `mask-reveal`: the hero product/vessel/artifact lit dramatically at `60%+` viewport height over a dark or drenched field, with display typography wrapping behind and in front of the object (layered z-index depth).
-- **Section Rhythm**: Layered object-depth hero → Scroll-driven tasting / anatomy / process breakdown (pinned object or sequence with callouts appearing per scroll step) → Interactive batch / cocktail / pairing selector (the live thing) → Provenance & craft gallery → Dramatic bottle/product takeover footer.
-- **Motion Stack**: ScrollTrigger pinned anatomy sequence, multi-layer parallax (background type → mid object → foreground detail), slow `1.4s` clip reveals.
-- **Color & Surface**: Deep chiaroscuro ground (mahogany, obsidian, midnight, or deep botanical green) + metallic/amber/botanical accent sampled from the product.
-
-### 14. Shopify Editions (`https://www.shopify.com/editions/winter2026`)
-- **Hero Mechanism**: High-density modular `index-hero` + `collage`: bold editorial masthead with an interactive chapter/feature switcher that dynamically reorganizes or jumps the viewport across a rich multi-module showcase.
-- **Section Rhythm**: Interactive masthead + chapter index → Sticky chapter rail with asymmetric feature showcase cards (live interactive demos inside key cells) → Full-width visual interlude → Searchable/filterable specification matrix → High-impact launch CTA.
-- **Motion Stack**: Snappy layout transitions (`250ms --ease-in-out`), scroll-spy active chapter indicator, interactive micro-demos inside feature stages.
-- **Color & Surface**: `Full palette` or chapter-by-chapter `Drenched` color events (each major section shifts surface tone cleanly).
-
-### 15. Adobe x Bowie 75 (`https://adobexbowie75.com/`)
-- **Hero Mechanism**: Multi-layered `collage` + `mask-reveal`: overlapping archival/generated media plates at different z-depths, display typography slicing through the collage, and an interactive layer/sound/artifact toggle.
-- **Section Rhythm**: Layered collage hero → Interactive artifact/timeline explorer (visitor scrubs eras or toggles layers) → Pinned horizontal exhibition wall → Drenched statement quote screen → Archival credits & takeover close.
-- **Motion Stack**: Multi-speed parallax planes on scroll and pointer move, clip-path polygon masks, bold chromatic field shifts.
-- **Color & Surface**: High-saturation `Drenched` or `Full palette` chromatic contrasts with sharp `0px` editorial framing.
+5. **Section-by-Section Compositional Choreography (No Stacked Card Grids!)**:
+   - **Chapter 1 (Hero Stage, `100svh` → Pinned Pull-Back)**: Full-bleed sky & architecture with 3-tier center title, `BY DAY / BY NIGHT` switcher, and hotspot rings.
+   - **Chapter 2 (`theme-sky` Powder Sky `#B5CEDB`)**: Centered compact editorial thesis at the top of the sky field, with a cutout/masked architectural facade rising from the bottom-left and palm foliage on the right, followed by a monumental `11vw` condensed display statement (`BUILT TO STAY`).
+   - **Chapter 3 (`theme-alabaster` Warm Alabaster `#F3F3EC`)**: Centered 3-line Display + Script statement (`THE SANCTUARY YOU WANTED` / *yours* / `THIS SEASON`) with an **organic hand-drawn SVG coastal/topographic route line** across the bottom showing real travel distances (`NGURAH RAI 35 MIN` — `SEMINYAK 15 MIN` — `BATU BOLONG 4 MIN` — `TANAH LOT 20 MIN`).
+   - **Chapter 4 (`theme-alabaster` → `theme-plum` Asymmetric Split Collage)**: Left column holds a deep Velvet Plum (`#340C24`) vertical block with an inset portrait courtyard photo and overflowing botanical foliage; right column holds a cropped terrace photo at top, a `56px` condensed serif statement (`EVERY DETAIL WAS SELECTED TO CREATE...`), a compact specification paragraph, and a large `160×160px` circular outline button (`VIEW AVAILABLE PAVILIONS`).
+   - **Chapter 5 (Interactive Residence / Suite Selector & Floorplan Explorer — "The Live Thing")**: Interactive architectural unit ledger where clicking/hovering each residence updates the live architectural floorplan SVG, m² breakdown, acoustic/thermal metrics, and nightly/ownership rate.
+   - **Chapter 6 (`theme-plum` Velvet Plum `#340C24` Monumental Closing Takeover)**: Top inset lifestyle crop, central botanical emblem, **monumental `10vw` condensed serif contact number / direct concierge line (`+62 (811) 3890-2400`)** with subtle 3D perspective/wave stagger on the digits, address below, and minimal bottom corners.
 
 ---
 
-## 3. Mandatory 70/30 Execution Checklist for Phase 2 & Phase 5–6
+## 3. Photography & Color Curation Rules (Mandatory for `image-generator`)
 
-When you pick a reference from this catalog, apply the **70% Reference / 30% Evolution** rule:
+Why did `design-test-2`'s previous images and colors feel like AI slop? Because every image was dark, murky, and low-contrast, sitting on a dark-grey background. Follow these rules on every project:
 
-1. **Record the 70/30 Split in `design/DESIGN.md` §0**:
-   - **70% Reference Foundation**: Name the Reference Site, Hero Composition ID, Section Rhythm, and Motion Stack inherited from the blueprint above.
-   - **30% Subject Evolution**: State explicitly what is evolved and expanded for this subject (the bespoke interactive "live thing", custom motif/artifact from `inventory.md`, unique color/material adaptation, and expanded section mechanics) so it is neither a 100% clone nor a generic departure.
-2. **AI Visual Assets (`image-generator`)**: Generate **6–8 bespoke visual assets** matching the reference's lighting discipline and focal length, but depicting this subject's authentic materials, environment, and artifacts. Save to `assets/`. Never scrape stock photos.
-3. **Layered Depth in the Hero**: Type and image must physically interact (overlap via z-index, clip-path mask, inline interleave, or edge-crossing) following the 70% reference structure, while introducing a 30% evolved signature twist tied to the subject's idea.
-4. **No Boring HTML Widgets Below the Fold**: Never drop plain default `<details>` accordions, unstyled `<input type="range">` sliders, or generic 2-column form cards into the page. Every interactive section must feel like a natural evolution of the reference's stagecraft.
-5. **Real Choreography Engine**: Include **Lenis + GSAP + ScrollTrigger** (with `prefers-reduced-motion` and no-JS `.js` class safety) to execute the reference's scroll-driven reveals, parallax planes, or pinned sequences.
+1. **Bright, High-Dynamic-Range Daylight & Golden-Hour Architectural Photography**:
+   - Unless the reference is strictly obsidian noir (`santioni`, `oryzo`), **at least 60% of generated images MUST be shot in crisp natural daylight** with a clear sky or bright architectural surfaces so the page breathes like a real editorial shoot.
+   - For `era-residence`, `mont-fort`, `mejuma-tuscany`, `ray-corral`, and `onlines`:
+     - **Hero Day Image Prompt**: *"Architectural photography of [subject], shot on Hasselblad H6D 24mm tilt-shift lens, brilliant clear azure blue sky occupying the upper half of the frame, sunlit pale limestone and volcanic stone cantilevered pavilions below, crystal turquoise reflection pool in foreground, vibrant magenta bougainvillea and tropical palms framing the right edge, crisp Mediterranean/tropical sunlight, Architectural Digest editorial grade, zero text."*
+     - **Hero Night Image Prompt** (for the Day/Night toggle): *"Same architectural angle at blue-hour twilight, deep indigo-plum sky, warm 2700K concealed architectural cove lighting glowing inside the stone pavilions and reflecting on the mirror-still pool."*
+     - **Botanical / Material Cutout & Collage Prompts**: Crisp sunlit close-ups of textured stone, water courtyards, and vibrant botanical accents (bougainvillea, frangipani, olive branches) with high micro-contrast.
+2. **Ban the Murky Dark-Grey + Yellow-Gold AI Slop Palette**:
+   - Never default to `oklch(0.15 ...)` charcoal + `oklch(0.78 ...)` yellow-brass across the whole page.
+   - Use **Multi-Chapter Color Fields**: pair a crisp light editorial ground (`#F3F3EC` Alabaster) with a cool atmospheric chapter (`#B5CEDB` Powder Sky) and a deep jewel-toned chapter (`#340C24` Velvet Plum, `#17233B` Deep Navy, or `#1E2D24` Deep Cypress).
+
+---
+
+## 4. Mandatory 70/30 Execution Checklist for Phase 2, 3, 5, 6
+
+1. **Lock `"referenceId"` in `design/brand.json`**:
+   - Example: `"referenceId": "era-residence"`.
+   - `inspect.sh` reads `referenceId` and enforces reference-specific structural gates (e.g., multi-chapter background shifts, 3-tier font pairing, 4-corner HUD, `≥ 9vw` display scale).
+2. **Replicate the Reference's Exact CSS Token Architecture in `css/tokens.css`**:
+   - Define the reference's multi-chapter surface tokens (`--bg-chapter-1`, `--bg-chapter-2`, `--bg-chapter-3`), 3-tier font tokens (`--font-display`, `--font-script`, `--font-text`), and monumental display scale (`--fs-display: clamp(4.5rem, 11.5vw, 11.5rem)`).
+3. **Generate Cohesive Daylight + Twilight Visual Assets (`image-generator`)**:
+   - Generate 6–8 high-craft images matching the reference's exact sky/subject ratio and daylight color temperature.
+4. **Build the Reference's Exact Section Choreography**:
+   - Never substitute a reference's bespoke sections (like Era's SVG coastal distance map, 4-corner HUD, Day/Night toggle, or plum/alabaster split collage) with generic 3-column cards or 2-column form boxes.

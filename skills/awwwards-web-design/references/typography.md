@@ -12,8 +12,10 @@ Award sites are typography-led. Type is the cheapest way to look expensive and t
 6. **Set the hero headline in it** at real size and inspect the rendered fold screenshot before committing.
 
 Pairing:
-- **One family is normal** (a third of studied award sites use one). Two is the limit. Add mono only for real code or data tables.
-- Pair by **contrast of role**: expressive display + quiet text. Two expressive faces fight; two neutral faces bore.
+- **Replicate the Reference's Typography Architecture (`awwwards-references.md` §1–2):**
+  - When a reference uses a **3-tier editorial lockup** (e.g., `era-residence` pairing an **Ultra-Condensed All-Caps Didone Serif** `11–12vw`, `lh 0.88` + an **Overlapping Calligraphic Script** `6–7vw`, `margin-top: -0.32em`, `rotate(-4deg)` + an **Extended/Geometric Sans** `13–16px`), you MUST load and apply all three roles (`--font-display`, `--font-script`, `--font-text`).
+  - Otherwise, **one or two families** is the limit. Add mono only for real code or data tables.
+- Pair by **contrast of role**: ultra-condensed architectural display + flowing calligraphic script accent + quiet geometric sans. Two similar faces fight; two neutral faces bore.
 - One superfamily with a width or weight axis can carry the whole hierarchy.
 
 ## 2. Scale
