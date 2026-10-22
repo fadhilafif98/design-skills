@@ -99,4 +99,100 @@ Removing ornaments leaves space. Fill it with **scale** (make the main thing lar
 
 Each desktop screen should hold as a poster: one dominant thing and the content it carries.
 
+## 11. Concrete Awwwards Architectural Blueprints (Anti-Box & Anti-Card-Grid)
+
+Lightweight models frequently collapse into `border: 1px solid` boxes and `repeat(3|4, 1fr)` card grids (`FAIL [card-grid]`, `FAIL [box-itis]`). Use these exact CSS/HTML architectures instead:
+
+### A. Floating Header + Overlapping Asymmetric Hero (`12-col` grid overlap)
+Never put a rigid `background: var(--bg); border-bottom: 1px solid` header above the hero (`FAIL [rigid-header]`). Float the header over the hero stage, and let the display headline overlap the dominant media frame on the 12-column grid:
+
+```css
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--gutter);
+  background: transparent; /* No border-bottom! */
+}
+.hero-stage {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 1fr auto auto;
+  column-gap: var(--gutter);
+  padding: calc(var(--space-xl) + 2rem) var(--gutter) var(--space-lg);
+  align-items: end;
+}
+.hero-media-frame {
+  grid-column: 5 / 13;
+  grid-row: 1 / 3;
+  height: 76svh;
+  overflow: hidden;
+}
+.hero-copy-overlap {
+  grid-column: 1 / 8;
+  grid-row: 2 / 3;
+  z-index: 2;
+  pointer-events: none;
+}
+/* Working-form ledger strip: single top hairline, NO 4-sided cell boxes */
+.hero-ledger-bar {
+  grid-column: 1 / 13;
+  grid-row: 3 / 4;
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr auto;
+  column-gap: var(--space-lg);
+  align-items: end;
+  padding-top: var(--space-md);
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--line);
+}
+```
+
+### B. True Full-Bleed `100vw` Pinned Horizontal Filmstrip (No Equal Card Grids)
+Never build a "filmstrip" as `grid-template-columns: repeat(4, 1fr)` inside `.container` (`FAIL [card-grid]`). Break out to `100vw`, use `display: flex; width: max-content`, vary the frame widths/aspect ratios, and use **zero** `1px` card borders:
+
+```css
+.filmstrip-pin-section {
+  width: 100%;
+  overflow: hidden;
+  padding-block: var(--space-2xl);
+}
+.filmstrip-track {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  width: max-content;
+  padding-inline: var(--gutter);
+  will-change: transform;
+}
+/* Alternate aspect ratios & widths so it reads as an exhibition, not a catalog */
+.filmstrip-item--wide   { width: clamp(24rem, 46vw, 44rem); }
+.filmstrip-item--tall   { width: clamp(18rem, 30vw, 28rem); }
+.filmstrip-item--medium { width: clamp(20rem, 36vw, 34rem); }
+```
+
+### C. Editorial Index Rows with Hover Image Preview (No 2×2 Text Box Grids)
+Instead of putting 4 features or rituals in a 2×2 grid of `border: 1px solid` boxes (`FAIL [card-grid]`, `FAIL [box-itis]`), stack them as full-width editorial rows separated **only** by `border-top: 1px solid var(--line)`:
+
+```css
+.editorial-index-row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: baseline;
+  padding-block: var(--space-lg);
+  border-top: 1px solid var(--line); /* Only top hairline, never a 4-sided box */
+}
+.editorial-index-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.editorial-index-title { grid-column: 1 / 5; }
+.editorial-index-body  { grid-column: 5 / 10; }
+.editorial-index-meta  { grid-column: 10 / 13; text-align: right; }
+```
+
 *Frame and fullness rules from leonxlnx/taste-skill (MIT); working-form action and memory test from pbakaus/impeccable (Apache-2.0). See NOTICE.md.*

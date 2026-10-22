@@ -135,6 +135,10 @@ function checkCss(file, n, line) {
   if (/(?:linear|radial|conic)-gradient\([^)]*(?:#(?:7c3aed|8b5cf6|6366f1|a855f7|9333ea)|purple|violet|indigo)/i.test(line)) report(file, n, 'warn', 'ai-gradient', 'Violet/indigo gradient: the first-wave generated look');
   const track = line.match(/letter-spacing\s*:\s*(-?[\d.]+)em/);
   if (track && parseFloat(track[1]) < -0.07) report(file, n, 'warn', 'tracking', `letter-spacing ${track[1]}em is too tight. Display floor is about -0.05em`);
+  if (/grid-template-columns\s*:\s*repeat\(\s*[34]\s*,\s*(?:1fr|minmax\(\s*[1-9]\d*(?:px|rem))/i.test(line))
+    report(file, n, 'error', 'equal-card-grid', 'grid-template-columns: repeat(3|4, 1fr) equal card grid is banned (tells.md §1). Use asymmetric 12-column spans, horizontal filmstrip (flex + width: max-content), or border-top index rows');
+  if (/^\s*\.(?:section-tag|eyebrow|kicker|overtitle|section-label|sub-badge)\b/i.test(line))
+    report(file, n, 'error', 'eyebrow-selector', 'Eyebrow/kicker class selector is banned (tells.md §2). Delete eyebrow tags above headings');
 }
 
 function textOf(line, ext) {

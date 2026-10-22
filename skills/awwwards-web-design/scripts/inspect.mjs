@@ -124,7 +124,8 @@ function measure() {
     out.fontSizes.add(Math.round(size));
     out.families.add(cs.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, ''));
     if (cs.textAlign === 'center') out.centered++;
-    if (cs.textTransform === 'uppercase' && parseFloat(cs.letterSpacing) / size >= 0.06 && size <= 14) out.trackedCaps.push(label(el));
+    // Catch uppercase tracked micro-labels / eyebrows up to 17px (excluding buttons, nav links, table headers, form labels)
+    if (cs.textTransform === 'uppercase' && parseFloat(cs.letterSpacing) / size >= 0.05 && size <= 17 && !el.closest('nav,header,footer,button,a,th,label,[role=button]')) out.trackedCaps.push(label(el));
     if (/mono|courier|consolas/i.test(cs.fontFamily) && !el.closest('pre,code,kbd,samp,table,[data-ui]')) out.mono.push(label(el));
     if (vw <= 480 && el.tagName === 'P' && size < 16) out.smallBody.push(label(el));
     const bg = effectiveBg(el);
@@ -138,19 +139,91 @@ function measure() {
   out.loadedFonts = [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/^["']|["']$/g, ''));
   out.failedFonts = [...document.fonts].filter((f) => f.status === 'error').map((f) => f.family.replace(/^["']|["']$/g, ''));
 
-  const all = [...document.querySelectorAll('body *')];
+  const all = [...document.querySelectorAll('body *')].filter((e) => !e.closest('[data-picker],script,style,noscript'));
   out.gradients = all.filter((e) => /gradient\(/.test(getComputedStyle(e).backgroundImage) && getComputedStyle(e).backgroundClip !== 'text' && getComputedStyle(e).webkitBackgroundClip !== 'text' && visible(e) && e.getBoundingClientRect().width > 120).slice(0, 5).map(label);
   out.gradientText = all.filter((e) => getComputedStyle(e).webkitBackgroundClip === 'text' || getComputedStyle(e).backgroundClip === 'text').slice(0, 3).map(label);
   out.blur = all.filter((e) => { const b = getComputedStyle(e).backdropFilter; return b && b !== 'none'; }).slice(0, 5).map(label);
   out.shadows = all.filter((e) => { const s = getComputedStyle(e).boxShadow; return s !== 'none' && !/^(rgba?\([^)]*\)|oklch\([^)]*\)) 0px 0px 0px 1px$/.test(s) && visible(e); }).length;
 
+  // 1. Eyebrow detection: short element sitting immediately above an h2 inside the same parent
+  out.eyebrows = [];
+  for (const h2 of document.querySelectorAll('h2')) {
+    if (!visible(h2)) continue;
+    const prev = h2.previousElementSibling;
+    if (prev && visible(prev) && /^(SPAN|P|DIV|SMALL|H6|H5|H4)$/.test(prev.tagName)) {
+      const txt = (prev.textContent || '').trim();
+      const pcs = getComputedStyle(prev);
+      const hcs = getComputedStyle(h2);
+      if (txt.length > 0 && txt.length <= 45 && parseFloat(pcs.fontSize) < parseFloat(hcs.fontSize) * 0.65) {
+        out.eyebrows.push(`${label(prev)} above ${label(h2)}`);
+      }
+    }
+  }
+
+  // 2. Box-border excess ("box-itis"): non-form elements with all 4 borders drawn
+  const has4Borders = (e) => {
+    const cs = getComputedStyle(e);
+    return ['Top', 'Right', 'Bottom', 'Left'].every((s) => parseFloat(cs[`border${s}Width`]) >= 1 && cs[`border${s}Style`] !== 'none' && rgba(cs[`border${s}Color`])[3] > 0.05);
+  };
+  out.borderedBoxes = all.filter((e) => {
+    if (!visible(e) || /^(INPUT|SELECT|TEXTAREA|BUTTON|A|TABLE|TD|TH|TR|IMG|SVG|CANVAS)$/i.test(e.tagName) || e.closest('form,noscript,header,nav')) return false;
+    const r = e.getBoundingClientRect();
+    return r.width >= 140 && r.height >= 80 && has4Borders(e);
+  }).map(label);
+
+  // 3. Equal multi-card grids (3+ equal cards in a single row inside a container, or 2x2 text-only boxes)
+  out.cardGrids = [];
+  for (const parent of all) {
+    if (!visible(parent) || /^(UL|OL|NAV|HEADER|FOOTER|FORM|TR|TBODY|THEAD)$/i.test(parent.tagName) || parent.closest('nav,header,footer,form,noscript')) continue;
+    const kids = [...parent.children].filter((c) => visible(c) && !/^(LI|OPTION|DT|DD|TR|TD|TH)$/i.test(c.tagName));
+    if (kids.length >= 3) {
+      const rects = kids.map((c) => c.getBoundingClientRect());
+      // Check if 3+ children sit on the same horizontal row with nearly identical widths (classic 3-col / 4-col card grid)
+      const firstRow = rects.filter((r) => Math.abs(r.top - rects[0].top) < 24);
+      const parentR = parent.getBoundingClientRect();
+      // Exempt true horizontal overflow filmstrips whose track is wider than the viewport
+      const isTrueFilmstrip = parent.scrollWidth > vw * 1.15 || parentR.width > vw * 1.15;
+      if (firstRow.length >= 3 && !isTrueFilmstrip) {
+        const w0 = firstRow[0].width;
+        if (w0 >= 180 && firstRow.every((r) => Math.abs(r.width - w0) < 20)) {
+          out.cardGrids.push(`${label(parent)} (${firstRow.length} equal cards in a row)`);
+        }
+      }
+      // Check if 4+ text-only boxed cards exist in a 2x2 or 3x2 grid without images
+      const boxedTextOnly = kids.filter((c) => !c.querySelector('img,video,canvas,svg') && (has4Borders(c) || getComputedStyle(c).backgroundColor !== getComputedStyle(parent).backgroundColor));
+      if (boxedTextOnly.length >= 4) {
+        out.cardGrids.push(`${label(parent)} (${boxedTextOnly.length} text-only boxed cards with no media)`);
+      }
+    }
+  }
+
+  // 4. Index numbering tell (01 / 02 / 03, Paviliun 01, Step 01) outside <ol> or tables
+  out.indexNumbers = [];
+  for (const el of texts) {
+    if (!visible(el) || el.closest('ol,table,time,address,footer,noscript,[data-ui]')) continue;
+    const txt = (el.textContent || '').trim();
+    if (txt.length <= 28 && /^(?:0[1-9]|\(0[1-9]\)|(?:step|langkah|paviliun|pavilion|suite|phase|chapter|bagian|no\.?)\s*0[1-9])\b/i.test(txt)) {
+      out.indexNumbers.push(label(el));
+    }
+  }
+
+  // 5. Uniform reveal tell: one single reveal class (e.g. .reveal-fade) repeated on 4+ blocks instead of part-by-part choreography
+  const revealClassCounts = {};
+  for (const e of all) {
+    for (const c of e.classList) {
+      if (/^(reveal|fade|anim|scroll-reveal)/i.test(c)) revealClassCounts[c] = (revealClassCounts[c] || 0) + 1;
+    }
+  }
+  out.uniformReveal = Object.entries(revealClassCounts).filter(([, count]) => count >= 4).map(([cls, count]) => `.${cls} (${count}×)`);
+
   const media = [...document.querySelectorAll('img,video,picture,canvas')].filter((e) => { const r = e.getBoundingClientRect(); return r.width >= 160 && r.height >= 120; });
   out.mediaCount = media.length;
   out.brokenImages = [...document.images].filter((i) => i.complete && i.naturalWidth === 0 && i.getAttribute('src')).map((i) => i.getAttribute('src'));
+  const stCount = window.ScrollTrigger?.getAll ? window.ScrollTrigger.getAll().length : 0;
+  out.stCount = stCount;
   out.hasChoreography = Boolean(
-    window.gsap || window.ScrollTrigger || window.Lenis ||
-    document.querySelector('[data-reveal],[data-reveal-lines],[data-clip],[data-part],[data-magnetic],[data-parallax],canvas') ||
-    all.some((e) => { const cp = getComputedStyle(e).clipPath; return cp && cp !== 'none'; })
+    stCount >= 2 ||
+    document.querySelectorAll('[data-reveal-lines],[data-clip],[data-part],[data-parallax]').length >= 3
   );
 
   if (vw <= 480) out.smallTargets = [...document.querySelectorAll('a,button,input,select,textarea,[role=button],summary')].filter((e) => {
@@ -246,6 +319,16 @@ function foldMeasure() {
     if (beside && vOverlap > 0) { card = label(e); break; }
   }
 
+  // Check if site header has an opaque background + border-bottom that cuts off the hero stage instead of floating/blending
+  const hdr = document.querySelector('header');
+  let rigidHeader = false;
+  if (hdr && visible(hdr)) {
+    const hcs = getComputedStyle(hdr);
+    const hasBottomBorder = parseFloat(hcs.borderBottomWidth) >= 1 && hcs.borderBottomStyle !== 'none';
+    const isOpaque = !/rgba\([^)]*,\s*0(?:\.\d+)?\)|transparent/.test(hcs.backgroundColor);
+    if (hasBottomBorder && isOpaque) rigidHeader = true;
+  }
+
   const ps = [...document.querySelectorAll('p')].filter(visible).map((p) => parseFloat(getComputedStyle(p).fontSize)).sort((a, b) => a - b);
   const body = ps.length ? ps[Math.floor(ps.length / 2)] : 16;
   const h1Size = h1 ? parseFloat(getComputedStyle(h1).fontSize) : 0;
@@ -253,7 +336,7 @@ function foldMeasure() {
   const cover = total ? hit / total : 0;
   return {
     dominant: { kind: kinds[0][0], share: kinds[0][1].area / A, label: kinds[0][1].label },
-    pictureCover: cover, pictures: pics.length, card, h1Size, ratio: h1Size / body,
+    pictureCover: cover, pictures: pics.length, card, rigidHeader, h1Size, ratio: h1Size / body,
     sig: {
       anchorX: cx < 0.4 ? 'left' : cx > 0.6 ? 'right' : 'centre',
       anchorY: cy < 0.38 ? 'top' : cy > 0.62 ? 'bottom' : 'middle',
@@ -295,17 +378,22 @@ function judge(m, w) {
   const [r, g, b] = m.pageBg;
   if (Math.min(r, g, b) >= 209 && r >= g && g >= b && r - b >= 6 && r - b <= 48)
     add('WARN', 'cream-ground', at, `Page ground rgb(${r} ${g} ${b}) is the warm-cream default of generated pages. Keep only if the subject's own material is this colour, and say so in DESIGN.md`);
-  if (m.fontSizes > 9) add('WARN', 'type-sizes', at, `${m.fontSizes} distinct font sizes. Five far-apart sizes read as a system`);
+  if (m.fontSizes > 7) add('FAIL', 'type-sizes', at, `${m.fontSizes} distinct font sizes rendered. Strict ceiling is 5–7 far-apart sizes from tokens.css (tells.md §5)`);
   if (m.textCount > 10 && m.centered / m.textCount > 0.7) add('WARN', 'centered', at, `${Math.round((m.centered / m.textCount) * 100)}% of text is centred`);
-  if (m.trackedCaps.length >= 3) add('WARN', 'tracked-caps', at, `${m.trackedCaps.length} tiny tracked-uppercase labels (template tell): ${m.trackedCaps.slice(0, 3).join(', ')}`);
+  if (m.eyebrows.length >= 2) add('FAIL', 'eyebrow-label', at, `${m.eyebrows.length} eyebrow labels above <h2> headings (${m.eyebrows.slice(0, 3).join(', ')}). Banned in tells.md §2: remove eyebrows and let the heading or layout carry the hierarchy`);
+  if (m.trackedCaps.length >= 3) add('FAIL', 'tracked-caps', at, `${m.trackedCaps.length} tracked-uppercase micro-labels (${m.trackedCaps.slice(0, 3).join(', ')}). Banned template tell (tells.md §2)`);
+  if (m.indexNumbers.length >= 2) add('FAIL', 'index-numbering', at, `Decorative index numbering found (${m.indexNumbers.slice(0, 3).join(', ')}). Banned in tells.md §3 ("01/02/03", "Paviliun 01")`);
+  if (w >= 1024 && m.cardGrids.length) add('FAIL', 'card-grid', at, `Generic multi-card grid detected: ${m.cardGrids.join('; ')}. Banned in tells.md §1 & §5: replace equal card rows / 2×2 text boxes with asymmetric editorial splits, true full-bleed 100vw filmstrips, or hover-preview index lists`);
+  if (w >= 1024 && m.borderedBoxes.length > 5) add('FAIL', 'box-itis', at, `${m.borderedBoxes.length} 4-sided bordered boxes (${m.borderedBoxes.slice(0, 4).join(', ')}). Stop putting every item in a 1px border box; use open whitespace, tone steps, or single horizontal hairlines`);
+  if (m.uniformReveal.length) add('FAIL', 'uniform-reveal', at, `Identical fade-up class repeated across sections: ${m.uniformReveal.join(', ')}. Banned in tells.md §2 & §7: use varied part-by-part GSAP ScrollTrigger choreography (masked lines, clip-path wipes, parallax)`);
   if (m.mono.length >= 3) add('WARN', 'mono-labels', at, `${m.mono.length} monospace text elements outside code/data: ${m.mono.slice(0, 3).join(', ')}`);
-  if (m.gradientText.length) add('WARN', 'gradient-text', at, m.gradientText.join(', '));
+  if (m.gradientText.length) add('FAIL', 'gradient-text', at, `Gradient-filled text is banned: ${m.gradientText.join(', ')}`);
   if (m.gradients.length) add('WARN', 'gradient', at, `Gradient backgrounds: ${m.gradients.join(', ')}. Justify (scrim, concept) or remove`);
   if (m.blur.length >= 2) add('WARN', 'glass', at, `backdrop-filter on ${m.blur.join(', ')}`);
   if (m.shadows > 6) add('WARN', 'shadows', at, `${m.shadows} elements with box-shadow. Shadows only on what floats`);
   for (const [a, b] of m.blank) add('WARN', 'blank-stretch', at, `Nothing from y=${a} to y=${b} (${Math.round((b - a) / m.vh * 100)}% of a screen)`);
   if (m.invisible.length >= 3) add('FAIL', 'hidden-after-scroll', at, `${m.invisible.length} text elements still invisible after scrolling through: ${m.invisible.slice(0, 4).join(', ')}`);
-  if (w >= 1024 && !m.hasChoreography) add('WARN', 'static-page', at, 'No scroll/reveal choreography detected (GSAP/ScrollTrigger, Lenis, clip-path masks, data-reveal, or interactive canvas). Implement the reference Motion Stack (motion-playbook.md §7–9)');
+  if (w >= 1024 && !m.hasChoreography) add('FAIL', 'static-page', at, `Insufficient scroll choreography (ScrollTrigger count=${m.stCount}). Implement at least 2 distinct GSAP ScrollTrigger mechanisms (hero scrub/clip + section reveals/pinning) per motion-playbook.md §9`);
   if (m.smallTargets?.length) add('WARN', 'tap-target', at, `Tap targets < 44px: ${m.smallTargets.join(', ')}`);
   if (m.smallBody?.length) add('WARN', 'small-body', at, `Paragraph text < 16px on phone: ${m.smallBody.slice(0, 3).join(', ')}`);
 }
@@ -317,6 +405,7 @@ function judgeFold(f, w) {
     if (f.dominant.share < 0.2) add('FAIL', 'timid-hero', at, `Nothing dominates the first screen: the largest thing (${f.dominant.kind}) covers ${pct(f.dominant.share)}. Make one picture or the display type take ≥ 35% (awwwards-patterns.md §2)`);
     else if (f.dominant.share < 0.35) add('WARN', 'timid-hero', at, `The dominant ${f.dominant.kind} covers ${pct(f.dominant.share)} of the first screen. Award-level heroes give one thing ≥ 35%`);
     if (f.card) add('FAIL', 'hero-card', at, `Boxed card beside the headline: ${f.card}. This is the split-hero template. Move the live thing to the section that proves it, or make it part of the composition (awwwards-patterns.md §2)`);
+    if (f.rigidHeader) add('FAIL', 'rigid-header', at, 'Header has an opaque background and bottom border that cuts off the hero stage. Make the header transparent/floating over the hero');
   }
   if (w >= 1024 && f.ratio < 6) add('WARN', 'display-scale', at, `Display type is only ${f.ratio.toFixed(1)}× the body size. Award-level contrast is ≥ 6× (type-led ≥ 10×)`);
   if (f.pictures === 0 && f.dominant.kind === 'type' && w >= 1024) add('WARN', 'no-fold-picture', at, 'No picture on the first screen. Fine only for a type-led concept that DESIGN.md §0 declares; otherwise use the imagery plan (visual-craft.md §4)');

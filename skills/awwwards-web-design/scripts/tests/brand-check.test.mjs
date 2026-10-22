@@ -115,3 +115,7 @@ test('without brand.json it runs tells-only: no raw-colour errors, motion and co
   const r = rules(JSON.parse(out).findings);
   assert.ok(!r.includes('raw-color') && r.includes('transition-all') && r.includes('copy-tell'));
 });
+test('equal 3/4-column card grids and eyebrow selectors are flagged as errors', () => {
+  const r = rules(run({ 'a.css': '.cards { grid-template-columns: repeat(3, 1fr); }\n.section-tag { text-transform: uppercase; }' }));
+  assert.ok(r.includes('equal-card-grid') && r.includes('eyebrow-selector'));
+});
