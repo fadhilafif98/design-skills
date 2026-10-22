@@ -256,6 +256,15 @@ function scan(file) {
   if (state.cadence >= 3) report(file, 0, 'warn', 'cadence', `${state.cadence} aphoristic lines ("Not X. Y." / "Bukan sekadar…"). Say the fact plainly`);
 }
 
+const VALID_REFERENCE_IDS = new Set([
+  'emotion-agency', 'lxl-creative', 'era-residence', 'dontboardme', 'oryzo',
+  'mont-fort', 'animejs', 'onlines', 'squared-media', 'structure-eng',
+  'ray-corral', 'mejuma-tuscany', 'santioni', 'shopify-editions', 'adobe-bowie'
+]);
+if (hasConfig && (!cfg.referenceId || !VALID_REFERENCE_IDS.has(String(cfg.referenceId).toLowerCase()))) {
+  report(configPath, 1, 'error', 'reference-id', `brand.json must set a valid "referenceId" from references/awwwards-references.md §1 (${[...VALID_REFERENCE_IDS].join(', ')})`);
+}
+
 const files = fs.statSync(root).isFile() ? [root] : walk(root);
 files.forEach(scan);
 

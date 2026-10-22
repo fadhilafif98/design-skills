@@ -13,6 +13,7 @@ const script = path.join(here, '..', 'brand-check.mjs');
 const baseConfig = {
   brandName: 'Kopi Catat',
   brandNameBannedVariants: ['KopiCatat'],
+  referenceId: 'mejuma-tuscany',
   tokenFiles: ['css/tokens.css'],
   fonts: { allowed: ['Hanken Grotesk'], allowGenericFallbacks: true },
   voice: { addressForm: 'kamu', bannedAddressForms: ['Anda'], bannedWords: ['unlock'], allowEmoji: false,
@@ -118,4 +119,8 @@ test('without brand.json it runs tells-only: no raw-colour errors, motion and co
 test('equal 3/4-column card grids and eyebrow selectors are flagged as errors', () => {
   const r = rules(run({ 'a.css': '.cards { grid-template-columns: repeat(3, 1fr); }\n.section-tag { text-transform: uppercase; }' }));
   assert.ok(r.includes('equal-card-grid') && r.includes('eyebrow-selector'));
+});
+test('missing or invalid referenceId in brand.json is flagged as an error', () => {
+  const r = rules(run({ 'a.css': '.a { color: var(--ink); }' }, { ...baseConfig, referenceId: 'invalid-ref' }));
+  assert.ok(r.includes('reference-id'));
 });

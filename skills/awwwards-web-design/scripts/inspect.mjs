@@ -39,12 +39,21 @@ const allow = new Set([...(flag('allow', '') || '').split(',').filter(Boolean), 
 const allowedFonts = (cfg.fonts?.allowed || []).map((f) => f.toLowerCase());
 const referenceId = (cfg.referenceId || '').toLowerCase();
 const REF_PROFILES = {
-  'era-residence': { minBgChapters: 3, minFontFamilies: 3, minH1VwRatio: 0.085, requireHud: true },
-  'emotion-agency': { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.075, requireHud: false },
-  'lxl-creative': { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.085, requireHud: false },
-  'dontboardme': { minBgChapters: 3, minFontFamilies: 2, minH1VwRatio: 0.08, requireHud: false },
-  'shopify-editions': { minBgChapters: 3, minFontFamilies: 2, minH1VwRatio: 0.06, requireHud: false },
-  'squared-media': { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.065, requireHud: false },
+  'emotion-agency':   { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.065, requireHud: false },
+  'lxl-creative':     { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.085, requireHud: false },
+  'era-residence':    { minBgChapters: 3, minFontFamilies: 3, minH1VwRatio: 0.085, requireHud: true },
+  'dontboardme':      { minBgChapters: 3, minFontFamilies: 2, minH1VwRatio: 0.075, requireHud: false },
+  'oryzo':            { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.055, requireHud: false },
+  'mont-fort':        { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.050, requireHud: false },
+  'animejs':          { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.050, requireHud: false },
+  'onlines':          { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.065, requireHud: false },
+  'squared-media':    { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.060, requireHud: false },
+  'structure-eng':    { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.058, requireHud: false },
+  'ray-corral':       { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.065, requireHud: true },
+  'mejuma-tuscany':   { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.060, requireHud: false },
+  'santioni':         { minBgChapters: 2, minFontFamilies: 2, minH1VwRatio: 0.065, requireHud: false },
+  'shopify-editions': { minBgChapters: 3, minFontFamilies: 2, minH1VwRatio: 0.060, requireHud: false },
+  'adobe-bowie':      { minBgChapters: 3, minFontFamilies: 2, minH1VwRatio: 0.070, requireHud: false },
 };
 
 // Local files are served over http so module scripts, fetch() and relative assets behave as when hosted.
