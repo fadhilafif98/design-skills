@@ -23,8 +23,8 @@ Communicate in the user's language, plainly. Define any design term in the same 
 
 ## Prerequisites
 
-- **Standalone ready:** works with zero external tools using `references/audit-rubric.md`, `discovery-questions.md`, `design-vocabulary.md`, and `report-templates.md`.
-- **Optional sibling skill (`../maestro/`):** enables measured Chromium audits (`inspect.sh`), source tells linting (`brand-check.mjs`), and extended design references. Check once at start and report availability in the Sources line.
+- **Standalone ready:** works with zero external tools using `references/audit-rubric.md`, `references/discovery-questions.md`, `references/design-vocabulary.md`, and `references/report-templates.md`.
+- **Optional sibling skill (`maestro`):** when installed alongside this skill, enables measured Chromium audits, source tells linting, and extended design references. Check once at start and report availability in the Sources line.
 
 ## Instructions
 
@@ -49,16 +49,18 @@ Otherwise infer the mode and begin.
 
 ### Sibling Skill (Optional, Preferred)
 
-| If present | Use |
+When the sibling **maestro** skill is installed alongside this skill, use its scripts and references:
+
+| Capability | Usage |
 |---|---|
-| `../maestro/scripts/inspect.sh` | `bash ../maestro/scripts/inspect.sh <file-or-url> --surface <experience\|persuade\|operate\|read> --name audit --widths 1440,390 --shots page` |
-| `../maestro/scripts/brand-check.mjs` | `node ../maestro/scripts/brand-check.mjs <site> --json` (add `--config design/brand.json` when a brand lock exists) |
-| `../maestro/references/` | `design-archetypes.md`, `hero-patterns.md`, `ia-ux-conversion.md`, `seo-perf-launch.md`, `critique.md`, `tells.md`, `copy.md`, `brand-guardian.md`, `typography.md`, `layout-composition.md`, `visual-craft.md`, `motion-playbook.md`, `interaction-details.md`, `stress-test.md`, `art-directions.md`; templates `BRAND.md` + `brand.json` |
+| Browser inspector (maestro inspect script) | Run with `--surface <experience\|persuade\|operate\|read> --name audit --widths 1440,390 --shots page` |
+| Source tells linter (maestro brand-check script) | Run with `<site> --json` (add `--config` pointing to the project brand JSON when a brand lock exists) |
+| Extended references & templates | Use maestro's archetype, hero, IA/UX, SEO/perf, critique, tells, copy, brand-guardian, typography, layout, visual-craft, motion, interaction, stress-test, art-directions guides and brand lock templates |
 
 If absent, never hard-fail: use any available browser/screenshot tool or user screenshots, use `references/audit-rubric.md` alone, mark unmeasured checks "not measured", and recommend installing `maestro`.
 
 ### How to See the Design (Priority Order)
-1. **Measured render:** `inspect.sh` or browser tool screenshots (1440, 390, key states).
+1. **Measured render:** maestro's browser inspector or browser tool screenshots (1440, 390, key states).
 2. **Codebase:** read CSS/components and extract actual tokens.
 3. **URL without browser:** WebFetch for structure/copy; request screenshots.
 4. **User screenshots.**
@@ -74,12 +76,12 @@ Always state which sources were used and what could not be verified.
 ### Mode B: Audit
 1. **Recon:** purpose, audience, primary action (if unclear, that is Finding #1).
 2. **Classify surface:** Persuade, Operate, Read, or Experience (`references/audit-rubric.md`).
-3. **Measured pass:** run `inspect.sh` and `brand-check.mjs` if present; save output without reading it into judgment yet.
+3. **Measured pass:** run maestro's browser inspector and brand linter if present; save output without reading it into judgment yet.
 4. **Capture validity:** inspect every screenshot once (no blank regions, top visible, animations settled).
-5. **Independent critique:** spawn a fresh subagent with only screenshot paths, one-line brief, and `references/audit-rubric.md` (plus `critique.md` if present). Require `Disposition: ship|fix|rebuild because <reason>`. If no subagent is available, critique before reading measured output and prefix `[DEGRADED: single-context review]`.
+5. **Independent critique:** spawn a fresh subagent with only screenshot paths, one-line brief, and `references/audit-rubric.md` (plus maestro's critique guide if present). Require `Disposition: ship|fix|rebuild because <reason>`. If no subagent is available, critique before reading measured output and prefix `[DEGRADED: single-context review]`.
 6. **Synthesize:** merge critic findings with measured FAILs/WARNs (measured FAIL overrides opinion; apply rubric caps).
 7. **Prioritize:** assign P0-P3, Rule vs Taste, effort S/M/L, exact fix, and principle; rank by impact / effort into Top 3 + roadmap.
-8. **Stress check:** 320px, reduced motion, no-JS (via `inspect.sh`), plus long headlines and 200% zoom (mark untested items "not measured").
+8. **Stress check:** 320px, reduced motion, no-JS (via maestro's browser inspector), plus long headlines and 200% zoom (mark untested items "not measured").
 9. Deliver **Audit report** with disposition and offer to apply Top 3 or hand off to `maestro`.
 
 ### Mode C: Decide (Compare 2-5 Options)
@@ -91,13 +93,13 @@ Always state which sources were used and what could not be verified.
 ### Mode D: Translate (Feeling -> Prompt)
 1. Map client words via `references/design-vocabulary.md` (feeling -> meaning -> levers -> avoid -> prompt phrase).
 2. For ambiguous feelings, present 2-3 interpretations and recommend one.
-3. Output a **prompt pack**: prompt, idea sentence, implied DESIGN.md values, color strategy, banned tells.
+3. Output a **prompt pack**: prompt, idea sentence, implied design-spec values, color strategy, banned tells.
 
 ### Mode E: Brand (Consistency Audit + Lock)
-Follow `../maestro/references/brand-guardian.md` if present:
+Follow maestro's brand-guardian guide if present:
 1. Identify source of truth (brand book, existing materials); if absent, that is Finding #1.
-2. If no lock exists, create `design/BRAND.md` + `design/brand.json` (LOCKED / FLEXIBLE / FREE) and confirm assumptions.
-3. Run `brand-check.mjs --json` if present, plus visual + voice drift review per section.
+2. If no lock exists, create the project's brand lock Markdown and JSON files under the design directory (LOCKED / FLEXIBLE / FREE) and confirm assumptions.
+3. Run maestro's brand linter with `--json` if present, plus visual + voice drift review per section.
 4. Deliver **Brand report** (`references/report-templates.md`): pillar scores, drift list with exact fixes, Top 3, next items to LOCK.
 
 ### Required Finding Format
@@ -113,28 +115,28 @@ Direct, warm, concrete, no praise padding. Put strengths in one line each under 
 - Never deliver more than 3 Top priorities.
 - Never fabricate data/metrics or claim unrun checks.
 - Never leak personal notes into the independent critic's prompt.
-- Never edit files in consulting mode unless asked (except `BRAND.md`/`brand.json` in Mode E).
+- Never edit files in consulting mode unless asked (except brand lock files in Mode E).
 - Always end with the single next step.
 
 ## Examples
 
 ```markdown
 # Example Audit Top 3 Excerpt
-1. **Low contrast on primary CTA (P0 · Rule · S):** `#9CA3AF` on `#FFFFFF` measures 2.5:1 (`hero.css:42`).
+1. **Low contrast on primary CTA (P0 · Rule · S):** `#9CA3AF` on `#FFFFFF` measures 2.5:1 (hero stylesheet, line 42).
    - Exact fix: Change button color to `var(--ink)` (`#17233B`, 14.8:1).
    - Principle: Primary actions must meet WCAG AA contrast (>= 4.5:1).
 ```
 
 ## Limitations
 
-- Without `../maestro/` or a browser tool, contrast ratios, font loading, and layout overflow cannot be measured automatically and must be reported as "not measured".
+- Without the optional sibling `maestro` skill or a browser tool, contrast ratios, font loading, and layout overflow cannot be measured automatically and must be reported as "not measured".
 - Consulting modes advise and audit only; full website implementation should be handed off to `maestro`.
 
 ## Troubleshooting
 
 | Error | Cause | Solution |
 |---|---|---|
-| Sibling `inspect.sh` not found | `maestro` skill not installed alongside this skill | Continue in standalone mode with `references/audit-rubric.md`, request desktop/mobile screenshots, and mark automated metrics "not measured" |
+| Sibling browser inspector not found | `maestro` skill not installed alongside this skill | Continue in standalone mode with `references/audit-rubric.md`, request desktop/mobile screenshots, and mark automated metrics "not measured" |
 | Independent critic missing `Disposition:` line | Subagent response omitted required verdict format | Treat review as unavailable (not a pass) and re-prompt critic with `references/audit-rubric.md` format |
 | Blank or mid-animation audit screenshots | Capture ran before fonts/reveals settled | Fix capture timing or reveal guard and recapture before scoring |
 

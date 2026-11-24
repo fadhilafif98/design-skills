@@ -47,7 +47,7 @@ Instead of guessing or polling the user across multiple throwaway concepts, matc
    - **Motion & Scroll Stack** (Lenis + GSAP ScrollTrigger / SplitText / clip-path / parallax),
    - **Color Strategy** (Step 6) and verified **Font Pairing** (`typography.md` §1).
 3. **30% Creative Evolution (Develop & expand from the archetype):** Evolve the archetype using facts from `design/inventory.md`—introduce a bespoke interactive instrument ("the live thing"), subject-derived OKLCH hues/textures, and custom visual motifs so the final execution feels like a tailored evolution of the blueprint, **never a 100% 1:1 clone** and never drifting away from the archetype's core concept.
-4. *(Optional fallback)*: Only if the user explicitly asks to compare 3 different options, run `node <skill>/scripts/deal.mjs --brief "<subject>"` and build `templates/direction-picker.html`. Otherwise, **auto-decide the single best archetype direction** and commit all engineering budget to building the final site at flagship fidelity.
+4. *(Optional fallback)*: Only if the user explicitly asks to compare 3 different options, run `node <skill>/scripts/deal.mjs --brief "<subject>"` and build `assets/templates/direction-picker.html`. Otherwise, **auto-decide the single best archetype direction** and commit all engineering budget to building the final site at flagship fidelity.
 
 ## Step 4: Find the idea
 

@@ -25,8 +25,8 @@ Communicate in the user's language, briefly. Explain the *why* of major decision
 
 ## Prerequisites
 
-- **Node.js 18+** for `brand-check.mjs`, `lookup.mjs`, and `inspect.sh`.
-- **Network access on first `inspect.sh` run** to install Playwright + Chromium into `~/.cache/maestro`.
+- **Node.js 18+** for `scripts/brand-check.mjs`, `scripts/lookup.mjs`, and `scripts/inspect.sh`.
+- **Network access on first `scripts/inspect.sh` run** to install Playwright + Chromium into `~/.cache/maestro`.
 - **Optional:** `image-generator` subagent for bespoke visual assets; `modern-web-guidance` sibling skill for modern native web APIs.
 
 ## Instructions
@@ -68,12 +68,12 @@ Communicate in the user's language, briefly. Explain the *why* of major decision
 **Gate 2:** idea passes competitor test, live thing uses real content, rut avoided, blueprint mapped, AI images verified.
 
 ### Phase 3: Lock the rules (1.5 min)
-1. Fill `templates/DESIGN.md` -> `design/DESIGN.md` (§0 traces every downstream token).
+1. Fill `assets/templates/DESIGN.md` into the project's `design/DESIGN.md` (§0 traces every downstream token).
 2. Verify every font on its official listing (`references/typography.md` §1); no reflex defaults (`references/tells.md` §4).
 3. Define tokens in `css/tokens.css` (listed in `design/brand.json` -> `tokenFiles`): `referenceId`, multi-chapter OKLCH surfaces (`--bg-chapter-1/2/3`), 2-3 reference font roles, <= 5 type sizes, spacing scale, one radius rule, canonical motion curves, banned tells.
 4. Write `design/BRAND.md` + `design/brand.json` with LOCKED / FLEXIBLE / FREE bounds (`references/brand-guardian.md`).
 
-**Gate 3:** all values tokenized, `BRAND.md` and `brand.json` agree, `brand-check.mjs` passes.
+**Gate 3:** all values tokenized, `BRAND.md` and `brand.json` agree, `scripts/brand-check.mjs` passes.
 
 ### Phase 4: Argument and copy (1.5 min)
 1. One claim per section with proof (`references/copy.md` §1) and conversion role (`references/ia-ux-conversion.md` §2-3), mapped to reference section rhythm. Delete claimless sections.
@@ -111,7 +111,7 @@ Follow `references/critique.md`:
 Refuse to report unless `inspect.sh` has 0 FAIL, `brand-check.mjs` has 0 errors, the critique round is logged, and every phase has a ledger line. Never claim an unrun check. Summarize briefly: matched reference + idea + rut avoided; live thing + signature moment + open command; honest scores/caps/gate results + LOCKED items; all `[FILL]`, `REPLACE:`, `CONFIRM:`, `SAMPLE`, and AI assets (`design/credits.md`); one next step.
 
 ### Feedback Loop
-Translate plain feedback ("kurang bagus", "ramai", "kurang premium", "kayak AI") via `../design-consulting/references/design-vocabulary.md` or `references/tells.md`. Map taste -> DESIGN.md §0 tokens; clarity -> Phase 1/4; "kurang wow" -> Phase 2/5/6 architecture/motion; "ramai" -> strip ornaments and refill with scale/content. Apply FLEXIBLE changes within bounds; ask approval for LOCKED items; re-gate and log.
+Translate plain feedback ("kurang bagus", "ramai", "kurang premium", "kayak AI") via the optional sibling `design-consulting` skill's design vocabulary or `references/tells.md`. Map taste -> DESIGN.md §0 tokens; clarity -> Phase 1/4; "kurang wow" -> Phase 2/5/6 architecture/motion; "ramai" -> strip ornaments and refill with scale/content. Apply FLEXIBLE changes within bounds; ask approval for LOCKED items; re-gate and log.
 
 ### Hard Rules
 - Never write site code before Phases 1-4 have ledger lines.
@@ -162,11 +162,11 @@ bash <skill>/scripts/inspect.sh ./site/index.html --name final --widths 1440,390
 
 | File | Use in |
 |---|---|
-| `references/design-archetypes.md` · `hero-patterns.md` | Phases 2, 5, 6: curated blueprints, 12 hero compositions |
-| `references/creative-direction.md` · `art-directions.md` · `worked-examples.md` | Phases 1-3: inventory, rut, grammars, examples |
-| `references/tells.md` · `copy.md` · `typography.md` | Phases 3-5: dated tells, copy deck, verified fonts |
-| `references/layout-composition.md` · `layout-blueprints.md` · `visual-craft.md` | Phases 3-5: grid, section rotation, CSS blueprints, colour, AI imagery |
-| `references/motion-playbook.md` · `interaction-details.md` · `modern-web-platform.md` | Phases 5-6: motion engines, tactile UI, Baseline web APIs |
-| `references/ia-ux-conversion.md` · `seo-perf-launch.md` · `stress-test.md` | Phases 1, 4, 5, 7: surface classes, IA, SEO/CWV/WCAG, QA |
-| `references/critique.md` · `brand-guardian.md` | Phases 0, 3, 8: 14-pass critique, caps, brand locks |
-| `templates/DESIGN.md` · `BRAND.md` · `brand.json` · `direction-picker.html` | Phase 3 templates |
+| `references/design-archetypes.md` · `references/hero-patterns.md` | Phases 2, 5, 6: curated blueprints, 12 hero compositions |
+| `references/creative-direction.md` · `references/art-directions.md` · `references/worked-examples.md` | Phases 1-3: inventory, rut, grammars, examples |
+| `references/tells.md` · `references/copy.md` · `references/typography.md` | Phases 3-5: dated tells, copy deck, verified fonts |
+| `references/layout-composition.md` · `references/layout-blueprints.md` · `references/visual-craft.md` | Phases 3-5: grid, section rotation, CSS blueprints, colour, AI imagery |
+| `references/motion-playbook.md` · `references/interaction-details.md` · `references/modern-web-platform.md` | Phases 5-6: motion engines, tactile UI, Baseline web APIs |
+| `references/ia-ux-conversion.md` · `references/seo-perf-launch.md` · `references/stress-test.md` | Phases 1, 4, 5, 7: surface classes, IA, SEO/CWV/WCAG, QA |
+| `references/critique.md` · `references/brand-guardian.md` | Phases 0, 3, 8: 14-pass critique, caps, brand locks |
+| `assets/templates/DESIGN.md` · `assets/templates/BRAND.md` · `assets/templates/brand.json` · `assets/templates/direction-picker.html` | Phase 3 templates |

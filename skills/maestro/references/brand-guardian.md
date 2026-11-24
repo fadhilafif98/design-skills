@@ -3,8 +3,8 @@
 The brand is the one thing that must not drift. Every phase, every section, and every feedback round passes through this guardian. Taste can evolve; identity cannot change silently.
 
 Two files hold the lock:
-- `design/BRAND.md`: human-readable rules (template: `templates/BRAND.md`)
-- `design/brand.json`: machine-readable rules for `scripts/brand-check.mjs` (template: `templates/brand.json`)
+- `design/BRAND.md`: human-readable rules (template: `assets/templates/BRAND.md`)
+- `design/brand.json`: machine-readable rules for `scripts/brand-check.mjs` (template: `assets/templates/brand.json`)
 
 They must always agree. When you change one, change the other in the same step.
 
