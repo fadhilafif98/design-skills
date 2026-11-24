@@ -50,7 +50,7 @@ Add a **dev-only toggle** (fixed bottom-centre, instant switch, `?data=worst|emp
 | Long email / URL | `reservasi.kantorpusat@namaperusahaan-group.test`, a 120-char URL |
 | Long name | *"Raden Ayu Kusumawardhani Prameswari Notonegoro"*, `Đặng Thị Ngọc Hân`, `王秀英`, an Arabic RTL name |
 | Messy whitespace / one name | `"  Sam   Lee "`, *"Sukarno"* (single name: initials must not break) |
-| Emoji / ZWJ | `🦊 Fox` (charAt gives `�`), 👨‍👩‍👧 family, flags |
+| Emoji / ZWJ | Multi-codepoint emoji (e.g. fox + text, ZWJ family sequence, regional flags) where `charAt` splits surrogates |
 | Escaping | `O'Neil`, `<script>`, `&amp;`, `**bold**` (escape once) |
 | Missing optional content | No subtitle, no image, no price, no testimonial photo |
 | Counts | 0, 1, 7, 1.284, 1,2 jt, `142%`, `0.1 + 0.2` |
@@ -119,7 +119,7 @@ Still **manual** (state in the report which ones you ran):
 | Touch | Hover-only controls (e.g. a "•••" menu revealed on hover) must be reachable |
 | Real device | A phone a few years old, keyboard open |
 
-## Critical JS-reveal rule
+## Critical JS visibility guard
 
 Elements hidden for reveal animations must be hidden **by JS**, or behind a `.js` class on `<html>`, so content never stays invisible if scripts fail:
 ```html

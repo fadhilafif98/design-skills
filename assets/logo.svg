@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+  <rect width="128" height="128" rx="24" fill="#111318"/>
+  <!-- Architectural grid hairlines -->
+  <path d="M24 64H104M64 24V104" stroke="#F3F2EC" stroke-opacity="0.14" stroke-width="1"/>
+  <!-- Outer precision frame -->
+  <rect x="26" y="26" width="76" height="76" rx="4" stroke="#F3F2EC" stroke-width="2.5"/>
+  <!-- Inner asymmetric editorial aperture -->
+  <path d="M26 76H76V26" stroke="#F3F2EC" stroke-width="2.5"/>
+  <!-- Focal accent block (the one live thing) -->
+  <rect x="76" y="76" width="26" height="26" fill="#FF522B"/>
+  <!-- Precision corner registration dot -->
+  <circle cx="44" cy="44" r="6" fill="#F3F2EC"/>
+</svg>

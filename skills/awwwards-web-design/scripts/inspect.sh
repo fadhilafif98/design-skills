@@ -2,7 +2,7 @@
 # Render a page in a real browser and measure it. No screenshots unless --shots asks for them;
 # they go to a temp dir outside the project (override with --out).
 # Usage: inspect.sh <file-or-url> [--shots none|fold|page] [--out DIR] [--name page] [--widths 1440,768,390]
-#                   [--config design/brand.json] [--allow rule,rule] [--no-extra] [--json]
+#                   [--surface experience|persuade|operate|read] [--config design/brand.json] [--allow rule,rule] [--no-extra] [--json]
 #   inspect.sh index.html --name build                                   # measure only
 #   inspect.sh "design/direction-picker.html?v=2" --name concept2 --widths 1440 --no-extra --shots fold
 #   inspect.sh index.html --name final --widths 1440,390 --shots page    # for the critique
@@ -18,7 +18,7 @@ if [ ! -d "$tool/node_modules/playwright" ]; then
   mkdir -p "$tool"
   [ -f "$tool/package.json" ] || echo '{"private":true}' > "$tool/package.json"
   (cd "$tool" && npm install --silent --no-audit --no-fund playwright@1 >/dev/null)
-  (cd "$tool" && npx playwright install chromium >/dev/null)
+  (cd "$tool" && ./node_modules/.bin/playwright install chromium >/dev/null)
 fi
 
 NODE_PATH="$tool/node_modules" exec node "$here/inspect.mjs" "$@"

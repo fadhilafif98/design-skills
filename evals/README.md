@@ -8,6 +8,7 @@ A skill change is a guess until it moves these numbers. Run the evals before and
 |---|---|---|
 | **Linter regression** | `brand-check.mjs` flags what it should and nothing else | `node --test skills/awwwards-web-design/scripts/tests/brand-check.test.mjs` |
 | **Seeded-defect fixture** | `inspect.sh` measures the planted defects | `bash skills/awwwards-web-design/scripts/inspect.sh skills/design-consulting/evals/files/slop-site/index.html --out .tmp/fixture --name fixture`; expect FAIL on `headline-lines`, `contrast`, `overflow`, `hidden-after-scroll`, `no-js`, `reduced-motion`, `zoom-disabled`, `broken-image` |
+| **Uplift comparison** | Quantifies unguided baseline vs skill-guided delta (FAIL/WARN/CWV/SEO/WCAG) | `npm run eval:compare -- <baseline.html> <guided.html> --surface experience` |
 | **Behaviour evals** | The agent follows the procedure and the output clears the bar | `skills/*/evals/evals.json` (skill-creator format) |
 
 ## Running behaviour evals

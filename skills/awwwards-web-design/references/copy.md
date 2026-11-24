@@ -74,7 +74,7 @@ Don't let honesty become timidity. Refusing a bold direction because its demonst
 
 - Write from the visitor's side: name things by what they understand, not by how the business is organised ("Jam buka", not "Operasional").
 - Active voice, plain verbs, sentence case, no filler. Each element does one job.
-- Errors say what went wrong and how to fix it. They don't apologise and are never vague. An empty state is an invitation to act.
+- Errors say what went wrong and how to fix it. They stay direct and factual, never vague. An empty state is an invitation to act.
 - Follow the BRAND.md voice lock: address form (kamu/Anda), canonical CTAs, the three reference lines.
 - **Self-check every line:** could it appear on a competitor's site? If yes, rewrite with an item from the subject inventory.
 

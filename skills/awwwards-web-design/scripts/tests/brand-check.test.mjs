@@ -124,3 +124,10 @@ test('missing or invalid referenceId in brand.json is flagged as an error', () =
   const r = rules(run({ 'a.css': '.a { color: var(--ink); }' }, { ...baseConfig, referenceId: 'invalid-ref' }));
   assert.ok(r.includes('reference-id'));
 });
+test('legacy web patterns (100vh, outline none, div onclick, zoom disable) are flagged', () => {
+  const r = rules(run({
+    'a.css': '.hero { min-height: 100vh; }\nbutton:focus { outline: none; }',
+    'i.html': '<meta name="viewport" content="width=device-width, maximum-scale=1"><div onclick="go()">Go</div>',
+  }));
+  assert.ok(r.includes('legacy-100vh') && r.includes('legacy-outline-none') && r.includes('legacy-div-click') && r.includes('legacy-viewport-zoom'));
+});

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 380" width="1280" height="380" fill="none">
+  <defs>
+    <pattern id="grid-light" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#111318" stroke-opacity="0.055" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Warm architectural alabaster ground -->
+  <rect width="1280" height="380" rx="16" fill="#F5F4EF"/>
+  <rect width="1280" height="380" rx="16" fill="url(#grid-light)"/>
+  <rect x="0.75" y="0.75" width="1278.5" height="378.5" rx="15.25" stroke="#111318" stroke-opacity="0.12" stroke-width="1.5"/>
+
+  <!-- Top-left & bottom-right architectural registration marks -->
+  <path d="M36 48H60M48 36V60" stroke="#111318" stroke-opacity="0.35" stroke-width="1.25"/>
+  <path d="M1220 332H1244M1232 320V344" stroke="#111318" stroke-opacity="0.35" stroke-width="1.25"/>
+  <text x="72" y="52" fill="#111318" fill-opacity="0.52" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12" letter-spacing="1.6">AWWWARDS ARCHITECTURE · 70/30 EVOLUTION</text>
+  <text x="1208" y="52" text-anchor="end" fill="#111318" fill-opacity="0.52" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12" letter-spacing="1.6">CWV · SEO · WCAG 2.2 AA</text>
+
+  <!-- Centered Logo Mark + Editorial Wordmark -->
+  <g transform="translate(268, 122)">
+    <!-- Emblem -->
+    <rect x="0" y="0" width="112" height="112" rx="18" fill="#111318"/>
+    <path d="M22 56H90M56 22V90" stroke="#F5F4EF" stroke-opacity="0.16" stroke-width="1"/>
+    <rect x="24" y="24" width="64" height="64" rx="3" stroke="#F5F4EF" stroke-width="2.4"/>
+    <path d="M24 66H66V24" stroke="#F5F4EF" stroke-width="2.4"/>
+    <rect x="66" y="66" width="22" height="22" fill="#E84A27"/>
+    <circle cx="39" cy="39" r="5" fill="#F5F4EF"/>
+
+    <!-- Wordmark -->
+    <text x="148" y="70" fill="#111318" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="78" font-weight="700" letter-spacing="-3.2">design-skills</text>
+    <!-- Subtitle -->
+    <text x="151" y="106" fill="#111318" fill-opacity="0.68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" font-weight="400" letter-spacing="-0.2">Award-level web design &amp; consulting skills for AI coding agents</text>
+  </g>
+
+  <!-- Bottom rule & pipeline strip -->
+  <line x1="48" y1="306" x2="1232" y2="306" stroke="#111318" stroke-opacity="0.12" stroke-width="1"/>
+  <text x="640" y="340" text-anchor="middle" fill="#111318" fill-opacity="0.58" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13" letter-spacing="1.4">SUBJECT  →  IDEA  →  RULES  →  WORDS  →  BUILD  →  CHOREOGRAPHY  →  MEASURE  →  JUDGE</text>
+</svg>

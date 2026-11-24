@@ -4,6 +4,8 @@
   "brandNameBannedVariants": ["KopiCatat", "Kopi catat", "kopi Catat"],
   "$referenceId": "Must match one of the 15 referenceId values in references/awwwards-references.md §1 (emotion-agency, lxl-creative, era-residence, dontboardme, oryzo, mont-fort, animejs, onlines, squared-media, structure-eng, ray-corral, mejuma-tuscany, santioni, shopify-editions, adobe-bowie)",
   "referenceId": "mejuma-tuscany",
+  "$surface": "Page surface class for inspect.sh: experience (default, campaign/portfolio/hospitality), persuade (SaaS/business/e-commerce), operate (app/dashboard), read (docs/blog)",
+  "surface": "experience",
 
   "tokenFiles": ["css/tokens.css"],
   "tokenSelectors": [":root", "[data-theme"],

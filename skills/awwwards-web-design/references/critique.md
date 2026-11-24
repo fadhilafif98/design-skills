@@ -27,7 +27,7 @@ Screenshots: <list>
 
 The critic must end with the `Disposition:` line. A reply without it counts as **no review**, not a pass.
 
-If you can't spawn a subagent, critique yourself, and start the critique with `⚠️ DEGRADED: single-context critique`. Score once more as "the juror who did not build it" before you write numbers.
+If you can't spawn a subagent, critique yourself, and start the critique with `[DEGRADED: single-context critique]`. Score once more as "the juror who did not build it" before you write numbers.
 
 ## 2. Check 0: are the pictures valid?
 
@@ -37,7 +37,7 @@ Before judging anything, open every screenshot and confirm it shows what its nam
 - fonts are loaded (no fallback serif where a grotesk was planned);
 - reveal animations have settled.
 
-An element hidden by animation timing reads as missing. If a capture is invalid, fix the capture (or the reveal) and rerun `inspect.sh --shots page`. Don't judge a broken photograph.
+An element hidden by animation timing reads as missing. If a capture is invalid, fix the capture (or the reveal) and rerun `inspect.sh --shots page`. Skip scoring until the capture is valid.
 
 ## 3. Fourteen passes
 
@@ -120,7 +120,7 @@ Four criteria, 1–10 each, weighted like Awwwards: **Design 40% · Usability 30
 Use exactly this shape so rounds can be compared:
 
 ```
-ROUND n            (critic: fresh subagent | ⚠️ DEGRADED single-context)
+ROUND n            (critic: fresh subagent | DEGRADED single-context)
 Check 0:           captures valid | invalid: <which, why>
 Seen in one second: …
 Idea (one sentence): …

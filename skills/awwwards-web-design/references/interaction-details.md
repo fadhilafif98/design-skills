@@ -42,7 +42,7 @@ Adapted in part from emilkowalski/skills (MIT).
 | Last field of a form | `enterkeyhint="send"` / `"done"` |
 | Name | `autocomplete="name"` (never `autocapitalize="none"`) |
 
-- Validate on blur, not on every keystroke. Errors sit next to the field, say what happened and how to fix it, in the interface's voice. Errors don't apologise.
+- Validate on blur, not on every keystroke. Errors sit next to the field, say what happened and how to fix it, in the interface's voice. Keep error messages direct and factual.
 - Success state is designed, not an `alert()`.
 - No form backend? The primary action goes to the real destination (WhatsApp link with prefilled text, `mailto:` with subject and body). Never fake a payment form.
 
@@ -84,7 +84,7 @@ Never disable user zoom (`maximum-scale=1`, `user-scalable=no`).
 |---|---|
 | Capture the pointer | `el.setPointerCapture(e.pointerId)` on `pointerdown` |
 | Respect the grab offset | Store `offset = pointer − elementPos` at down; never snap the element's centre to the finger |
-| Velocity from history | Keep the last ~100ms of `{x, y, t}` samples; velocity = Δposition / Δtime over that window |
+| Velocity from history | Keep the last ~100ms of `{x, y, t}` samples; velocity = delta position / delta time over that window |
 | Commit by velocity sign | Dismiss/commit if moving toward the target; reverse if moving away, regardless of position |
 | Flick | `abs(distance) / elapsedMs > 0.11` px/ms commits even when short |
 | Direction lock | ~10px hysteresis before deciding horizontal vs vertical |

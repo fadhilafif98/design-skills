@@ -68,7 +68,7 @@ Reference lines (new copy must sound like these):
 - Motion character: [calm, expo-out, no bounce] (LOCKED)
 - Pace: [narrative 900–1400ms] (FLEXIBLE within range)
 
-## 8. Flexible bounds (what feedback may change without asking)
+## 8. Flexible bounds (within-range adjustments)
 - [accent coverage 2–10%]
 - [display size within range]
 - [section patterns, image crops, motion pace within range]

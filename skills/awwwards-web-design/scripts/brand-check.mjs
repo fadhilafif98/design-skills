@@ -139,6 +139,11 @@ function checkCss(file, n, line) {
     report(file, n, 'error', 'equal-card-grid', 'grid-template-columns: repeat(3|4, 1fr) equal card grid is banned (tells.md §1). Use asymmetric 12-column spans, horizontal filmstrip (flex + width: max-content), or border-top index rows');
   if (/^\s*\.(?:section-tag|eyebrow|kicker|overtitle|section-label|sub-badge)\b/i.test(line))
     report(file, n, 'error', 'eyebrow-selector', 'Eyebrow/kicker class selector is banned (tells.md §2). Delete eyebrow tags above headings');
+  // Modern Web Platform legacy pattern warnings (modern-web-platform.md)
+  if (/(?:min-)?height\s*:\s*100vh\b/i.test(line))
+    report(file, n, 'warn', 'legacy-100vh', '100vh clips mobile browser chrome. Use 100svh (stable) or 100dvh (dynamic)');
+  if (/outline\s*:\s*(?:none|0)\b/i.test(line) && !/:focus-visible/i.test(line))
+    report(file, n, 'warn', 'legacy-outline-none', 'outline: none removes keyboard focus visibility. Pair with a clear :focus-visible ring');
 }
 
 function textOf(line, ext) {
@@ -229,6 +234,12 @@ function scan(file) {
     if (state.inFontFamilyBlock && braceDepth < fontBlockDepth) state.inFontFamilyBlock = false;
     if (inStyle || isMarkup || !inScript) checkCss(file, n, line);
     if (isMarkup) checkLogo(file, n, line);
+    if (isMarkup) {
+      if (/<(?:div|span)\b[^>]*\bonclick=/i.test(line))
+        report(file, n, 'warn', 'legacy-div-click', 'Clickable <div>/<span> lacks keyboard and screen-reader semantics. Use native <button type="button">');
+      if (/<meta\b[^>]*name=["']viewport["'][^>]*(?:user-scalable\s*=\s*(?:no|0)|maximum-scale\s*=\s*1(?:\.0)?(?![\d.]))/i.test(line))
+        report(file, n, 'error', 'legacy-viewport-zoom', 'Viewport meta disables pinch-zoom. Remove user-scalable=no / maximum-scale=1');
+    }
     if (isMarkup) {
       // Visible text of this line: drop inline <style>/<script> blocks and whatever is still inside one.
       let vis = line;

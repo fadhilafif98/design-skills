@@ -81,15 +81,17 @@ Weights (Persuade; adjust and state for other surfaces): Clarity 15, Hierarchy 1
 - Forms: visible labels, inputs ≥ 16px, correct `type`/`inputmode`/`autocomplete`, errors that say how to fix.
 - Phone: `100svh` heroes, safe areas, tap targets ≥ 44px **(measured)**, no sideways scroll at 320px **(measured)**.
 
-### 11. Accessibility (Rule)
-- Landmarks, one `h1`, no skipped heading levels, alt text, meaningful link text.
-- Keyboard: everything reachable, visible focus, Esc closes overlays.
-- 200% zoom without loss; zoom never disabled.
+### 11. Accessibility & SEO (Rule)
+- Landmarks (`<main>`), `<html lang>`, `<title>`, `<meta name="description">`, Open Graph tags, JSON-LD schema, one `h1`, no skipped heading levels, `img[alt]`, meaningful link/button accessible names, and `<label>` on every form field **(measured by `inspect.sh`)**.
+- Keyboard: everything reachable, visible focus, Esc closes overlays, skip-to-content link.
+- 200% zoom without loss; zoom never disabled **(measured)**.
+- Text over images/video has a directional scrim maintaining ≥ 4.5:1 contrast.
 
-### 12. Performance (Rule)
-- LCP < 2.5s (aim < 1.5s for marketing), CLS < 0.1, if measured (Lighthouse/PageSpeed). Otherwise "not measured".
-- Image dimensions set; font metric overrides; animations on transform/opacity.
+### 12. Performance & Launch Readiness (Rule)
+- LCP < 2.5s (aim < 1.5s for marketing), CLS < 0.1, initial transfer ≤ 1.5 MB **(measured by `inspect.sh`)**.
+- Image dimensions set (`width`/`height` or `aspect-ratio`) **(measured)**; `fetchpriority="high"` on hero LCP; `loading="lazy"` below fold; font metric overrides; animations on transform/opacity.
 - No uncaught JS errors **(measured)**.
+- Operational basics for production sites: working form endpoint + confirmation state, analytics/CTA tracking hook, legal links where required.
 
 ## 2. Hard rejects (any one caps the overall below 8)
 

@@ -54,7 +54,7 @@ Write in the user's language. Keep reports scannable: headings, tables, short li
 ## Audit report
 
 ```markdown
-[⚠️ DEGRADED: single-context review — only if no independent critic ran]
+[DEGRADED: single-context review — only if no independent critic ran]
 # Design Audit: [site/page]
 Surface: [Persuade / Operate / Read / Experience, per section if hybrid]
 Sources — Measured: [inspect.sh 1440/768/390/320 + reduced motion + no-JS | brand-check | Lighthouse | none]
