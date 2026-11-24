@@ -13,10 +13,10 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "test": "node --test skills/awwwards-web-design/scripts/tests/brand-check.test.mjs",
-    "lookup": "node skills/awwwards-web-design/scripts/lookup.mjs",
-    "inspect:fixture": "bash skills/awwwards-web-design/scripts/inspect.sh skills/design-consulting/evals/files/slop-site/index.html --name fixture",
+    "test": "node --test skills/maestro/scripts/tests/brand-check.test.mjs",
+    "lookup": "node skills/maestro/scripts/lookup.mjs",
+    "inspect:fixture": "bash skills/maestro/scripts/inspect.sh skills/design-consulting/evals/files/slop-site/index.html --name fixture",
     "eval:compare": "node scripts/eval-compare.mjs",
-    "version": "node scripts/sync-version.mjs && git add README.md skills/awwwards-web-design/SKILL.md skills/design-consulting/SKILL.md"
+    "version": "node scripts/sync-version.mjs && git add README.md skills/maestro/SKILL.md skills/design-consulting/SKILL.md"
   }
 }

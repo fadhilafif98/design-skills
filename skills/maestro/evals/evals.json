@@ -1,0 +1,106 @@
+{
+  "skill_name": "maestro",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "buatkan website kedai kopi saya di Bandung. terserah kamu",
+      "expected_output": "Autopilot run: inventory, rut, curated archetype blueprint match from design-archetypes.md, bespoke AI imagery generated via image-generator, locked DESIGN.md/BRAND.md, copy deck, built index.html with GSAP/Lenis choreography that passes both gates, fresh-context critique, honest report in Indonesian.",
+      "files": [],
+      "expectations": [
+        "design/inventory.md lists at least 8 items spanning at least 3 families, with inferred items marked ASSUMPTION",
+        "design/decisions.md has a ledger line for every phase 0-9 (or N/A with a reason)",
+        "DESIGN.md §0 records a matched Reference Blueprint from references/design-archetypes.md, an idea sentence ('On this page, X becomes Y'), and a competitor test result",
+        "At least 4 bespoke images were generated via image-generator (or documented in design/credits.md) rather than scraping generic stock photos",
+        "The page ground is not warm cream (inspect.sh reports no cream-ground warning) unless DESIGN.md gives a subject-derived reason",
+        "No font from the reflex list in tells.md §4 is used without a written reason",
+        "The h1 is 2 lines or fewer at 1440, 768 and 390 (inspect.sh headline-lines has no FAIL)",
+        "The page implements scroll/reveal choreography (inspect.sh reports no static-page warning) with reduced-motion and no-JS fallbacks",
+        "The final inspect.sh run reports 0 FAIL and brand-check.mjs reports 0 errors",
+        "No invented testimonials, ratings, customer counts or press logos appear; unconfirmed facts use [FILL: ...] or <!-- CONFIRM -->",
+        "The page has a bespoke interactive live thing using real content with a no-JS fallback",
+        "The critique was produced by a fresh subagent, or is explicitly marked DEGRADED",
+        "The final report is in Indonesian and lists every FILL/REPLACE/CONFIRM/SAMPLE slot"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Landing page for Ledgerline, an API that reconciles Stripe payouts with bank statements for small accounting firms. Primary action: book a demo. We have real product screenshots in assets/ui/.",
+      "expected_output": "A Precision/Structured style page matched to a tech archetype (e.g. obsidian-canvas / reactive-timeline / alpine-swiss) whose hero shows the real product UI, avoiding the near-black + neon and purple-gradient ruts.",
+      "files": [],
+      "expectations": [
+        "The rut section names both the category default (dark + purple/neon gradient, 3 feature cards) and a predictable opposite",
+        "DESIGN.md §0 maps to an appropriate archetype from references/design-archetypes.md (e.g. obsidian-canvas, reactive-timeline, or alpine-swiss)",
+        "The hero uses the real product UI from assets/ui/ rather than an illustration or a fake grey-bar dashboard",
+        "There is no row of three identical icon feature cards",
+        "There are no gradient text, glow, or backdrop-filter glass panels (inspect.sh WARN list has none of gradient-text, glass)",
+        "The primary button says what happens (e.g. 'Book a 20-minute demo'), not 'Get started' or 'Learn more'",
+        "Light or dark ground is justified by a written use-scene sentence"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Make a site for our dental clinic. Here is our brand guide: our colour is #0B5D3B, we always use the font Inter, and we address patients as 'Anda'.",
+      "expected_output": "Import mode: brand values LOCKED; Inter in fonts.locked so it is not flagged; address form Anda enforced; direction built inside the locked brand.",
+      "files": [],
+      "expectations": [
+        "Import mode ran first and design/BRAND.md lists the colour, Inter and the address form as LOCKED",
+        "brand.json lists Inter in fonts.locked and fonts.allowed, and voice.addressForm is 'Anda'",
+        "No copy on the page uses 'kamu'",
+        "The chosen reference direction keeps the brand colour #0B5D3B and Inter while applying the reference's layout composition and live thing",
+        "Prices or a booking path are visible on the first screen or in the nav (trust convention kept)"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Portfolio website for me, I'm a ceramicist in Yogyakarta. I have about 30 photos of my work. Make it award level.",
+      "expected_output": "Full mode, picture-led direction using the real photos, critique up to 3 rounds, honest scores.",
+      "files": [],
+      "expectations": [
+        "Mode is Full and up to 3 critique rounds are logged in the critique format with a Disposition line",
+        "At least 6 of the real photos appear on the page with consistent crops",
+        "The site does not use the Ma grammar as an empty, thin page (no blank-stretch WARN left unexplained)",
+        "Final scores are reported with any caps applied and are not all 9-10",
+        "The report does not promise an award"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "kurang premium, dan kayaknya kelihatan kayak buatan AI",
+      "expected_output": "Feedback loop on an existing build: translate words into levers, run tells.md against screenshots, change only FLEXIBLE items, show before/after.",
+      "files": [],
+      "expectations": [
+        "The agent ran inspect.sh before changing anything and listed which tells were visible",
+        "No LOCKED brand element was changed without an AskUserQuestion approval",
+        "Removed ornaments were replaced with scale, content or pictures, not another ornament",
+        "The change is gated with inspect.sh and logged in decisions.md"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Make me a website for my bakery",
+      "expected_output": "Guided mode: exactly one AskUserQuestion batch of at most 4 plain-language questions; no questions about fonts, colours or layout.",
+      "files": [],
+      "expectations": [
+        "Exactly one question batch is asked before Phase 2, with at most 4 questions",
+        "Each question has a (Recommended) option",
+        "No question mentions fonts, colours, layout or animation",
+        "One question asks what someone should remember after the first screen"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "buatkan website untuk villa mewah saya di Canggu, Bali. 4 kamar, sangat tenang, booking lewat WhatsApp. belum ada foto.",
+      "expected_output": "A photographable subject with no own photos: AI-generated imagery decided at intake, matched to an architectural/hospitality archetype in design-archetypes.md (e.g. daylight-atelier), 6-8 bespoke AI images generated at real scale, layered hero without a card beside the headline, passing timid-hero / hero-card / static-page.",
+      "files": [],
+      "expectations": [
+        "design/brief.md names the picture source as AI-generated imagery (image-generator) before Phase 2",
+        "DESIGN.md §0 selects a hospitality/architectural archetype from design-archetypes.md (e.g. daylight-atelier) and records its hero composition, section rhythm, and motion stack",
+        "The hero shows bespoke architectural photography covering ≥ 50% of the desktop fold (inspect fold line: pictures ≥ 50%) with layered typography interaction",
+        "No card or widget sits beside the hero headline (inspect.sh reports no hero-card)",
+        "inspect.sh reports 0 FAIL, no timid-hero FAIL, and no static-page WARN",
+        "Lower sections use art-directed compositions (e.g. horizontal filmstrip / interactive stage) rather than plain HTML accordions or default sliders",
+        "Every AI-generated picture is listed in design/credits.md and marked REPLACE so the owner knows to swap in real villa photography before launch"
+      ]
+    }
+  ]
+}

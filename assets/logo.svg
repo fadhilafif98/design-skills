@@ -1,13 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
-  <rect width="128" height="128" rx="24" fill="#111318"/>
-  <!-- Architectural grid hairlines -->
-  <path d="M24 64H104M64 24V104" stroke="#F3F2EC" stroke-opacity="0.14" stroke-width="1"/>
-  <!-- Outer precision frame -->
-  <rect x="26" y="26" width="76" height="76" rx="4" stroke="#F3F2EC" stroke-width="2.5"/>
-  <!-- Inner asymmetric editorial aperture -->
-  <path d="M26 76H76V26" stroke="#F3F2EC" stroke-width="2.5"/>
-  <!-- Focal accent block (the one live thing) -->
-  <rect x="76" y="76" width="26" height="26" fill="#FF522B"/>
-  <!-- Precision corner registration dot -->
-  <circle cx="44" cy="44" r="6" fill="#F3F2EC"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1A1B1F"/>
+      <stop offset="100%" stop-color="#0B0C0E"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="20" y1="22" x2="108" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DCDAD2"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="124" height="124" rx="28" fill="url(#bg)" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="1.5"/>
+  <!-- Conductor's Baton & Harmonic Wave (abstract M + cadence orb) -->
+  <path d="M18 95 C18 50, 32 26, 49 26 C61 26, 65 42, 67 55 C71 37, 83 22, 101 22 C108 22, 112 26, 112 32 C112 39, 107 43, 100 43 C87 43, 81 56, 77 75 C75 86, 69 94, 61 94 C52 94, 48 86, 47 74 C46 61, 44 48, 40 48 C35 48, 33 66, 33 95 C33 101, 29.5 104, 25.5 104 C21.5 104, 18 101, 18 95 Z" fill="url(#mark)"/>
+  <!-- Cadence orb (baton focal point) -->
+  <circle cx="98" cy="86" r="13.5" fill="url(#mark)"/>
 </svg>

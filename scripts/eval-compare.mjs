@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const inspectSh = path.resolve(__dirname, '../skills/awwwards-web-design/scripts/inspect.sh');
+const inspectSh = path.resolve(__dirname, '../skills/maestro/scripts/inspect.sh');
 
 const args = process.argv.slice(2);
 const surfaceIdx = args.indexOf('--surface');

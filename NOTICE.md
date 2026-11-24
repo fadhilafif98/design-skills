@@ -12,6 +12,6 @@ This project is MIT-licensed (see `LICENSE`). It adapts ideas, rules, values and
 
 Apache-2.0 notice for material adapted from pbakaus/impeccable: Copyright the impeccable authors. Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0). Adapted text has been rewritten and condensed; changes are ours.
 
-Font candidates listed in `scripts/deal.mjs` and `references/awwwards-references.md` are names only. Each face has its own licence (SIL OFL for Google Fonts; the Fontshare licence for Fontshare faces). Verify before production use.
+Font candidates listed in `scripts/deal.mjs` and `references/design-archetypes.md` are names only. Each face has its own licence (SIL OFL for Google Fonts; the Fontshare licence for Fontshare faces). Verify before production use.
 
-All third-party websites, studios, brands, and trademarks referenced in `skills/awwwards-web-design/references/awwwards-references.md` (including Awwwards) are property of their respective owners. They are cited solely as compositional and structural design studies with no affiliation or endorsement implied. Optional runtime libraries referenced in `motion-playbook.md` (such as GSAP / SplitText) remain subject to their respective upstream licences (e.g. the GSAP/Webflow Standard License).
+Optional runtime libraries referenced in `motion-playbook.md` (such as GSAP / SplitText) remain subject to their respective upstream licences (e.g. the GSAP/Webflow Standard License).

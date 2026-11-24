@@ -24,7 +24,7 @@ Communicate in the user's language, plainly. Define any design term in the same 
 ## Prerequisites
 
 - **Standalone ready:** works with zero external tools using `references/audit-rubric.md`, `discovery-questions.md`, `design-vocabulary.md`, and `report-templates.md`.
-- **Optional sibling skill (`../awwwards-web-design/`):** enables measured Chromium audits (`inspect.sh`), source tells linting (`brand-check.mjs`), and extended design references. Check once at start and report availability in the Sources line.
+- **Optional sibling skill (`../maestro/`):** enables measured Chromium audits (`inspect.sh`), source tells linting (`brand-check.mjs`), and extended design references. Check once at start and report availability in the Sources line.
 
 ## Instructions
 
@@ -51,11 +51,11 @@ Otherwise infer the mode and begin.
 
 | If present | Use |
 |---|---|
-| `../awwwards-web-design/scripts/inspect.sh` | `bash ../awwwards-web-design/scripts/inspect.sh <file-or-url> --surface <experience\|persuade\|operate\|read> --name audit --widths 1440,390 --shots page` |
-| `../awwwards-web-design/scripts/brand-check.mjs` | `node ../awwwards-web-design/scripts/brand-check.mjs <site> --json` (add `--config design/brand.json` when a brand lock exists) |
-| `../awwwards-web-design/references/` | `awwwards-references.md`, `ia-ux-conversion.md`, `seo-perf-launch.md`, `critique.md`, `tells.md`, `copy.md`, `brand-guardian.md`, `typography.md`, `layout-composition.md`, `visual-craft.md`, `motion-playbook.md`, `interaction-details.md`, `stress-test.md`, `art-directions.md`; templates `BRAND.md` + `brand.json` |
+| `../maestro/scripts/inspect.sh` | `bash ../maestro/scripts/inspect.sh <file-or-url> --surface <experience\|persuade\|operate\|read> --name audit --widths 1440,390 --shots page` |
+| `../maestro/scripts/brand-check.mjs` | `node ../maestro/scripts/brand-check.mjs <site> --json` (add `--config design/brand.json` when a brand lock exists) |
+| `../maestro/references/` | `design-archetypes.md`, `hero-patterns.md`, `ia-ux-conversion.md`, `seo-perf-launch.md`, `critique.md`, `tells.md`, `copy.md`, `brand-guardian.md`, `typography.md`, `layout-composition.md`, `visual-craft.md`, `motion-playbook.md`, `interaction-details.md`, `stress-test.md`, `art-directions.md`; templates `BRAND.md` + `brand.json` |
 
-If absent, never hard-fail: use any available browser/screenshot tool or user screenshots, use `references/audit-rubric.md` alone, mark unmeasured checks "not measured", and recommend installing `awwwards-web-design`.
+If absent, never hard-fail: use any available browser/screenshot tool or user screenshots, use `references/audit-rubric.md` alone, mark unmeasured checks "not measured", and recommend installing `maestro`.
 
 ### How to See the Design (Priority Order)
 1. **Measured render:** `inspect.sh` or browser tool screenshots (1440, 390, key states).
@@ -69,7 +69,7 @@ Always state which sources were used and what could not be verified.
 1. One AskUserQuestion batch, max 4 questions from `references/discovery-questions.md` with `(Recommended)` defaults. Never ask about fonts, colors, layout, or motion.
 2. Build **subject inventory** (8-12 client-specific facts); label unknowns as assumptions.
 3. Derive brief (purpose, one thing to remember, use scene, color strategy, personality) and **idea sentence** (`On this site, [inventory item] becomes [device]`); redo if it passes for a competitor.
-4. Deliver **Discovery report** (`references/report-templates.md`): brief, 1 recommendation + 1 alternative, SAFE CHOICES vs RISKS, assets list, and a ready-to-paste `awwwards-web-design` prompt.
+4. Deliver **Discovery report** (`references/report-templates.md`): brief, 1 recommendation + 1 alternative, SAFE CHOICES vs RISKS, assets list, and a ready-to-paste `maestro` prompt.
 
 ### Mode B: Audit
 1. **Recon:** purpose, audience, primary action (if unclear, that is Finding #1).
@@ -80,7 +80,7 @@ Always state which sources were used and what could not be verified.
 6. **Synthesize:** merge critic findings with measured FAILs/WARNs (measured FAIL overrides opinion; apply rubric caps).
 7. **Prioritize:** assign P0-P3, Rule vs Taste, effort S/M/L, exact fix, and principle; rank by impact / effort into Top 3 + roadmap.
 8. **Stress check:** 320px, reduced motion, no-JS (via `inspect.sh`), plus long headlines and 200% zoom (mark untested items "not measured").
-9. Deliver **Audit report** with disposition and offer to apply Top 3 or hand off to `awwwards-web-design`.
+9. Deliver **Audit report** with disposition and offer to apply Top 3 or hand off to `maestro`.
 
 ### Mode C: Decide (Compare 2-5 Options)
 1. Restate goal and audience.
@@ -94,7 +94,7 @@ Always state which sources were used and what could not be verified.
 3. Output a **prompt pack**: prompt, idea sentence, implied DESIGN.md values, color strategy, banned tells.
 
 ### Mode E: Brand (Consistency Audit + Lock)
-Follow `../awwwards-web-design/references/brand-guardian.md` if present:
+Follow `../maestro/references/brand-guardian.md` if present:
 1. Identify source of truth (brand book, existing materials); if absent, that is Finding #1.
 2. If no lock exists, create `design/BRAND.md` + `design/brand.json` (LOCKED / FLEXIBLE / FREE) and confirm assumptions.
 3. Run `brand-check.mjs --json` if present, plus visual + voice drift review per section.
@@ -127,14 +127,14 @@ Direct, warm, concrete, no praise padding. Put strengths in one line each under 
 
 ## Limitations
 
-- Without `../awwwards-web-design/` or a browser tool, contrast ratios, font loading, and layout overflow cannot be measured automatically and must be reported as "not measured".
-- Consulting modes advise and audit only; full website implementation should be handed off to `awwwards-web-design`.
+- Without `../maestro/` or a browser tool, contrast ratios, font loading, and layout overflow cannot be measured automatically and must be reported as "not measured".
+- Consulting modes advise and audit only; full website implementation should be handed off to `maestro`.
 
 ## Troubleshooting
 
 | Error | Cause | Solution |
 |---|---|---|
-| Sibling `inspect.sh` not found | `awwwards-web-design` skill not installed alongside this skill | Continue in standalone mode with `references/audit-rubric.md`, request desktop/mobile screenshots, and mark automated metrics "not measured" |
+| Sibling `inspect.sh` not found | `maestro` skill not installed alongside this skill | Continue in standalone mode with `references/audit-rubric.md`, request desktop/mobile screenshots, and mark automated metrics "not measured" |
 | Independent critic missing `Disposition:` line | Subagent response omitted required verdict format | Treat review as unavailable (not a pass) and re-prompt critic with `references/audit-rubric.md` format |
 | Blank or mid-animation audit screenshots | Capture ran before fonts/reveals settled | Fix capture timing or reveal guard and recapture before scoring |
 

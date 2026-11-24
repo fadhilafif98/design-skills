@@ -6,7 +6,7 @@ const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
 const targets = [
   {
-    file: 'skills/awwwards-web-design/SKILL.md',
+    file: 'skills/maestro/SKILL.md',
     re: /^(\s*version:\s*["']?)[\d.]+(["']?)$/m,
     replace: `$1${version}$2`,
   },

@@ -47,7 +47,7 @@ Weights (Persuade; adjust and state for other surfaces): Clarity 15, Hierarchy 1
 - Mobile is its own composition, not a squeeze.
 
 ### 5. Color (Taste + Rule)
-- **Reference Design System & Multi-Chapter Strategy**: When auditing against a reference in `../awwwards-web-design/references/awwwards-references.md`, check whether the site replicates the reference's multi-chapter color system (e.g. `era-residence` shifting across `#F3F3EC` Warm Alabaster, `#B5CEDB` Powder Sky, and `#340C24` Velvet Plum with `#17233B` Deep Navy ink) vs collapsing into a monotonous single-surface dark-grey/gold AI default (`FAIL [flat-surface-monotony]`).
+- **Archetype Design System & Multi-Chapter Strategy**: When auditing against an archetype in `../maestro/references/design-archetypes.md`, check whether the site replicates the archetype's multi-chapter color system (e.g. `daylight-atelier` shifting across `#F3F3EC` Warm Alabaster, `#B5CEDB` Powder Sky, and `#340C24` Velvet Plum with `#17233B` Deep Navy ink) vs collapsing into a monotonous single-surface dark-grey/gold AI default (`FAIL [flat-surface-monotony]`).
 - Accent on the action and at most one other thing.
 - Contrast: body ≥ 4.5:1, large text (≥ 24px or ≥ 18.7px bold) ≥ 3:1, UI boundaries ≥ 3:1 **(measured)**. Secondary text on a colored surface is tinted from that hue, never gray.
 - Light vs dark follows the physical use scene and reference chapters, never a flat dark-mode default.
@@ -128,7 +128,7 @@ Weights (Persuade; adjust and state for other surfaces): Clarity 15, Hierarchy 1
 | Content invisible where a reveal didn't fire, or clipped off-screen | interaction ≤ 5 |
 | Two or more mostly empty screens, or running text small and grey | layout ≤ 6.5 |
 
-**Calibration:** real Awwwards Sites of the Day land around 7.5–8.0 overall. An honest 8.5 is rare. Most real business sites score 4–6. If your first overall is 9, re-score as the juror who didn't build it.
+**Calibration:** flagship editorial sites land around 7.5–8.0 overall. An honest 8.5 is rare. Most real business sites score 4–6. If your first overall is 9, re-score as the juror who didn't build it.
 
 ## 5. Severity
 
@@ -146,6 +146,6 @@ Weights (Persuade; adjust and state for other surfaces): Clarity 15, Hierarchy 1
 Disposition, one word:
 - **ship**: no P0/P1; the Top 3 are improvements, not repairs.
 - **fix**: P0/P1 exist but the idea and structure hold.
-- **rebuild**: the competitor test fails and the hierarchy or structure fails; fixing details won't rescue it. Hand off to `awwwards-web-design`.
+- **rebuild**: the competitor test fails and the hierarchy or structure fails; fixing details won't rescue it. Hand off to `maestro`.
 
 Fix order (later items can't rescue earlier ones): idea → hierarchy → composition → typography → imagery → color → detail → motion.
