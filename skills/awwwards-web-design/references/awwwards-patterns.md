@@ -113,4 +113,4 @@ Use them when the idea calls for them, not as decoration:
 
 ## 5. Looking at real references
 
-If WebSearch or WebFetch is available, look at 3–5 Sites of the Day in the subject's category (awwwards.com/websites/ filtered by category, e.g. hotel, architecture, food). For each, write **one line of mechanism** ("the hero is one tall photo in an off-centre frame; the name crosses its left edge"), never colours or fonts. Map each line to an id above. Never copy a layout one to one; take the mechanism and fill it with this subject's inventory.
+Use the curated blueprints in `awwwards-references.md` (via `scripts/lookup.mjs`) as the primary source. If researching additional Sites of the Day via general web search or manual browsing (never automated scraping of `awwwards.com`), write **one line of mechanism** per example ("the hero is one tall photo in an off-centre frame; the name crosses its left edge"), never copied colours, fonts, or copy. Map each line to an id above. Never copy a layout one to one; take the mechanism and fill it with this subject's inventory.
