@@ -186,10 +186,6 @@ Yes. Phase 0 runs in **Import mode** (`brand-guardian.md` §3): your logo, colou
 **Which AI coding agents are supported?**
 Any agent that supports the Agent Skills standard (`SKILL.md`), including Claude Code, Antigravity, Cursor, Codex, OpenCode, Gemini CLI, and GitHub Copilot.
 
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=fadhilafif98/design-skills&type=Date)](https://star-history.com/#fadhilafif98/design-skills&Date)
-
 <hr>
 
 <p align="center"><em>“Taste is trained, not guessed.<br>
