@@ -16,6 +16,11 @@ const targets = [
     replace: `$1${version}$2`,
   },
   {
+    file: 'skills/maestro-unslop/SKILL.md',
+    re: /^(\s*version:\s*["']?)[\d.]+(["']?)$/m,
+    replace: `$1${version}$2`,
+  },
+  {
     file: 'README.md',
     re: /(badge\/version-v)[\d.]+(-)/,
     replace: `$1${version}$2`,

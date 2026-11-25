@@ -1,0 +1,69 @@
+{
+  "skill_name": "maestro-unslop",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Tolong unslop halaman website kopi ini supaya tidak kelihatan kayak buatan AI, tetap pakai struktur HTML/CSS sederhana. file: ../design-consulting/evals/files/slop-site/index.html",
+      "expected_output": "Full-page Surgical Unslop: classifies as place (non-tech), removes Wave 1-3 tells (violet gradient, Poppins, emoji cards, fake proof, 3-line h1, broken JS reveal, phone overflow, maximum-scale=1), modernizes legacy CSS/HTML (100svh, overflow-x: clip, text-wrap: balance, native controls), replaces with real substance, runs gate, reports Before -> After -> Why.",
+      "files": ["../design-consulting/evals/files/slop-site/index.html"],
+      "expectations": [
+        "Classifies the business kind as 'place' (non-tech) and maps to experience/persuade surface",
+        "Removes violet gradients, gradient headline text, Poppins, emoji icon cards, pill badge, generic CTAs, and invented proof ('10.000+ pelanggan')",
+        "Does not fall into the Wave 3 rut (warm cream + high-contrast serif + terracotta + mono eyebrows + 01/02/03)",
+        "Fixes low-contrast text (>= 4.5:1), 3+ line h1 (<= 2 lines), horizontal overflow at 390px, maximum-scale=1, and unguarded JS reveal",
+        "Applies modern native platform fixes (100svh, overflow-x: clip, text-wrap: balance/pretty, native semantic controls)",
+        "Adds zero shaders, WebGL, or dark-neon grounds (enforcing Tech vs Non-Tech boundary)",
+        "Runs sibling inspect.sh and brand-check.mjs (or marks browser checks 'not measured' if absent) and reports a Before -> After -> Why table"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Unslop this SaaS pricing & FAQ section + modal component: it uses Inter, 3 equal glassmorphism cards with violet glow, a <div class='modal'> with z-index: 9999, custom JS accordion with max-height: 9999px, and :invalid turning inputs red on load.",
+      "expected_output": "Component/Section Surgical Unslop for software: removes glassmorphism/violet glow/Inter/generic cards, replaces <div class='modal'> with native <dialog>, JS accordion with <details name>, :invalid with :user-invalid, adds @container/subgrid where appropriate, and reports Before -> After -> Why.",
+      "files": [],
+      "expectations": [
+        "Classifies business kind as 'software' (tech) and scope as component/section",
+        "Replaces <div class='modal'> with native <dialog> + showModal() + ::backdrop",
+        "Replaces JS max-height accordion with native <details name='...'><summary>",
+        "Replaces :invalid with :user-invalid so empty inputs do not turn red before interaction",
+        "Strips violet glow, glassmorphism, and reflex font (Inter) without falling into Wave 3 cream+terracotta rut",
+        "Preserves existing stack/routes and outputs a Before -> After -> Why table"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Website klinik gigi saya kelihatan aneh karena developer sebelumnya pakai background dark neon, efek shader WebGL, dan fake dashboard chart. Tolong unslop tanpa rebuild dari nol.",
+      "expected_output": "Boundary Enforcement Unslop: classifies dental clinic as 'service' (non-tech), strips dark-neon ground, WebGL shaders, and fake dashboard, replaces with clean flat light surfaces, real/bespoke clinic photography slots, concrete outcome rows, and plain Indonesian copy.",
+      "files": [],
+      "expectations": [
+        "Classifies the business kind as 'service' (non-tech) and explains why shaders, dark-neon, and fake dashboards violate House Rule 1",
+        "Removes WebGL shader, dark-neon ground, and fake dashboard chart",
+        "Replaces them with flat colour, clean non-reflex typography, and bespoke/placeholder real photography (marked REPLACE:) plus plain outcome proof (marked [FILL:])",
+        "Includes at most 1-2 non-tech dealt moments (e.g. index-drawer or type-billboard) with prefers-reduced-motion support"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Unslop my landing page without installing maestro.",
+      "expected_output": "Standalone graceful degradation: runs unslop-checklist.md (and optional unslop-deal.mjs) without hard-failing when sibling maestro scripts are absent, and honestly marks browser metrics 'not measured'.",
+      "files": [],
+      "expectations": [
+        "Continues in standalone mode using references/unslop-checklist.md",
+        "Never fabricates contrast ratios, CWV, or screenshot checks when inspect.sh is absent",
+        "Marks unmeasured browser checks 'not measured' and mentions optional sibling maestro install in one line"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Saya punya ide komponen baru untuk website kedai kopi saya: interactive brew-ratio calculator dengan pilihan metode seduh (V60, Kalita, French Press) dan tampilan hasil langsung. Buatkan dengan standar anti-slop.",
+      "expected_output": "Custom Component Idea Path for place (non-tech): recognizes novel component not directly in the 6 registries, consults modern-web-guidance primitives, builds accessible interactive brew-ratio calculator with OKLCH tokens, non-reflex fonts, compositor-only micro-motion, keyboard/ARIA + <noscript> fallback, and zero non-tech slop.",
+      "files": [],
+      "expectations": [
+        "Classifies business kind as 'place' (non-tech) and selects the Custom Component Idea path (references/component-craft.md §4)",
+        "Uses native semantic controls (<button aria-pressed>, <input>, <output>/aria-live, :user-invalid) and modern-web-guidance patterns (e.g. startViewTransition or @container, prefers-reduced-motion: no-preference)",
+        "Uses OKLCH tokens, non-reflex typography, >= 4.5:1 contrast, and >= 44px tap targets without shaders, dark-neon, or Wave 3 cream+terracotta rut",
+        "Includes keyboard accessibility, :focus-visible ring, and a semantic <noscript> fallback"
+      ]
+    }
+  ]
+}

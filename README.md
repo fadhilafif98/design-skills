@@ -65,8 +65,9 @@ Install both for the full workflow. `design-consulting` works standalone, and au
 Clone the repository and symlink the skills into your agent's skills directory (e.g. `~/.claude/skills` or `$CLAUDE_CONFIG_DIR/skills`):
 
 ```bash
-ln -s "$PWD/skills/maestro" ~/.claude/skills/maestro
-ln -s "$PWD/skills/design-consulting"   ~/.claude/skills/design-consulting
+ln -s "$PWD/skills/maestro"           ~/.claude/skills/maestro
+ln -s "$PWD/skills/maestro-unslop"    ~/.claude/skills/maestro-unslop
+ln -s "$PWD/skills/design-consulting" ~/.claude/skills/design-consulting
 ```
 
 Start a new session afterwards so the agent loads the skills.
@@ -94,7 +95,8 @@ build a website for my specialty coffee roastery in Portland
 
 | Skill | Role | Pick it for |
 |---|---|---|
-| [`maestro`](skills/maestro/SKILL.md) | Build (10 phases + ledger) | Creating or redesigning a website, landing page, portfolio, company profile, or storefront end-to-end |
+| [`maestro`](skills/maestro/SKILL.md) | Build (10 phases + ledger) | Creating or redesigning a flagship, award-level website, portfolio, or campaign end-to-end |
+| [`maestro-unslop`](skills/maestro-unslop/SKILL.md) | Surgical Unslop (page / section / component) | Rescuing an existing AI-looking, generic, or legacy-bloated UI—enforcing business-kind boundaries, 3-wave tells removal, and modern native web APIs without rebuilding from scratch |
 | [`design-consulting`](skills/design-consulting/SKILL.md) | Advise (5 modes) | Discovery briefs, measured UX/SEO/brand audits, comparing design options, translating vague feedback, or locking a brand book |
 
 <details>
@@ -116,6 +118,17 @@ Ten phases tracked in `design/decisions.md` so no step is silently skipped:
 | [`stress-test.md`](skills/maestro/references/stress-test.md) · [`critique.md`](skills/maestro/references/critique.md) · [`brand-guardian.md`](skills/maestro/references/brand-guardian.md) | Worst-case content states, 14-pass fresh-context juror rubric with caps, LOCKED/FLEXIBLE/FREE brand protocol |
 | [`worked-examples.md`](skills/maestro/references/worked-examples.md) | 3 full briefs (café, B2B SaaS, clinic) taken to a locked direction |
 | [`inspect.sh`](skills/maestro/scripts/inspect.sh) · [`brand-check.mjs`](skills/maestro/scripts/brand-check.mjs) · [`lookup.mjs`](skills/maestro/scripts/lookup.mjs) · [`deal.mjs`](skills/maestro/scripts/deal.mjs) | Real-browser Playwright gate (CWV, SEO, WCAG, tells, ambition, surface profiles), brand/legacy-pattern linter, on-demand token-efficient lookup CLI, and optional font/direction roller |
+
+</details>
+
+<details>
+<summary><strong>What's inside <code>maestro-unslop</code> (Surgical Unslop: 3 references, replacement dealer, Baseline platform cleanup)</strong></summary>
+
+- **Existing Code Only (Zero Overlap with `maestro`):** Rescues a single component, section, or full page while preserving existing stack, routes, forms, and `LOCKED` brand assets.
+- **5-Bucket Diagnosis:** Strips Wave 1–3 visual tells, structural tells (3-card grids, timid heroes, phone overflow), AI copy clichés (EN/ID), broken motion/a11y, and legacy web bloat (`<div class="modal">` → `<dialog>`, JS accordions → `<details name>`, `100vh` → `100svh`, `overflow: hidden` → `overflow-x: clip`, `:invalid` → `:user-invalid`, `@container`, `subgrid`, `text-wrap: balance/pretty`, `@supports` Baseline fallbacks).
+- **Business-Kind Guardrails:** Enforces Tech (`software`/`tech`/`gaming`) vs Non-Tech (`product`/`service`/`place`) boundaries—stripping shaders, dark-neon, and fake dashboards off non-tech sites.
+- **70/30 Reference-First Component Craft:** Instead of reinventing flat wireframes from scratch, sources 2–4 real components from Aceternity UI, Skiper UI, Magic UI v3, React Bits / Pro, and Uiverse (70% proven craft / 30% OKLCH token, copy, business-kind, and `modern-web-guidance` adaptation).
+- **Standalone + Sibling-Aware:** Works standalone with Node 18+ (`unslop-checklist.md`, `component-craft.md`, optional `unslop-deal.mjs`), and automatically borrows `inspect.sh` and `brand-check.mjs` when `maestro` is installed.
 
 </details>
 

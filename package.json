@@ -13,10 +13,11 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "test": "node --test skills/maestro/scripts/tests/brand-check.test.mjs",
+    "test": "node --test skills/maestro/scripts/tests/brand-check.test.mjs skills/maestro-unslop/scripts/tests/unslop-deal.test.mjs",
     "lookup": "node skills/maestro/scripts/lookup.mjs",
+    "unslop:deal": "node skills/maestro-unslop/scripts/unslop-deal.mjs",
     "inspect:fixture": "bash skills/maestro/scripts/inspect.sh skills/design-consulting/evals/files/slop-site/index.html --name fixture",
     "eval:compare": "node scripts/eval-compare.mjs",
-    "version": "node scripts/sync-version.mjs && git add README.md skills/maestro/SKILL.md skills/design-consulting/SKILL.md"
+    "version": "node scripts/sync-version.mjs && git add README.md skills/maestro/SKILL.md skills/design-consulting/SKILL.md skills/maestro-unslop/SKILL.md"
   }
 }
