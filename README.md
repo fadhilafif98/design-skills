@@ -55,10 +55,12 @@ Install a single skill, or install globally for Claude Code:
 
 ```bash
 npx skills@latest add fadhilafif98/design-skills --skill maestro
+npx skills@latest add fadhilafif98/design-skills --skill maestro-unslop
+npx skills@latest add fadhilafif98/design-skills --skill design-consulting
 npx skills@latest add fadhilafif98/design-skills -a claude-code -g
 ```
 
-Install both for the full workflow. `design-consulting` works standalone, and automatically borrows `inspect.sh`, `brand-check.mjs`, and references from `maestro` when present.
+Install all three for the full workflow. `maestro-unslop` and `design-consulting` work standalone, and automatically borrow `inspect.sh`, `brand-check.mjs`, and references from `maestro` when present.
 
 ### Manual install
 
